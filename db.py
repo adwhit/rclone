@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from lxml import etree
 import re
 from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
@@ -22,7 +21,7 @@ class Code(Base):
     relationship("Task", backref = "codes")
 
     def __repr__(self):
-        return "<Code:{:s}/{:s}>".format(self.task, self.name)
+        return "<Code:{:s}/{:s}>".format(self.task, self.language)
 
 class Lang(Base):
     __tablename__ = "language"
@@ -49,19 +48,6 @@ def cleanstr(s):
 
 def newdb():
     Base.metadata.create_all()
-
-def mock(session):
-    langs = [Lang(name="Rust"), Lang(name="Python"), Lang(name="Julia")]
-    tasks = [Task(name="Nqueens"), Task(name="Fleas"), Task(name="Counter")]
-    c1 = Code(text="just counting", task="Counter",language="Rust")
-    c2 = Code(text="counting slowly", task="Counter",language="Python")
-    c3 = Code(text="counting fast", task="Counter",language="Julia")
-    c4 = Code(text="Not counting at all", task="Nqueens",language="Julia")
-    codes = [c1,c2,c3,c4]
-    session.add_all(langs)
-    session.add_all(tasks)
-    session.add_all(codes)
-    session.commit()
 
 class Scraper():
     tagbase = "{http://www.mediawiki.org/xml/export-0.7/}"
