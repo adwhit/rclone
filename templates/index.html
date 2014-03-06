@@ -1,10 +1,24 @@
 <!doctype html>
+<html>
+<head>
 <title>Rosetta Clone</title>
 <link rel=stylesheet type=text/css href='{{url_for('static', filename='style.css')}}'>
-<div class=page>
-    <h1>Rosetta Clone</h1>
-    <div class=metanav>
-        {{code}}
-    </div>
-</div>
+</head>
+  
+<body>
+<div id="container" style="width:1000px">
+<h1>Rosetta Clone</h1>
 
+<select>{% for task in tasks %}<option value={{task}}>{{task}}</option>{% endfor %}</select>
+<select>{% for lang in langs1 %}<option value={{lang}}>{{lang}}</option>{% endfor %}</select>
+<select>{% for lang in langs2 %}<option value={{lang}}>{{lang}}</option>{% endfor %}</select>
+
+<div id="left" style="width:500px;float:left">
+    {{code1}}
+</div>
+<div id="width:500px;float:right">
+    {{code2}}
+</div>
+</div>
+</body>
+</html>
