@@ -87,7 +87,7 @@ class Scraper():
         for ix in range(0,len(body),2):
             langarr = re.split(rexp,body[ix])
             for lang in langarr:
-                codedict[lang] = body[ix+1]
+                codedict[lang.strip()] = body[ix+1]
         return description, codedict
 
     def parse(self):
