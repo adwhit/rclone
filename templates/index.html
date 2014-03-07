@@ -12,17 +12,26 @@
         <div id=descr>
             <select name="taskname" onchange="this.form.submit()">
                 {% for task in tasklist %}
-                <option value="{{task}}"{% if task == taskname %}selected="selected"{% endif %}>{{task}}</option>{% endfor %}
+                <option value="{{task}}"{% if task == taskname %}selected="selected"{% endif %}>{{task}}</option>
+                {% endfor %}
             </select>
             <p>{{taskdesc}}</p>
         </div>
         <div id=container>
             <div id=col1>
-                <select name="col1" onchange="this.form.submit()">{% for lang in langlist1 %}<option value="{{lang}}">{{lang}}</option>{% endfor %}</select>
+                <select name="col1" onchange="this.form.submit()">
+                    {% for lang in langlist1 %}
+                    <option value="{{lang}}"{% if lang == lang1 %}selected="selected"{% endif %}>{{lang}}</option>
+                    {% endfor %}
+                </select>
                 <p>{{code1}}</p>
             </div>
             <div id=col2>
-                <select name="col2"  onchange="this.form.submit()">{% for lang in langlist2 %}<option value="{{lang}}">{{lang}}</option>{% endfor %}</select>
+                <select name="col2" onchange="this.form.submit()">
+                    {% for lang in langlist2 %}
+                    <option value="{{lang}}"{% if lang == lang2 %}selected="selected"{% endif %}>{{lang}}</option>
+                    {% endfor %}
+                </select>
                 <p>{{code2}}</p>
             </div>
         </div>

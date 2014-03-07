@@ -10,6 +10,8 @@ class gb():
     nullstr = "--"
     snippetdict = {}
     taskdict = {}
+    langlistdict = {}
+    tasklistdict = {}
 
 
 def set_globals():
@@ -27,6 +29,7 @@ app = Flask(__name__)
 @app.route("/index", methods = ["GET", "POST"])
 def index():
 
+    #defaults:
     content = {
             "taskdesc": "",
             "taskname": "",
@@ -44,7 +47,7 @@ def index():
         content["lang1"] = notnull(request.form.get("col1"))
         content["lang2"] = notnull(request.form.get("col2"))
         content["taskname"] = notnull(request.form.get("taskname"))
-        get_content(request.form, content)
+        get_content(content)
     elif request.method == "GET":
         pass
 
@@ -56,14 +59,22 @@ def notnull(s):
     else:
         return s
 
-def get_content(form, content):
+def get_content(content):
 
     if content["taskname"]:
         content["taskdesc"] =  get_task_desc(content["taskname"])
+        content["langlist1"] = get_langlist(content["taskname"])
+        content["langlist2"] = get_langlist(content["taskname"])
         if content["lang1"]:
             content["code1"] = get_snippet(content["taskname"], content["lang1"])
         if content["lang2"]:
             content["code2"] = get_snippet(content["taskname"], content["lang2"])
+    if content["lang1"] and content["lang2"]:
+        content["tasklist"] = get_tasklist_twoway(content["lang1"], content["lang2"])
+    elif content["lang1"]:
+        content["tasklist"] = get_tasklist_oneway(content["lang1"])
+    elif content["lang2"]:
+        content["tasklist"] = get_tasklist_oneway(content["lang2"])
 
     for k, v in content.items():
         if isinstance(v, str):
@@ -90,6 +101,33 @@ def get_task_desc(task):
         taskdesc = session.query(Task).filter_by(name=task).one().description
         gb.taskdict[task] = taskdesc
         return taskdesc
+
+def get_tasklist_oneway(lang):
+    if lang in gb.tasklistdict:
+        return gb.tasklistdict[lang]
+    else:
+        session = db.Session()
+        result = session.query(Code.task).filter_by(language=lang).all()
+        tasklist = [r for (r,) in result]
+        tasklist.insert(0,gb.nullstr)
+        gb.tasklistdict[lang] = tasklist
+        return tasklist
+
+def get_tasklist_twoway(lang1, lang2):
+    s1 = set(get_tasklist_oneway(lang1))
+    s2 = set(get_tasklist_oneway(lang2))
+    return sorted(s1.intersection(s2))
+
+def get_langlist(task):
+    if task in gb.langlistdict:
+        return gb.langlistdict[task]
+    else:
+        session = db.Session()
+        results =  session.query(Code.language).filter_by(task=task).order_by(Code.language).all()
+        langlist = [r for (r,) in results]
+        langlist.insert(0, gb.nullstr)
+        gb.langlistdict[task] = langlist
+        return langlist
 
 if __name__ == "__main__":
     #app.run(host="0.0.0.0")
