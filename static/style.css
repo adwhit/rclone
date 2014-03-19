@@ -1,14 +1,26 @@
-body            { font-family: 'Arial', serif; background: #999; }
-a, h1, h2       { color: #333333; }
-h1, h2          { font-family: 'Arial', serif; margin: 0; text-align:center; }
-h1              { border-bottom: 2px solid #eee; }
-h2              { font-size: 1.2em; }
+html, body        { font-family: 'Arial', serif; background: #999; }
+h1,h3         { margin: 0; text-align:center; }
+
+#wrap { }
 
 #main { 
-    font-size: 0.8em;
     margin: 0 auto;
-    background: #fafafa;
-    width:1000px;
+    width:1200px;
+    font-size: 0.8em;
+    color: #eeeeee; 
+    background: #444444;
+}
+
+#output { 
+    padding:10px; 
+    overflow:scroll;
+    color: #222222; 
+    background:#eeeeee;
+}
+
+#header {
+    padding:15px;
+    color: #eeeeee 
 }
 
 #descr {
@@ -18,36 +30,33 @@ h2              { font-size: 1.2em; }
     font-size: 1em; 
 }
 
-#container {
-    display: table;
-    width:100%;
-}
-
 #col1 {
-    display: table-cell;
-    color: #eeeeee;
-    width:50%;
-    background:#444444;
-    text-align:left;
-    padding:10px
+    float:left;
+    width:48%;
+    margin:1%;
 }
 
 #col2 { 
-    display: table-cell;
-    color: #eeeeee;
-    width:50%;
-    background:#444444;
-    text-align:left;
-    padding:10px
+    float:right;
+    width:48%;
+    margin:1%;
 }
 
-#footer {}
+#centre { text-align:center }
 
-.highlight { color: #000; padding:10px }
+#footer {
+    clear:both;
+    background:#eeeeee;
+    color: #222222; 
+    text-align: center;
+    padding: 5px;
+}
+
+.highlight { color: #000; padding:10px; overflow:scroll;}
 .highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f8f8f8; }
 .highlight .c { color: #408080; font-style: italic } /* Comment */
-.highlight .err { border: 1px solid #FF0000 } /* Error */
+//.highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
 .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */

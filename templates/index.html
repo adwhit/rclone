@@ -4,33 +4,43 @@
 <title>Rosetta Clone</title>
 <link rel=stylesheet type=text/css href='{{url_for('static', filename='style.css')}}'>
 </head>
-  
 <body>
-<div id=main>
-    <h1>Rosetta Clone</h1>
-    <form action="#" method="post">
-        <div id=descr>
-            <select name="taskname" onchange="this.form.submit()">
-                {% for task in tasklist %}<option value="{{task}}"{% if task == taskname %}selected="selected"{% endif %}>{{task}}</option>{% endfor %}
-            </select>
-            <p>{{taskdesc|safe}}</p>
+<a name="top"></a>   
+<div id=wrap>
+    <div id=main>
+        <div id=header>
+            <h1>Rosetta Clone</h1>
         </div>
-        <div id=container>
+        <form action="#" method="post">
+            <div id=descr>
+                <div id=centre>
+                    <select name="taskname" onchange="this.form.submit()">
+                        {% for task in tasklist %}<option value="{{task}}"{% if task == taskname %}selected="selected"{% endif %}>{{task}}</option>{% endfor %}
+                    </select>
+                </div>
+                <p>{{taskdesc|safe}}</p>
+            </div>
             <div id=col1>
-                <select name="col1" onchange="this.form.submit()">
-                    {% for lang in langlist1 %}<option value="{{lang}}"{% if lang == lang1 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
-                </select>
+                <div id=centre>
+                    <select name="col1" onchange="this.form.submit()">
+                        {% for lang in langlist1 %}<option value="{{lang}}"{% if lang == lang1 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                    </select>
+                </div>
                 <p>{{code1|safe}}</p>
             </div>
             <div id=col2>
-                <select name="col2" onchange="this.form.submit()">
-                    {% for lang in langlist2 %}<option value="{{lang}}"{% if lang == lang2 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
-                </select>
+                <div id=centre>
+                    <select name="col2" onchange="this.form.submit()">
+                        {% for lang in langlist2 %}<option value="{{lang}}"{% if lang == lang2 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                    </select>
+                </div>
                 <p>{{code2|safe}}</p>
             </div>
+        </form>
+        <div id=footer>
+            <p><a href=#top>RETURN</a></p>
         </div>
-    </form>
-    <div id=footer> RESET|RETURN </div>
+    </div>
 </div>
 </body>
 </html>

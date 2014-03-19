@@ -47,7 +47,7 @@ def index():
 
     if request.method == "POST":
         #update content fields
-        print(request.form)
+        #print(request.form)
         content["lang1"] = notnull(request.form.get("col1"))
         content["lang2"] = notnull(request.form.get("col2"))
         content["taskname"] = notnull(request.form.get("taskname"))
@@ -106,7 +106,7 @@ def get_task_desc(task):
     else:
         session = db.Session()
         taskdesc = session.query(Task).filter_by(name=task).one().description
-        taskdesc = replace_newline(taskdesc)
+        taskdesc = code_format.md_format(taskdesc, task)
         gb.taskdict[task] = taskdesc
         return taskdesc
 
