@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import db
+import code_format
 from db import Lang, Task, Code
 from sqlalchemy import or_, and_
 
@@ -35,7 +36,9 @@ def index():
             "taskname": "",
             "tasklist": gb.tasklist,
             "code1": "",
+            "css1": "",
             "code2": "",
+            "css2": "",
             "lang1": "",
             "lang2": "",
             "langlist1": gb.langlist,
@@ -68,9 +71,9 @@ def get_content(content):
         content["langlist1"] = get_langlist(content["taskname"])
         content["langlist2"] = get_langlist(content["taskname"])
         if content["lang1"]:
-            content["code1"] = get_snippet(content["taskname"], content["lang1"])
+            (content["code1"], content["css1"]) = get_snippet(content["taskname"], content["lang1"])
         if content["lang2"]:
-            content["code2"] = get_snippet(content["taskname"], content["lang2"])
+            (content["code2"], content["css2"]) = get_snippet(content["taskname"], content["lang2"])
     if content["lang1"] and content["lang2"]:
         content["tasklist"] = get_tasklist_twoway(content["lang1"], content["lang2"])
     elif content["lang1"]:
@@ -92,8 +95,9 @@ def get_snippet(task, lang):
     else:
         session = db.Session()
         snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task)).one().text
-        gb.snippetdict[task,lang] = snippet
-        return snippet
+        (html, css) = code_format.formatter(snippet, lang)
+        gb.snippetdict[task,lang] = (html, css)
+        return (html, css)
 
 def get_task_desc(task):
     if task in gb.taskdict:

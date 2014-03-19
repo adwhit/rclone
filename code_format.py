@@ -43,25 +43,32 @@ class CodeFormatter():
         l = sorted(self._htmllist)
         #prelude
         bit = self.raw[0:l[0][0]]
+        bound = len(l)
         if bit:
+            print("head AAAAARRRRRRRGGGGGGGHHHHHHHHH")
+            print(bit)
             l.append((0,l[0][0],bit))
-        for i in range(0,len(l)-1):
+        for i in range(0,bound-1):
             start = l[i][1]
             end = l[i+1][0]
             bit = self.raw[start:end]
             if bit:
+                print("AAAAARRRRRRRGGGGGGGHHHHHHHHH")
+                print(start, end, bit)
                 l.append((start, end, bit))
         #epilogue
-        bit = self.raw[l[i+1][1]:]
+        bit = self.raw[l[bound-1][1]:]
         if bit:
-            l.append((l[i+1][1],len(self.raw),bit))
+            print("end AAAAARRRRRRRGGGGGGGHHHHHHHHH")
+            print(bit)
+            l.append((l[bound-1][1],len(self.raw),bit))
         self._htmllist = sorted(l)
 
     def pygmentise(self, snippet):
         formatter = HtmlFormatter(source = self.language)
         try:
             lexer = lexers.get_lexer_by_name(self.language)
-        except lexer.ClassNotFound:
+        except lexers.ClassNotFound:
             lexer = lexers.guess_lexer(snippet)
         return highlight(snippet, lexer, formatter)
 
@@ -86,13 +93,12 @@ class CodeFormatter():
 def formatter(text, lang):
     ct = CodeFormatter(text, lang)
     ct.format()
-    return(ct.css, ct.html)
+    return(ct.html, ct.css)
     
 def main(path):
     with open(path) as f:
         text = f.read()
-
-    (css, body) = formatter(text, "c")
+    (body, css) = formatter(text, "")
     header = "<html><head>"
     cssheader = "<style type=\"text/css\">"
     cssfooter = "</style>"
