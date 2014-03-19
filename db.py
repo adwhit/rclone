@@ -44,7 +44,7 @@ def cleanstr(s):
     for c in s.lower().strip():
         if c.isalnum():
             arr.append(c)
-    return "".join(arr)
+    return "\n".join(arr)
 
 def newdb():
     Base.metadata.create_all()

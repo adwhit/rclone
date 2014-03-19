@@ -43,12 +43,14 @@ def index():
             }
 
     if request.method == "POST":
+        #update content fields
         print(request.form)
         content["lang1"] = notnull(request.form.get("col1"))
         content["lang2"] = notnull(request.form.get("col2"))
         content["taskname"] = notnull(request.form.get("taskname"))
         get_content(content)
     elif request.method == "GET":
+        # do some init stuff?
         pass
 
     return render_template("index.html", **content)
