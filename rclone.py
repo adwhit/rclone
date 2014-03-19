@@ -81,11 +81,12 @@ def get_content(content):
     elif content["lang2"]:
         content["tasklist"] = get_tasklist_oneway(content["lang2"])
 
-    for k, v in content.items():
+    """for k, v in content.items():
         if isinstance(v, str):
             print(k,v)
         else:
             print(k, v[:10])
+    """
             
     return content
 
@@ -105,6 +106,7 @@ def get_task_desc(task):
     else:
         session = db.Session()
         taskdesc = session.query(Task).filter_by(name=task).one().description
+        taskdesc = replace_newline(taskdesc)
         gb.taskdict[task] = taskdesc
         return taskdesc
 
@@ -134,6 +136,10 @@ def get_langlist(task):
         langlist.insert(0, gb.nullstr)
         gb.langlistdict[task] = langlist
         return langlist
+
+def replace_newline(s):
+    s = s.replace("\n\n", "<br>")
+    return s.replace("\n", "<br>")
 
 if __name__ == "__main__":
     #app.run(host="0.0.0.0")

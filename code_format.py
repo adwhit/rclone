@@ -45,22 +45,19 @@ class CodeFormatter():
         bit = self.raw[0:l[0][0]]
         bound = len(l)
         if bit:
-            print("head AAAAARRRRRRRGGGGGGGHHHHHHHHH")
-            print(bit)
+            bit = "<p>" + bit + "<p>"
             l.append((0,l[0][0],bit))
         for i in range(0,bound-1):
             start = l[i][1]
             end = l[i+1][0]
             bit = self.raw[start:end]
             if bit:
-                print("AAAAARRRRRRRGGGGGGGHHHHHHHHH")
-                print(start, end, bit)
+                bit = "<p>" + bit + "<p>"
                 l.append((start, end, bit))
         #epilogue
         bit = self.raw[l[bound-1][1]:]
         if bit:
-            print("end AAAAARRRRRRRGGGGGGGHHHHHHHHH")
-            print(bit)
+            bit = "<p>" + bit + "<p>"
             l.append((l[bound-1][1],len(self.raw),bit))
         self._htmllist = sorted(l)
 
