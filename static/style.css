@@ -13,7 +13,7 @@ h1,h3         { margin: 0; text-align:center; }
 
 #output { 
     padding:10px; 
-    overflow:scroll;
+    overflow:auto;
     color: #222222; 
     background:#eeeeee;
 }
@@ -52,7 +52,7 @@ h1,h3         { margin: 0; text-align:center; }
     padding: 5px;
 }
 
-.highlight { color: #000; padding:10px; overflow:scroll;}
+.highlight { color: #000; padding:10px; overflow:auto;}
 .highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f8f8f8; }
 .highlight .c { color: #408080; font-style: italic } /* Comment */

@@ -113,18 +113,15 @@ def md_format(text, task=None):
     """Markdown formatting substitution. Possibly inefficient"""
     text = text.replace("{{out}}", "<h4>Output</h4>")
     text = re.sub("{{trans\|(.*)}}", "<h4>Translation of \g<1></h4>", text)
-    text = re.sub("===(.*)===", "<h4>\g<1><h4>", text)
-    text = re.sub("==(.*)==", "<h3>\g<1><h3>", text)
+    text = re.sub("===(.*)===", "<h4>\g<1></h4>", text)
+    text = re.sub("==(.*)==", "<h3>\g<1></h3>", text)
+    text = re.sub("\[\[[^\[]+\|([^\]]*)\]\]", "\g<1>", text)
+    text = re.sub("\[\[([^\]]*)\]\]", "\g<1>", text)
     text = re.sub("\n+", "<br>", text)
-    text = re.sub("{{libheader\|(\w*)}}", "Library: \g<1>", text)
+    text = re.sub("{{libheader\|([^}]*)}}", "Library: \g<1>", text)
+    text = re.sub("{{works with\|([^}]*)}}", "Works with: \g<1>", text)
     if task:
-        #text = re.sub("{{task}}", "<h3>%s<h3>" % task, text)
         text = re.sub("{{task(\|.*)?}}", "<h3>%s</h3>" % task, text)
-
-
-    # ==HEADER2==
-    # ===HEADER3===
-    # {{task}}
     return text 
     
 def main(path):

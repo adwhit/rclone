@@ -111,7 +111,7 @@ def build_sql_objects(scraper):
         langs.append(Lang(name=lang))
     return tasks, langs, codes
 
-def main():
+def create_db():
     #parse xml
     scraper = Scraper()
     scraper.parse()
@@ -132,6 +132,10 @@ def main():
     print("Found {:d} snippets".format(len(codes)))
 
     session.commit()
+
+
+def main():
+    create_db()
 
 
 

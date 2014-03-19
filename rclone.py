@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import db
 import code_format
 from db import Lang, Task, Code
-from sqlalchemy import or_, and_
+from sqlalchemy import or_, and_, func
 
 
 class gb():
@@ -13,16 +13,21 @@ class gb():
     taskdict = {}
     langlistdict = {}
     tasklistdict = {}
+    top_langs = [x.replace("_"," ") for x in sorted(
+    "C C++ Javascript Java Python D Objective-C PHP Ruby \
+    Go Rust Julia Haskell Clojure C# UNIX_shell Perl".split())]
 
 
 def set_globals():
     session = db.Session()
-    all_langs = sorted([l.name for l in session.query(Lang).all()])
-    all_tasks = sorted([t.name for t in session.query(Task).all()])
+    all_langs = [l.name for l in session.query(Lang).order_by(Lang.name).all()]
+    all_tasks = [t.name for t in session.query(Task).order_by(Task.name).all()]
+    top_langs = session.query(Code.language, func.count(Code.language)).group_by(Code.language).all()
     gb.langlist = [gb.nullstr]
     gb.langlist.extend(all_langs)
     gb.tasklist = [gb.nullstr]
     gb.tasklist.extend(all_tasks)
+    return top_langs
 
 
 app = Flask(__name__)
@@ -42,7 +47,9 @@ def index():
             "lang1": "",
             "lang2": "",
             "langlist1": gb.langlist,
-            "langlist2": gb.langlist
+            "langlist2": gb.langlist,
+            "lang1set": "all",
+            "lang2set": "all",
             }
 
     if request.method == "POST":
