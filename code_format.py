@@ -76,7 +76,7 @@ class CodeFormatter():
     def pygmentise(self, snippet):
         formatter = HtmlFormatter()
         if self.language in CodeFormatter.aliases:
-            lang = CodeFormatter.aliases[lang]
+            lang = CodeFormatter.aliases[self.language]
         else:
             lang = self.language
         try:
@@ -113,15 +113,19 @@ def md_format(text, task=None):
     """Markdown formatting substitution. Possibly inefficient"""
     text = text.replace("{{out}}", "<h4>Output</h4>")
     text = re.sub("{{trans\|(.*)}}", "<h4>Translation of \g<1></h4>", text)
-    text = re.sub("===(.*)===", "<h4>\g<1></h4>", text)
-    text = re.sub("==(.*)==", "<h3>\g<1></h3>", text)
+    text = re.sub("===([^=]*)===", "<h4>\g<1></h4>", text)
+    text = re.sub("==([^=]*)==", "<h3>\g<1></h3>", text)
     text = re.sub("\[\[[^\[]+\|([^\]]*)\]\]", "\g<1>", text)
     text = re.sub("\[\[([^\]]*)\]\]", "\g<1>", text)
     text = re.sub("\n+", "<br>", text)
     text = re.sub("{{libheader\|([^}]*)}}", "Library: \g<1>", text)
     text = re.sub("{{works with\|([^}]*)}}", "Works with: \g<1>", text)
     if task:
-        text = re.sub("{{task(\|.*)?}}", "<h3>%s</h3>" % task, text)
+        tasklink = task.replace(" ","_")
+        re1 = "<h3><a href=http://www.rosettacode.org/wiki/\g<1>>{:s}</a></h3>".format(task)
+        re2 = "<h3><a href=http://www.rosettacode.org/wiki/{:s}>{:s}</a></h3>".format(tasklink,task)
+        text = re.sub("{{task\|([^}]*)}}", re1, text)
+        text = re.sub("{{task}}", re2, text)
     return text 
     
 def main(path):

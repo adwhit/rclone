@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import db
 import code_format
 from db import Lang, Task, Code
@@ -67,6 +67,10 @@ def index():
         # do some init stuff?
 
     return render_template("index.html", **content)
+
+@app.route("/")
+def toindex():
+    return redirect(url_for("index"))
 
 def notnull(s):
     if s == gb.nullstr:
@@ -179,6 +183,6 @@ def replace_newline(s):
     return s.replace("\n", "<br>")
 
 if __name__ == "__main__":
-    #app.run(host="0.0.0.0")
     set_globals()
+    #app.run(host="0.0.0.0")
     app.run(debug=True, port = 3000)
