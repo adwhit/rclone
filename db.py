@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine("sqlite:///data.sqlite", echo=False)
 Base = declarative_base(bind=engine)
-Session = sessionmaker(bind=engine)
+Session = scoped_session(sessionmaker(bind=engine))
 
 class Code(Base):
     __tablename__ = "code"

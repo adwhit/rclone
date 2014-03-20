@@ -24,7 +24,7 @@ def set_globals():
     group_by(Code.task).order_by(func.count(Code.task).desc()).limit(30).all()
     gb.toptasks = set([r[0] for r in top_tasks])
     gb.poplangs = set([x.replace("_"," ") for x in sorted(
-                       "C C++ Javascript Java Python D Objective-C PHP Ruby \
+                       "C C++ JavaScript Java Python D Objective-C PHP Ruby \
                        Go Rust Julia Haskell Clojure C# UNIX_shell Perl".split())])
 
 app = Flask(__name__)
@@ -184,5 +184,8 @@ def replace_newline(s):
 
 if __name__ == "__main__":
     set_globals()
-    #app.run(host="0.0.0.0")
-    app.run(debug=True, port = 3000)
+    import sys
+    if len(sys.argv) == 2 and sys.argv[1] == "-d":  #debug mode
+        app.run(debug=True, port = 3000)
+    else:
+        app.run(host="0.0.0.0")

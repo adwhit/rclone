@@ -111,21 +111,19 @@ def formatter(text, lang):
 
 def md_format(text, task=None):
     """Markdown formatting substitution. Possibly inefficient"""
-    text = text.replace("{{out}}", "<h4>Output</h4>")
-    text = re.sub("{{trans\|(.*)}}", "<h4>Translation of \g<1></h4>", text)
-    text = re.sub("===([^=]*)===", "<h4>\g<1></h4>", text)
-    text = re.sub("==([^=]*)==", "<h3>\g<1></h3>", text)
-    text = re.sub("\[\[[^\[]+\|([^\]]*)\]\]", "\g<1>", text)
-    text = re.sub("\[\[([^\]]*)\]\]", "\g<1>", text)
-    text = re.sub("\n+", "<br>", text)
-    text = re.sub("{{libheader\|([^}]*)}}", "Library: \g<1>", text)
-    text = re.sub("{{works with\|([^}]*)}}", "Works with: \g<1>", text)
+    text = re.sub("{{out(\|[^}]*)?}}", "<h4>Output</h4>", text)                 #output
+    text = re.sub("{{trans\|(.*)}}", "<h4>Translation of \g<1></h4>", text)     #translations
+    text = re.sub("===([^=]*)===", "<h4>\g<1></h4>", text)                      #header:4
+    text = re.sub("==([^=]*)==", "<h3>\g<1></h3>", text)                        #header:3
+    text = re.sub("\[\[[^\[]+\|([^\]]*)\]\]", "\g<1> ", text)                   #remove square brackets with secondary capture
+    text = re.sub("\[\[([^\]]*)\]\]", "\g<1> ", text)                           #remvoe square brackets
+    text = re.sub("\n+", "<br>", text)                                          #newlines to linebreaks
+    text = re.sub("{{libheader\|([^}]*)}}", "Library: \g<1>", text)             #Library
+    text = re.sub("{{works with\|([^}]*)}}", "Works with: \g<1>", text)         #works with
     if task:
-        tasklink = task.replace(" ","_")
-        re1 = "<h3><a href=http://www.rosettacode.org/wiki/\g<1>>{:s}</a></h3>".format(task)
-        re2 = "<h3><a href=http://www.rosettacode.org/wiki/{:s}>{:s}</a></h3>".format(tasklink,task)
-        text = re.sub("{{task\|([^}]*)}}", re1, text)
-        text = re.sub("{{task}}", re2, text)
+        tasklink = task.replace(" ","_")                                        #hyperlink
+        tosub = "<h3><a href=http://www.rosettacode.org/wiki/{:s}>{:s}</a></h3>".format(tasklink,task) 
+        text = re.sub("{{task(\|[^}]*)?}}", tosub, text)
     return text 
     
 def main(path):
