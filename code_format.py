@@ -110,19 +110,21 @@ def formatter(text, lang):
     return(ct.html, ct.css)
 
 def md_format(text, task=None):
+    rcurl = "http://www.rosettacode.org/wiki/"
     """Markdown formatting substitution. Possibly inefficient"""
     text = re.sub("{{out(\|[^}]*)?}}", "<h4>Output</h4>", text)                 #output
-    text = re.sub("{{trans\|(.*)}}", "<h4>Translation of \g<1></h4>", text)     #translations
+    text = re.sub("{{trans\|([^}]*)}}", "<h4>Translation of \g<1></h4>", text)     #translations
     text = re.sub("===([^=]*)===", "<h4>\g<1></h4>", text)                      #header:4
     text = re.sub("==([^=]*)==", "<h3>\g<1></h3>", text)                        #header:3
-    text = re.sub("\[\[[^\[]+\|([^\]]*)\]\]", "\g<1> ", text)                   #remove square brackets with secondary capture
-    text = re.sub("\[\[([^\]]*)\]\]", "\g<1> ", text)                           #remvoe square brackets
+    text = re.sub("\[\[[^\]]+\|([^\]]*)\]\]", "\g<1> ", text)                   #remove square brackets with secondary capture
+    text = re.sub("\[\[([^\]]*)\]\]", "<a href="+rcurl+"\g<1>>\g<1> </a>", text)                           #square brackets to link
+    text = re.sub("\[([^\]]*)\]", "<a href=\g<1>>Link</a>", text)               #hyperlinks
     text = re.sub("\n+", "<br>", text)                                          #newlines to linebreaks
     text = re.sub("{{libheader\|([^}]*)}}", "Library: \g<1>", text)             #Library
     text = re.sub("{{works with\|([^}]*)}}", "Works with: \g<1>", text)         #works with
     if task:
         tasklink = task.replace(" ","_")                                        #hyperlink
-        tosub = "<h3><a href=http://www.rosettacode.org/wiki/{:s}>{:s}</a></h3>".format(tasklink,task) 
+        tosub = "<h3><a href={:s}{:s}>{:s}</a></h3>".format(rcurl,tasklink,task) 
         text = re.sub("{{task(\|[^}]*)?}}", tosub, text)
     return text 
     
