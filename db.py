@@ -1,3 +1,4 @@
+import sys
 from lxml import etree
 import re
 from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
@@ -51,14 +52,10 @@ def newdb():
 
 class Scraper():
     tagbase = "{http://www.mediawiki.org/xml/export-0.7/}"
-    xmlpath = "data/Rosetta+Code-20140302015523.xml"
 
-    def __init__(self, xmlpath = None):
+    def __init__(self, datapath):
         """Class to download and parse data from Rossetta Code website"""
-        if xmlpath is None:
-            self.xmlpath = Scraper.xmlpath
-        else:
-            self.xmlpath = xmlpath
+        self.datapath = datapath
         self.tree = None
         self.root = None
         self.pages = {}
@@ -73,8 +70,15 @@ class Scraper():
                 pagedict[title.text] = text
         return pagedict
 
-    def getdata(self, xmlpath):
-        tree = etree.parse(xmlpath)
+    def getdata(self, datapath):
+        if datapath.endswith(".gz"):
+            import gzip
+            tree = etree.parse(gzip.open(datapath))
+        elif datapath.endswith(".xml"):
+            tree = etree.parse(datapath)
+        else:
+            print "Error: invalid file type ", datapath
+            sys.exit(1)
         root = tree.getroot()
         return tree, root
 
@@ -91,7 +95,7 @@ class Scraper():
         return description, codedict
 
     def parse(self):
-        self.tree, self.root = self.getdata(self.xmlpath)
+        self.tree, self.root = self.getdata(self.datapath)
         self.pages = self.xml2dict(self.root)
 
 def build_sql_objects(scraper):
@@ -111,9 +115,9 @@ def build_sql_objects(scraper):
         langs.append(Lang(name=lang))
     return tasks, langs, codes
 
-def create_db():
+def create_db(datapath):
     #parse xml
-    scraper = Scraper()
+    scraper = Scraper(datapath)
     scraper.parse()
 
     #make db
@@ -134,12 +138,13 @@ def create_db():
     session.commit()
 
 
-def main():
-    create_db()
+def main(datapath):
+    create_db(datapath)
 
 
 
 if __name__ == "__main__":
-    main()
-
-
+    if len(sys.argv) != 2:
+        print "Please supply database file in XML or XML.GZ format"
+        sys.exit()
+    main(sys.argv[1])

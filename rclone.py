@@ -29,8 +29,11 @@ def set_globals():
 
 app = Flask(__name__)
 
-@app.route("/index", methods = ["GET", "POST"])
-def index():
+@app.route("/twincol.html", methods = ["GET", "POST"])
+def twincol():
+
+
+    #How to restructure this sensibly?
 
     #defaults:
     content = {
@@ -66,11 +69,14 @@ def index():
         content["tasklist"] = get_tasklist_noway(content["taskfilter"])
         # do some init stuff?
 
-    return render_template("index.html", **content)
+    if content["ncols"] == 1:
+        return render_template("twincol.html", **content)
+    elif content["ncols"] == 2:
+        return render_template("twincol.html", **content)
 
 @app.route("/")
 def toindex():
-    return redirect(url_for("index"))
+    return redirect(url_for("twincol"))
 
 def notnull(s):
     if s == gb.nullstr:

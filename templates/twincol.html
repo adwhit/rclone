@@ -15,6 +15,11 @@
             <div id=descrwrapper>
                 <div id=descr>
                     <div id=centre>
+                        <p>
+                        Columns:
+                        <input type="radio" onchange="this.form.submit()" name="colchoice" value="one" {%if colchoice == "one" %}checked="checked"{%endif %}> One
+                        <input type="radio" onchange="this.form.submit()" name="colchoice" value="two" {%if colchoice == "two" %}checked="checked"{%endif %}> Two
+                        </p>
                         <span>Task:</span>
                         <select class="tasks" name="taskname" onchange="this.form.submit()">
                             {% for task in tasklist %}<option value="{{task}}"{% if task == taskname %}selected="selected"{% endif %}>{{task}}</option>{% endfor %}
