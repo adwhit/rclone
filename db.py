@@ -53,6 +53,7 @@ def newdb():
 
 class Scraper():
     tagbase = "{http://www.mediawiki.org/xml/export-0.7/}"
+    rarestring = "%Z%Z%"
 
     def __init__(self, datapath):
         """Class to download and parse data from Rossetta Code website"""
@@ -85,16 +86,16 @@ class Scraper():
         return tree, root
 
     def splitcode(self, pagekey):
+        r = Scraper.rarestring
         """Split code from description"""
-        rexp = re.compile("}}.*header\|")
-        sections = re.split("=={{header\|(.*)}}==", self.pages[pagekey])
+        langarr = re.findall(r+"(.*)"+r, self.htmlpages[pagekey])
+        sections = re.split(r+".*"+r, self.htmlpages[pagekey])
+        print len(langarr)
+        print len(sections)
+        assert(len(sections) == len(langarr) + 1)
         description = sections[0]
-        body = sections[1:]
         codedict = {}
-        for ix in range(0,len(body),2):
-            langarr = re.split(rexp,body[ix])
-            for lang in langarr:
-                codedict[lang.strip()] = body[ix+1]
+        codedict = dict(zip(langarr,sections[1:]))
         return description, codedict
 
     def parse(self):
@@ -103,19 +104,21 @@ class Scraper():
         self.htmlpages = dict2html(self.pages)
 
 def mw2html(mwstring):
-    p = Popen(["pandoc","-s", "-f", "mediawiki","-t", "html"], 
+    p = Popen(["pandoc","-f", "mediawiki","-t", "html"], 
             stdout=PIPE, stdin=PIPE, stderr=STDOUT)
     return p.communicate(input=mwstring.encode('utf8'))[0]
 
 def dict2html(d):
     h = {}
     for k,v in d.iteritems():
+        print k
         txt = substitute_tag(v)
-        h[k] = mw2html(txt)
+        h[k] = mw2html(txt).decode('utf8')
     return h
     
 def substitute_tag(txt):
-    tmp1 = re.sub("=={{header\|(.*)}}==","#!#\g<1>#!#",txt)
+    r = Scraper.rarestring
+    tmp1 = re.sub("=={{header\|(.*)}}==",r+"\g<1>"+r,txt)
     tmp2 =  re.sub("<lang ([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
     return re.sub("</lang>", "</syntaxhighlight>", tmp2)
 
@@ -126,8 +129,7 @@ def build_sql_objects(scraper):
     langs = []
     codes = []
 
-    for task, pagetext in scraper.pages.items():
-        print task
+    for task, pagetext in scraper.htmlpages.items():
         description, codedict = scraper.splitcode(task)
         tasks.append(Task(name=task, description=description))
         for (lang, text) in codedict.items():
