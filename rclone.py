@@ -69,10 +69,7 @@ def twincol():
         content["tasklist"] = get_tasklist_noway(content["taskfilter"])
         # do some init stuff?
 
-    if content["ncols"] == 1:
-        return render_template("twincol.html", **content)
-    elif content["ncols"] == 2:
-        return render_template("twincol.html", **content)
+    return render_template("twincol.html", **content)
 
 @app.route("/")
 def toindex():

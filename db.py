@@ -4,6 +4,7 @@ import re
 from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
+from subprocess import Popen, PIPE, STDOUT
 
 ### DB INIT STUFF
 
@@ -55,10 +56,14 @@ class Scraper():
 
     def __init__(self, datapath):
         """Class to download and parse data from Rossetta Code website"""
+        if not (datapath.endswith('.gz') or datapath.endswith('.xml')):
+            print "Error: invalid file type ", datapath
+            sys.exit(1)
         self.datapath = datapath
         self.tree = None
         self.root = None
         self.pages = {}
+        self.htmlpages = {}
 
     def xml2dict(self, root):
         pagedict = {}
@@ -70,19 +75,17 @@ class Scraper():
                 pagedict[title.text] = text
         return pagedict
 
-    def getdata(self, datapath):
-        if datapath.endswith(".gz"):
+    def getdata(self):
+        if self.datapath.endswith(".gz"):
             import gzip
-            tree = etree.parse(gzip.open(datapath))
-        elif datapath.endswith(".xml"):
-            tree = etree.parse(datapath)
+            tree = etree.parse(gzip.open(self.datapath))
         else:
-            print "Error: invalid file type ", datapath
-            sys.exit(1)
+            tree = etree.parse(self.datapath)
         root = tree.getroot()
         return tree, root
 
     def splitcode(self, pagekey):
+        """Split code from description"""
         rexp = re.compile("}}.*header\|")
         sections = re.split("=={{header\|(.*)}}==", self.pages[pagekey])
         description = sections[0]
@@ -95,8 +98,27 @@ class Scraper():
         return description, codedict
 
     def parse(self):
-        self.tree, self.root = self.getdata(self.datapath)
+        self.tree, self.root = self.getdata()
         self.pages = self.xml2dict(self.root)
+        self.htmlpages = dict2html(self.pages)
+
+def mw2html(mwstring):
+    p = Popen(["pandoc","-s", "-f", "mediawiki","-t", "html"], 
+            stdout=PIPE, stdin=PIPE, stderr=STDOUT)
+    return p.communicate(input=mwstring.encode('utf8'))[0]
+
+def dict2html(d):
+    h = {}
+    for k,v in d.iteritems():
+        txt = substitute_tag(v)
+        h[k] = mw2html(txt)
+    return h
+    
+def substitute_tag(txt):
+    tmp1 = re.sub("=={{header\|(.*)}}==","#!#\g<1>#!#",txt)
+    tmp2 =  re.sub("<lang ([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
+    return re.sub("</lang>", "</syntaxhighlight>", tmp2)
+
 
 def build_sql_objects(scraper):
     langset = set()
@@ -105,6 +127,7 @@ def build_sql_objects(scraper):
     codes = []
 
     for task, pagetext in scraper.pages.items():
+        print task
         description, codedict = scraper.splitcode(task)
         tasks.append(Task(name=task, description=description))
         for (lang, text) in codedict.items():
