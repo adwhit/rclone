@@ -43,15 +43,9 @@ select.lang { width:150px; }
 }
 
 #col1 {
-    float:left;
+    padding:1%;
     width:48%;
-    margin:1%;
-}
-
-#col2 { 
-    float:right;
-    width:48%;
-    margin:1%;
+    margin:0 auto;
 }
 
 #centre { text-align:center }

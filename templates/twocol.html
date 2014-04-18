@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>Rosetta Clone</title>
-<link rel=stylesheet type=text/css href='{{url_for('static', filename='default.css')}}'>
+<link rel=stylesheet type=text/css href='{{url_for('static', filename='twocol.css')}}'>
 <link rel=stylesheet type=text/css href='{{url_for('static', filename='pyg.css')}}'>
 </head>
 <body>
@@ -18,8 +18,8 @@
                     <div id=centre>
                         <p>
                         Columns:
-                        <input type="radio" onchange="this.form.submit()" name="colchoice" value="one" {%if colchoice == "one" %}checked="checked"{%endif %}> One
-                        <input type="radio" onchange="this.form.submit()" name="colchoice" value="two" {%if colchoice == "two" %}checked="checked"{%endif %}> Two
+                        <input type="radio" onchange="this.form.submit()" name="colchoice" value="1" {%if numcols == 1 %}checked="checked"{%endif %}> One
+                        <input type="radio" onchange="this.form.submit()" name="colchoice" value="2" {%if numcols == 2 %}checked="checked"{%endif %}> Two
                         </p>
                         <span>Task:</span>
                         <select class="tasks" name="taskname" onchange="this.form.submit()">
@@ -35,23 +35,23 @@
                 <div id=centre>
                     <span>Language 1:</span>
                     <select class="lang" name="col1" onchange="this.form.submit()">
-                        {% for lang in langlist1 %}<option value="{{lang}}"{% if lang == lang1 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                        {% for lang in langlist %}<option value="{{lang}}"{% if lang == lang1 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                     </select>
                     <input type="radio" onchange="this.form.submit()" name="lang1filter" value="all" {%if lang1filter == "all" %}checked="checked"{%endif %}> All
                     <input type="radio" onchange="this.form.submit()" name="lang1filter" value="top" {%if lang1filter == "top" %}checked="checked"{%endif %}> Top
                 </div>
-                <p>{{code1|safe}}</p>
+                <p>{{lang1code|safe}}</p>
             </div>
             <div id=col2>
                 <div id=centre>
                     <span>Language 2:</span>
                     <select class="lang" name="col2" onchange="this.form.submit()">
-                        {% for lang in langlist2 %}<option value="{{lang}}"{% if lang == lang2 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                        {% for lang in langlist %}<option value="{{lang}}"{% if lang == lang2 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                     </select>
                     <input type="radio" onchange="this.form.submit()" name="lang2filter" value="all" {%if lang2filter == "all" %}checked="checked"{%endif %}> All
                     <input type="radio" onchange="this.form.submit()" name="lang2filter" value="top" {%if lang2filter == "top" %}checked="checked"{%endif %}> Top
                 </div>
-                <p>{{code2|safe}}</p>
+                <p>{{lang2code|safe}}</p>
             </div>
         </form>
     </div>

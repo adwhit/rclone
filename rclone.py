@@ -3,11 +3,10 @@ from flask import Flask, render_template, request, redirect, url_for
 from db import Lang, Task, Code, Session
 from sqlalchemy import or_, and_, func
 
-lang_filters = { 
-             }
-
+#globals
 class gb():
     nullstr = "--"
+    urlplaceholder = "0"
     snippetdict = {}
     taskdict = {}
     task2lang = defaultdict(set)
@@ -21,11 +20,16 @@ def set_globals():
     #build task2lang and lang2task maps
     l2t = gb.lang2task
     t2l = gb.task2lang
+    alltasks = set()
+    alllangs = set()
     qry= session.query(Code.language, Code.task)
     for (l,t) in qry:
         l2t[l].add(t)
         t2l[t].add(l)
-
+        alltasks.add(t)
+        alllangs.add(l)
+    gb.task_filters["all"] = alltasks
+    gb.lang_filters["all"] = alllangs
 
     #populate filters
     top_tasks = session.query(Code.task, func.count(Code.task)).\
@@ -39,15 +43,17 @@ def set_globals():
 
 app = Flask(__name__)
 
-@app.route("/<task>/<lang1>/", methods=["POST", "GET"])
+@app.route("/onecol/<task>/<lang1>/", methods=["POST", "GET"])
 def one_lang(task,lang1):
+    task, lang = map(notnull, [task, lang1])
     if request.method == "POST":
         return handle_POST(1)
     else:
         return handle_GET(1, task, lang1)
 
-@app.route("/<task>/<lang1>/<lang2>/", methods=["POST", "GET"])
+@app.route("/twocol/<task>/<lang1>/<lang2>/", methods=["POST", "GET"])
 def two_lang(task, lang1, lang2):
+    task, lang , lang2 = map(notnull, [task, lang1, lang2])
     if request.method == "POST":
         return handle_POST(2)
     else:
@@ -63,7 +69,7 @@ def get_form_data(numcols):
     formdata["lang1"] = notnull(request.form.get("col1"))
     formdata["lang1filter"] = request.form.get("lang1filter")
 
-    formdata["numcols"] = int(request.form.get("numcols"))
+    formdata["numcolschoice"] = int(request.form.get("colchoice"))
 
     if numcols == 2:
         formdata["lang2"] = notnull(request.form.get("col2"))
@@ -73,48 +79,60 @@ def get_form_data(numcols):
 
 def handle_POST(numcols):
     formdata = get_form_data(numcols)
-    task = formdata["taskname"] if formdata["taskname"] else "?"
-    lang1 = formdata["lang1"] if formdata["lang1"] else "?"
-    if numcols == 1:
-        return redirect("/%s/%s/" % (task, lang1))
-    elif numcols == 2:
-        lang2 = formdata["lang2"] if formdata["lang2"] else "?"
-        return redirect("/%s/%s/%s/" % (task, lang1, lang2))
+    task = formdata["taskname"] if formdata["taskname"] else gb.urlplaceholder
+    lang1 = formdata["lang1"] if formdata["lang1"] else gb.urlplaceholder
+    if formdata["numcolschoice"] == 1:
+        return redirect("/onecol/%s/%s/" % (task, lang1))
+    elif formdata["numcolschoice"] == 2:
+        lang2 = formdata["lang2"] if formdata["lang2"] else gb.urlplaceholder
+        return redirect("/twocol/%s/%s/%s/" % (task, lang1, lang2))
 
 def handle_GET(numcols, task, lang1, lang2=None):
     print numcols, task, lang1, lang2
     content = get_content(task, lang1, lang2)
     if numcols == 1:
-        return render_templat("onecol", **content)
+        content["numcols"] = 1
+        return render_template("onecol.html", **content)
     elif numcols == 2:
+        content["numcols"] = 2
         return render_template("twocol.html", **content)
 
 @app.route("/")
 def toindex():
-    return redirect("/Append/Python/Python/")
+    return redirect("/twocol/100 doors/Python/Python/")
 
 def notnull(s):
-    if s == gb.nullstr:
+    if s == gb.nullstr or s == gb.urlplaceholder:
         return ""
     else:
         return s
 
 def get_content(task, lang1, lang2, **kwargs):
-    content = {}
+    content = {"taskname": task, "lang1": lang1, "lang2": lang2}
+    tasklist = gb.task_filters["all"].copy()
+    langlist = gb.lang_filters["all"].copy()
+
 
     if lang1:
-        content["tasklist"] = get_tasklist(lang1)
+        tasklist &= get_tasklist(lang1)
         if task:
-            content["lang1"] = get_snippet(task, lang1)
+            content["lang1code"] = get_snippet(task, lang1)
 
     if task:
+        langlist &= get_langlist(task)
         content["taskdesc"] = get_task_desc(task)
 
     if lang2:
-        content["tasklist"] &= get_tasklist(lang2)
+        tasklist &= get_tasklist(lang2)
         if task:
-            content["lang2"] = get_snippet(task, lang2)
+            content["lang2code"] = get_snippet(task, lang2)
 
+    content["tasklist"] = sorted(tasklist)
+    content["langlist"] = sorted(langlist)
+
+    for k,v in content.iteritems():
+        print k
+        if v: print len(v)
     return content
 
 
