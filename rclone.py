@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import db
-#import code_format
-from db import Lang, Task, Code
+from db import Lang, Task, Code, Session
 from sqlalchemy import or_, and_, func
 
 
@@ -16,7 +14,7 @@ class gb():
     pop_langs = None 
     
 def set_globals():
-    session = db.Session()
+    session = Session()
     gb.langlist = [l.name for l in session.query(Lang).order_by(Lang.name).all()]
     gb.tasklist = [t.name for t in session.query(Task).order_by(Task.name).all()]
     top_langs = session.query(Code.language, func.count(Code.language)).group_by(Code.language).all()
@@ -32,7 +30,6 @@ app = Flask(__name__)
 @app.route("/twocol.html", methods = ["GET", "POST"])
 def twocol():
 
-
     #How to restructure this sensibly?
 
     #defaults:
@@ -41,9 +38,7 @@ def twocol():
             "taskname": "",
             "tasklist": "",
             "code1": "",
-            "css1": "",
             "code2": "",
-            "css2": "",
             "lang1": "",
             "lang2": "",
             "langlist1": "",
@@ -118,7 +113,7 @@ def get_snippet(task, lang):
     if (task, lang) in gb.snippetdict:
         return gb.snippetdict[task,lang]
     else:
-        session = db.Session()
+        session = Session()
         snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task)).one().text
         gb.snippetdict[task,lang] = snippet
         return snippet
@@ -126,7 +121,7 @@ def get_snippet(task, lang):
 def get_task_desc(task):
     if task in gb.taskdict:
         return gb.taskdict[task]
-    session = db.Session()
+    session = Session()
     taskdesc = session.query(Task).filter_by(name=task).one().description
     gb.taskdict[task] = taskdesc
     return taskdesc
@@ -134,7 +129,7 @@ def get_task_desc(task):
 def get_tasklist_oneway(lang, taskfilter):
     if (lang, taskfilter) in gb.tasklistdict:
         return gb.tasklistdict[lang, taskfilter]
-    session = db.Session()
+    session = Session()
     result = session.query(Code.task).filter_by(language=lang).all()
     tasklist = sorted([r for (r,) in result])
     if taskfilter== "top":
@@ -162,7 +157,7 @@ def get_tasklist_twoway(lang1, lang2, taskfilter):
 def get_langlist(task, langfilter):
     if (task, langfilter) in gb.langlistdict:
         return gb.langlistdict[task, langfilter]
-    session = db.Session()
+    session = Session()
     results =  session.query(Code.language).filter_by(task=task).order_by(Code.language).all()
     langlist = [r for (r,) in results]
     if langfilter == "top":
