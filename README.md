@@ -19,6 +19,14 @@ Easy:
 More tricky:
 
 - Tidy up code
+- Make RESTful ("www.rosettaclone.org/Append/Python/Haskell")
 - Unit tests
 - Make website "responsive" (i.e. javascript) 
 - Implement as full WikiMedia server
+
+
+XXX:
+----
+- Parsing does not handle templates
+- Parser confused by "twin" headers (eg =={{header|C}} / {{header|C++}}== )
+- 

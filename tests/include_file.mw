@@ -1,0 +1,769 @@
+{{task}}The task is to demonstrate the language's ability to include source code from other files.
+
+=={{header|ACL2}}==
+
+For files containing only events (definitions and similar; no top-level function calls) which are admissible (note the lack of file extension):
+<lang Lisp>(include-book "filename")</lang>
+For all other files:
+<lang Lisp>(ld "filename.lisp")</lang>
+
+=={{header|Ada}}==
+<lang Ada>with Ada.Text_IO, Another_Package; use Ada.Text_IO;    
+  -- the with-clause tells the compiler to include the Text_IO package from the Ada standard 
+  -- and Another_Package. Subprograms from these packages may be called as follows: 
+  --               Ada.Text_IO.Put_Line("some text");
+  --               Another_Package.Do_Something("some text"); 
+  -- The use-clause allows the program author to write a subprogram call shortly as 
+  --               Put_Line("some text");</lang>
+=={{header|ALGOL 68}}==
+The formal definition of Algol68 make numerous references to the standard '''prelude''' and '''postlude'''.
+
+At the time the language was formally defined it was typical for code to be stored on decks of [[wp:Punched card|punched cards]] (or [[wp:Punched tape|paper tape]]). Possibly because storing code on [[wp:Hard disk drive|disk]] (or [[wp:Drum memory|drum]]) was expensive.  Similarly card decks can be read sequentially from ''just'' one [[wp:Punched card input/output|card reader]].  It appears the Algol68 "standard" assumed all cards could be simply stacked before and after the actual ''source code'', hence the references "prelude" and "postlude" in the formal standard.
+==={{header|ALGOL 68G}}===
+In the simplest case a file can be included as follows:
+<lang algol68>PR read "file.a68" PR</lang>
+
+But in the Algol68 formal reports - it appears - the intention was to have a more structure approach.
+{{works with|ALGOL 68|Revision 1 - one extension to language used - PRAGMA READ - a non standard feature similar to C's #include directive.}}
+{{works with|ALGOL 68G|Any - tested with release [http://sourceforge.net/projects/algol68/files/algol68g/algol68g-2.7 algol68g-2.7].}}
+{{wont work with|ELLA ALGOL 68|Any (with appropriate job cards) - tested with release [http://sourceforge.net/projects/algol68/files/algol68toc/algol68toc-1.8.8d/algol68toc-1.8-8d.fc9.i386.rpm/download 1.8-8d] - due to extensive use of '''format'''[ted] ''transput''.}}
+'''File: prelude/test.a68'''<lang algol68># -*- coding: utf-8 -*- #
+BEGIN
+# Exception setup code: #
+  on value error(stand out, (REF FILE f)BOOL: GOTO value error not mended);
+# Block setup code: #
+  printf(($"Prelude test:"l$))</lang>'''File: postlude/test.a68'''<lang algol68># -*- coding: utf-8 -*- #
+# Block teardown code:  #
+  printf(($"Postlude test."l$))
+EXIT 
+# Exception code: #
+  value error not mended: SKIP
+END</lang>'''File: test/include.a68'''<lang algol68>#!/usr/bin/a68g --script #
+# -*- coding: utf-8 -*- #
+
+PR read "prelude/test.a68" PR;
+printf($4x"Hello, world!"l$);
+PR read "postlude/test.a68" PR</lang>'''Output:'''
+<pre>
+Prelude test:
+    Hello, world!
+Postlude test.
+</pre>
+
+'''Other implementations: e.g. [[ALGOL 68RS]] and [[ALGOL 68G]]'''<br>
+Note that actual ''source code'' inclusion with parsing can be avoided because of a more generalised separate compilation method storing declaration specifications in a ''[[wp:data dictionary|data dictionary]]''.  Different to '''#include''' found in [[C]] where the include file needs to be parsed for each source file that includes it.
+
+==={{header|ALGOL 68RS}}===
+
+This British implementation of the language has various ways to include it's own source code and and integrate with code compiled from other languages.<br>
+{{works with|ELLA ALGOL 68|Any (with appropriate job cards) - tested with release [http://sourceforge.net/projects/algol68/files/algol68toc/algol68toc-1.8.8d/algol68toc-1.8-8d.fc9.i386.rpm/download 1.8-8d].}}
+* [[wp:ALGOL 68RS#Separate compilation|Separate compilation]]
+* [[wp:ALGOL 68RS#Declaration modules|Declaration modules]]
+* [[wp:ALGOL 68RS#Nested modules|Nested modules]]
+* [[wp:ALGOL 68RS#Code and Alien access|Code and Alien access]]
+
+In order to support a top-down programming style ALGOL 68RS provided the '''here''' and '''context''' facilities.
+
+A program could be written with parts to be filled in later marked by a '''here''' tag followed by a ''keeplist'' of declarations to be made available.
+
+ '''program''' (pass1, pass2) compiler
+ '''begin'''
+    '''string''' source := ...;
+    '''tree''' parsetree;
+ ...
+    '''here''' pass1 (source, parsetree);
+ ...
+    '''instructions''' insts;
+    '''here''' pass2 (parsetree, insts);
+ ...
+ '''end'''
+ '''finish'''
+
+The code to be executed in the context of the '''here''' tags would be written as:
+
+ '''program''' pass1 implementation
+ '''context''' pass1 '''in''' compiler
+ '''begin'''
+   ...   { code using "source" and "parsetree" }
+ '''end'''
+ '''finish'''
+
+'''here''' is similar to the ALGOL 68C '''environ''' and '''context''' is equivalent to the ALGOL 68C '''using'''.
+
+==={{header|ALGOL 68C}}===
+
+Separate compilation in ALGOL 68C is done using the ENVIRON and USING clauses. The ENVIRON saves the complete environment at the point it appears. A separate module written starting with a USING clause is effectively inserted into the first module at the point the ENVIRON clause appears.
+* [[wp:ALGOL 68C#The ENVIRON and USING clauses|The ENVIRON and USING clauses]]
+
+''' Example of <code>ENVIRON</code> clause '''<br>
+A file called ''mylib.a68'':
+<lang algol68>BEGIN
+   INT dim = 3; # a constant #
+   INT a number := 120; # a variable #
+   ENVIRON EXAMPLE1;
+   MODE MATRIX = [dim, dim]REAL; # a type definition #
+   MATRIX m1;
+   a number := ENVIRON EXAMPLE2;
+   print((a number))
+END</lang>
+
+''' Example of <code>USING</code> clause '''<br>
+A file called ''usemylib.a68'':
+<lang algol68>USING EXAMPLE2 FROM "mylib"
+BEGIN
+  MATRIX m2; # example only #
+  print((a number)); # declared in mylib.a68 #
+  print((2 UPB m1)); # also declared in mylib.a68 #
+  ENVIRON EXAMPLE3;  # ENVIRONs can be nested #
+  666
+END</lang>
+
+=={{header|Applesoft BASIC}}==
+Chain PROGRAM TWO to PROGRAM ONE.  First create and save PROGRAM TWO.  Then, create PROGRAM ONE and run it.  PROGRAM ONE runs and then "includes" PROGRAM TWO which is loaded and run using the Binary program CHAIN from the DOS 3.3 System Master.  Variables from PROGRAM ONE are not cleared so they can be used in PROGRAM TWO.  User defined functions should be redefined in PROGRAM TWO.  See "Applesoft: CHAIN and user-defined functions Issues" http://support.apple.com/kb/TA41069
+
+<lang ApplesoftBASIC}> 10  REMPROGRAM TWO
+ 20  DEF  FN A(X) = X * Y
+ 30  PRINT  FN A(2)
+
+SAVE PROGRAM TWO</lang>
+<lang ApplesoftBASIC}> 10  REMPROGRAM ONE
+ 20 Y = 6
+ 30  DEF  FN A(X) = X * Y
+ 40  PRINT  FN A(2)
+ 50 D$ =  CHR$ (4)
+ 60  PRINT D$"BLOADCHAIN,A520"
+ 70  CALL 520"PROGRAM TWO"
+
+SAVE PROGRAM ONE
+RUN</lang>
+
+Output:
+<pre>
+12
+
+12
+</pre>
+
+=={{header|AutoHotkey}}==
+<lang AutoHotkey>
+#Include FileOrDirName
+#IncludeAgain FileOrDirName
+</lang>
+=={{header|AWK}}==
+
+The awk extraction and reporting language does not support the use of include files. However, it is possible to provide the name of more than one source file at the command line:
+
+<lang sh>awk -f one.awk -f two.awk</lang>
+
+The functions defined in different source files will be visible from other scripts called from the same command line:
+
+<lang awk># one.awk
+BEGIN {
+  sayhello()
+}
+
+# two.awk
+function sayhello() {
+  print "Hello world"
+}</lang>
+
+However, it is not permissible to pass the name of additional source files through a hashbang line, so the following will will not work:
+
+ #!/usr/bin/awk -f one.awk -f two.awk
+
+{{Works with|Gawk}}
+GNU Awk has an <code>@include</code> which can include another awk source file at that point in the code.
+
+<lang awk>@include "filename.awk"</lang>
+
+This is a parser-level construct and so must be a literal filename, not a variable or expression.  If the filename is not absolute then it's sought in an <code>$AWKPATH</code> list of directories.  See [http://www.gnu.org/software/gawk/manual/html_node/Include-Files.html the gawk manual] for more.
+
+=={{header|BASIC}}==
+{{works with|QuickBASIC}}
+The include directive must be in a comment and that the name of the file for inclusion is enclosed in single quotes (a.k.a. apostrophes).
+
+Note that this will ''not'' work under QBasic.
+
+<lang qbasic>REM $INCLUDE: 'file.bi'
+'$INCLUDE: 'file.bi'</lang>
+
+See also: [[#BBC BASIC|BBC BASIC]], [[#Gambas|Gambas]], [[#IWBASIC|IWBASIC]], [[#PowerBASIC|PowerBASIC]], [[#PureBasic|PureBasic]], [[#Run BASIC|Run BASIC]], [[#ZX Spectrum Basic|ZX Spectrum Basic]]
+
+=={{header|Batch File}}==
+<lang dos>
+call file2.bat
+</lang>
+
+=={{header|BBC BASIC}}==
+{{works with|BBC BASIC for Windows}}
+<lang bbcbasic>      CALL filepath$</lang>
+The file is loaded into memory at run-time, executed, and then discarded.  It must be in 'tokenised' (internal) .BBC format.
+
+=={{header|Bracmat}}==
+<lang bracmat>get$"<i>module</i>"</lang>
+
+=={{header|C}} / {{header|C++}}==
+
+In C and C++, inclusion of other files is achieved via a preprocessor. The <code>#include</code> preprocessor directive tells the compiler to incorporate code from the included file. This is normally used near the top of a source file and is usually used to tell the compiler to include header files for the function libraries.
+
+<lang c> /* Standard library header names are enclosed using chevron enclosures */
+ #include <stdlib.h>
+
+ /* User library header names are enclosed using doublequotes */
+ #include "mylib.h" </lang>
+
+=={{header|C sharp}}==
+<lang csharp>/* The C# language specification does not give a mechanism for 'including' one source file within another,
+ * likely because there is no need - all code compiled within one 'assembly' (individual IDE projects
+ * are usually compiled to separate assemblies) can 'see' all other code within that assembly.
+ */</lang>
+
+=={{header|Clipper}}==
+The inclusion of other files is achieved via a preprocessor. The <code>#include</code> preprocessor directive tells the compiler to incorporate code from the included file. This is normally used near the top of a source file and is usually used to tell the compiler to include header files for the function libraries.
+<lang clipper>  #include "inkey.ch" </lang>
+
+=={{header|Clojure}}==
+Just as in Common Lisp:
+<lang clojure>(load "path/to/file")</lang>
+
+This would rarely be used for loading code though, since Clojure supports modularisation (like most modern languages) through [http://blog.8thlight.com/colin-jones/2010/12/05/clojure-libs-and-namespaces-require-use-import-and-ns.html namespaces] and code is typically located/loaded via related abstractions.  It's probably more often used to load data or used for quick-and-dirty experiments in the [https://en.wikipedia.org/wiki/Read–eval–print_loop REPL].
+
+=={{header|COBOL}}==
+In COBOL, code is included from other files by the <code>COPY</code> statement. The files are called copybooks, normally end with the file extension '.cpy' and may contain ''any'' valid COBOL syntax. The <code>COPY</code> statement takes an optional <code>REPLACING</code> clause allows any text within the copybook to be replaced with something else.
+<lang cobol>COPY "copy.cpy". *> The full stop is mandatory, wherever the COPY is.
+COPY "another-copy.cpy" REPLACING foo BY bar
+                                  SPACE BY ZERO
+                                  ==text to replace== BY ==replacement text==.</lang>
+
+=={{header|Common Lisp}}==
+<lang lisp>(load "path/to/file")</lang>
+
+=={{header|D}}==
+D has a module system, so usually there is no need of a textual inclusion of a text file:
+<lang d>import std.stdio;</lang>
+
+To perform a textual inclusion:
+<lang d>mixin(import("code.txt"));</lang>
+=={{header|Déjà Vu}}==
+<lang dejavu>#with the module system:
+!import!foo
+
+#passing a file name (only works with compiled bytecode files):
+!run-file "/path/file.vu"</lang>
+
+=={{header|Delphi}}==
+<lang Delphi>uses SysUtils;    // Lets you use the contents of SysUtils.pas from the current unit
+
+{$Include Common} // Inserts the contents of Common.pas into the current unit
+{$I Common}       // Same as the previous line, but in a shorter form</lang>
+
+=={{header|DWScript}}==
+
+In addition to straight inclusion, there is a filtered inclusion, in which the include file goes through a pre-processing filter.
+<lang Delphi>
+{$INCLUDE Common}      // Inserts the contents of Common.pas into the current unit
+{$I Common}            // Same as the previous line, but in a shorter form
+{$INCLUDE_ONCE Common} // Inserts the contents of Common.pas into the current unit only if not included already
+{$FILTER Common}       // Inserts the contents of Common.pas into the current unit after filtering
+{$F Common}            // Same as the previous line, but in a shorter form
+</lang>
+
+=={{header|Erlang}}==
+<lang Erlang>
+-include("my_header.hrl"). % Includes the file at my_header.erl
+</lang>
+=={{header|Euphoria}}==
+<lang Euphoria>
+include my_header.e
+</lang>
+
+=={{header|Forth}}==
+<lang forth>include matrix.fs</lang>
+
+Other Forth systems have a smarter word, which protects against multiple inclusion.  The name varies: '''USES''', '''REQUIRE''',  '''NEEDS'''.
+
+=={{header|Fortran}}==
+<lang Fortran>include ''char-literal-constant''</lang>
+
+"The interpretation of char-literal-constant is processor dependent. An example of a possible valid interpretation is that char-literal-constant is the name of a file that contains the source text to be included."
+See section ''3.4 Including source text'' of the [http://www.j3-fortran.org/doc/year/04/04-007.pdf ISO standard working draft] (Fortran 2003).
+
+=={{header|Gambas}}==
+
+In gambas, files are added to the project via the project explorer main window which is a component of the integrated development environment.
+
+=={{header|GAP}}==
+<lang gap>Read("file");</lang>
+
+=={{header|Gnuplot}}==
+<lang gnuplot>load "filename.gnuplot"</lang>
+
+This is the same as done for each file named on the command line.  Special filename <code>"-"</code> reads from standard input.
+
+<lang gnuplot>load "-"         # read standard input</lang>
+
+If the system has <code>popen</code> then piped output from another program can be loaded,
+
+<lang gnuplot>load "< myprogram"       # run myprogram, read its output
+load "< echo print 123"</lang>
+
+<code>call</code> is the same as <code>load</code> but takes parameters which are then available to the sub-script as <code>$0</code> through <code>$9</code>
+
+<lang gnuplot>call "filename.gnuplot" 123 456 "arg3"</lang>
+
+=={{header|Harbour}}==
+The inclusion of other files is achieved via a preprocessor. The <code>#include</code> preprocessor directive tells the compiler to incorporate code from the included file. This is normally used near the top of a source file and is usually used to tell the compiler to include header files for the function libraries.
+<lang harbour>  #include "inkey.ch" </lang>
+
+=={{header|Haskell}}==
+
+<lang Haskell>-- Due to Haskell's module system, textual includes are rarely needed. In
+-- general, one will import a module, like so:
+import SomeModule
+-- For actual textual inclusion, alternate methods are available. The Glasgow
+-- Haskell Compiler runs the C preprocessor on source code, so #include may be
+-- used:
+#include "SomeModule.hs"</lang>
+
+=={{header|HTML}}==
+
+Current HTML specifications do not provide an include tag, Currently, in order to include content from another file, it is necessary to include content via an iframe. However, this is not supported in some browsers and looks very untidy in other browsers:
+
+<lang html><iframe src="foobar.html">
+Sorry: Your browser cannot show the included content.</iframe></lang>
+
+There is an unofficial tag, but this will be ignored by most browsers:
+
+<lang html><include>foobar.html</include></lang>
+
+=={{header|Icon}} and {{header|Unicon}}==
+
+Include another file of source code using the preprocessor statement: <lang Icon>$include "filename.icn"</lang>
+
+=={{header|IWBASIC}}==
+<lang IWBASIC>$INCLUDE "ishelllink.inc"</lang>
+
+Further, external library or object files can be specified with the $USE statement, which is a compiler preprocessor command:
+
+<lang IWBASIC>$USE "libraries\\mylib.lib"</lang>
+
+IWBASIC also allows resources, files and data that are compiled with an application and embedded in the executable. However, resources in IWBASIC may be used only for projects, i.e., programs that have more than one source file.
+
+Various resources are loaded as follows:
+
+<lang IWBASIC>Success=LOADRESOURCE(ID,Type,Variable)</lang>
+
+<code>ID</code> is either a numeric or string identifier to the resource, <code>TYPE</code> is a numeric or string type and it stores the info in variable. The standard Windows resource types can be specified and loaded in raw form using the following constants:
+
+<lang IWBASIC>@RESCURSOR
+@RESBITMAP
+@RESICON
+@RESMENU
+@RESDIALOG
+@RESSTRING
+@RESACCEL
+@RESDATA
+@RESMESSAGETABLE
+@RESGROUPCURSOR
+@RESGROUPICON
+@RESVERSION</lang>
+
+=={{header|J}}==
+
+The usual approach for a file named 'myheader.ijs' would be:
+
+<lang j>require 'myheader.ijs'</lang>
+
+However, this has "include once" semantics, and if the requirement is to include the file even if it has been included earlier you would instead use:
+
+<lang j>load 'myheader.ijs'</lang>
+
+
+=={{header|Java}}==
+To include source code from another file, you simply need to create an object of that other file, or 'extend' it using inheritance. The only requirement is that the other file also exists in the same directory, so that the classpath can lead to it. Since Java is quite particular about their "Class name is the same as file name" rule, if you want to use another file called Class2 in Class1, you don't need to be told a unique filename.
+
+Just this would be enough.
+<lang Java>
+public class Class1 extends Class2
+{
+	//code here
+}
+</lang>
+
+You could also consider creating an instance of Class2 within Class1, and then using the instance methods.
+<lang Java>
+public class Class1
+{
+	Class2 c2=new Class2();
+	static void main(String[] args)
+	{
+		c2.func1();
+		c2.func2();
+	}
+}
+</lang>
+
+=={{header|JavaScript}}==
+Following example, if loaded in an HTML file, loads the [http://jquery.com/ jQuery] library from a remote site
+<lang javascript>var s = document.createElement('script');
+s.type = 'application/javascript';
+
+// path to the desired file
+s.src = 'http://code.jquery.com/jquery-1.6.2.js';
+document.body.appendChild(s);</lang>
+Most be noted that it can also request [[HTTP]] source and eval() the source
+===With jQuery===
+{{libheader|jQuery}}
+<lang javascript>$.getScript("http://example.com/script.js");</lang>
+
+=={{header|Julia}}==
+Julia's <code>include</code> function executes code from an arbitrary file:
+<lang Julia>include("foo.jl")</lang>
+or alternatively <code>include_string</code> executes code in a string as if it were a file (and can optionally accept a filename to use in error messages etcetera).
+
+Julia also has a module system:
+<lang Julia>import MyModule</lang>
+imports the content of the module <code>MyModule.jl</code> (which should be of the form <code>module MyModule ... end</code>, whose symbols can be accessed as <code>MyModule.variable</code>, or alternatively
+<lang Julia>using MyModule</lang>
+will import the module and all of its exported symbols
+
+=={{header|LabVIEW}}==
+In LabVIEW, any VI can be used as a "SubVI" by changing the icon and wiring the terminals to the front panel. This cannot be explained concisely in code; instead, see the [http://zone.ni.com/reference/en-XX/help/371361E-01/lvconcepts/creating_subvis/ documentation].
+
+=={{header|LabVIEW}}==
+<lang Lasso>web_response -> include('my_file.inc')</lang>
+
+=={{header|Lasso}}==
+<lang Lasso>include('myfile.lasso')</lang>
+
+=={{header|Lua}}==
+
+To include a header file myheader.lua:
+
+<lang lua> require "myheader" </lang>
+
+=={{header|m4}}==
+
+<lang m4>include(filename)</lang>
+
+=={{header|Maple}}==
+For textual inclusion, analogous to the C preprocessor, use the "$include" preprocessor directive.  (The preprocessor is not a separate program, however.)  This is frequently useful for large project development.
+<lang Maple>$include <somefile></lang>
+Or
+<lang Maple>$include "somefile"</lang>
+It is also possible to read a file, using the "read" statement.  This has rather different semantics.
+<lang Maple>read "somefile":</lang>
+
+=={{header|Mathematica}}==
+
+
+<lang Mathematica> Get["myfile.m"] </lang>
+
+=={{header|MATLAB}} / {{header|Octave}}==
+MATLAB and Octave look for functions in *.m and *.mex included in the "path". 
+New functions can be included, either by storing a new function in an existing path, or by extending the existing path to a new directory. When two functions have the same name, the function found first in the path takes precedence. The later is shown here:
+
+<lang MATLAB>
+  % add a new directory at the end of the path
+  path(path,newdir);  
+  addpath(newdir,'-end');  % same as before
+
+  % add a new directory at the beginning
+  addpath(newdir);
+  path(newdir,path);       % same as before
+</lang>
+
+=={{header|Maxima}}==
+<lang maxima>load("c:/.../source.mac")$
+
+/* or if source.mac is in Maxima search path (see ??file_search_maxima), simply */
+load(source)$</lang>
+
+=={{header|Modula-2}}==
+<lang modula2>IMPORT  InOut, NumConv, Strings;</lang>
+
+=={{header|Nemerle}}==
+To include classes, static methods etc. from other namespaces, include those namespaces with the <tt>using</tt> keyword
+<lang Nemerle>using System.Console;</lang>
+<tt>using</tt> is for accessing code that has already been compiled into libraries. Nemerle also allows for creating
+<tt>partial</tt> classes (and structs), the source code of which may be split amongst several files as long as the class is 
+marked as <tt>partial</tt> in each place that part of it is defined. An interesting feature of partial classes in
+Nemerle is that some parts of partial classes may be written in C# while others are written in Nemerle.
+<lang Nemerle>public partial class Foo : Bar // all parts of a partial class must have same access modifier;
+{                              // the class that a partial class inherits from only needs to
+...                            // be specified in one location
+}</lang>
+
+=={{header|OCaml}}==
+
+In script mode and in the interactive loop (the toplevel) we can use:
+<lang ocaml>#use "some_file.ml"</lang>
+
+In compile mode (compiled to bytecode or compiled to native code) we can use:
+<lang ocaml>include Name_of_a_module</lang>
+
+=={{header|ooRexx}}==
+ooRexx has a package system and no ability for textual inclusion of other text files.  Importing of other packages is done via the ::requires directive. 
+<lang ooRexx> 
+  ::requires "regex.cls"
+</lang>
+
+=={{header|OpenEdge/Progress}}==
+Curly braces indicate that a file should be included. The file is searched across all PROPATH directory entries.
+<lang progress>{file.i}</lang>
+
+Arguments can be passed to the file being included:
+
+<lang progress>{file.i super}</lang>
+
+=={{header|Openscad}}==
+
+<lang openscad>//Include and run the file foo.scad
+include <foo.scad>;
+
+//Import modules and functions, but do not execute
+use <bar.scad>;</lang>
+
+=={{header|PARI/GP}}==
+Files can be loaded in GP with the <code>read</code>, or directly in gp with the metacommand <code>\r</code>.
+
+PARI can use the standard [[#C|C]] <code>#include</code>, but note that if using gp2c the embedded <code>GP;</code> commands must be in the original file.
+
+=={{header|Pascal}}==
+See [[Include_a_file#Delphi | Delphi]]
+
+=={{header|Perl}}==
+
+Here we include the file include.pl into our main program:
+
+main.perl:
+
+<lang perl>#!/usr/bin/perl
+do "include.pl";        # Utilize source from another file
+sayhello();</lang>
+
+include.pl:
+<lang perl>sub sayhello {
+  print "Hello World!";
+}</lang>
+
+From documentation:<pre>
+If "do" cannot read the file, it returns undef and sets $! to the error.
+If "do" can read the file but cannot compile it, it returns undef and sets
+an error message in $@.
+If the file is successfully compiled, "do" returns the value of the last
+expression evaluated.</pre>
+
+=={{header|Perl 6}}==
+Perl 6 provides a module system that is based primarily on importation of symbols rather than
+on inclusion of textual code:
+<lang perl6>use MyModule;</lang>
+However, one can evaluate code from a file:
+<lang perl6>require 'myfile.p6';</lang>
+One can even do that at compile time:
+<lang perl6>BEGIN require 'myfile.p6'</lang>
+None of these are true inclusion, unless the <tt>require</tt> cheats and modifies the current input string of the parser.  To get a true textual inclusion, one could define an unhygienic textual macro like this:
+<lang perl6>macro include(AST $file) { slurp $file.eval }
+include('myfile.p6');</lang>
+
+=={{header|PHP}}==
+There are different ways to do this in PHP.  You can use a basic include:
+<lang PHP>include("file.php")</lang>
+You can be safe about it and make sure it's not included more than once:
+<lang PHP>include_once("file.php")</lang>
+You can crash the code at this point if the include fails for any reason by using require:
+<lang PHP>require("file.php")</lang>
+And you can use the require statement, with the safe _once method:
+<lang PHP>require_once("file.php")</lang>
+
+=={{header|PicoLisp}}==
+The function '[http://software-lab.de/doc/refL.html#load load]' is used for recursively executing the contents of files.
+<lang PicoLisp>(load "file1.l" "file2.l" "file3.l")</lang>
+
+=={{header|PL/I}}==
+<lang pli>%include myfile;</lang>
+
+=={{header|PowerBASIC}}==
+Note that PowerBASIC has the optional modifier <code>ONCE</code> which is meant to insure that no matter how many times the file may be included in code, it will only be inserted by the compiler once (the first time the compiler is told to include that particular file).
+
+Note also that <code>#INCLUDE</code> and <code>$INCLUDE</code> function identically.
+
+<lang powerbasic>#INCLUDE "Win32API.inc"
+#INCLUDE ONCE "Win32API.inc"</lang>
+
+=={{header|Prolog}}==
+
+<lang Prolog>consult('filename').</lang>
+
+=={{header|PureBasic}}==
+IncludeFile will include the named source file at the current place in the code. 
+<lang PureBasic>IncludeFile "Filename"</lang>
+XIncludeFile is exactly the same except it avoids including the same file several times.
+<lang PureBasic>XIncludeFile "Filename"</lang>
+
+IncludeBinary will include a named file of any type at the current place in the code. 
+IncludeBinary don't have to, but should preferably be done inside a [http://www.purebasic.com/documentation/reference/data.html data block]. 
+<lang PureBasic>IncludeBinary "Filename"</lang>
+
+=={{header|Python}}==
+Python supports the use of [http://docs.python.org/library/functions.html#execfile execfile] to allow code from arbitrary files to be executed from a program (without using its modules system).
+
+<lang Python>import mymodule</lang>
+
+includes the content of mymodule.py
+
+Names in this module can be accessed as attributes:
+ 
+<lang Python>mymodule.variable</lang>
+
+=={{header|R}}==
+
+<lang R>source("filename.R")</lang>
+
+=={{header|Racket}}==
+
+Including files is usually discouraged in favor of using modules, but it is still possible:
+
+<lang racket>
+#lang racket
+(include "other-file.rkt")
+</lang>
+
+=={{header|Retro}}==
+
+<lang Retro>include filename.ext</lang>
+
+=={{header|REXX}}==
+
+The REXX language does not include any directives to include source code from other files. A workaround is to use a preprocessor that take the source and the included modules and builds a temporary file containing all the necessary code, which then gets run by the interpreter. 
+
+Some variants of REXX may provide implementation specific solutions.
+
+=={{header|RPG}}==
+
+{{works with|ILE RPG}}
+
+<lang rpg>      // fully qualified syntax:
+      /include library/file,member
+
+      // most sensible; file found on *libl:
+      /include file,member
+
+      // shortest one, the same library and file:
+      /include member
+      
+      // and alternative:
+      /copy library/file,member
+
+      //... farther like "include"</lang>
+
+=={{header|Ruby}}==
+Note that in Ruby, you don't use the file extension.  .rb is assumed.
+<lang Ruby>require 'file'</lang>
+
+=={{header|Run BASIC}}==
+You don't use the file extension.  .bas is assumed.
+<lang runbasic>run SomeProgram.bas",#include         ' this gives it a handle of #include
+render #include                       ' render will RUN the program with handle #include</lang>
+
+=={{header|Seed7}}==
+The Seed7 language is defined in the include file seed7_05.s7i.
+Therefore seed7_05.s7i must be included before other language features can be used (only comments can be used before).
+The first include directive (the one which includes seed7_05.s7i) is special and it must be introduced with the $ character.
+<lang seed7>$ include "seed7_05.s7i";</lang>
+All following include directives don't need a $ to introduce them.
+<lang seed7>  include "float.s7i";</lang>
+
+=={{header|Smalltalk}}==
+there is no such thing as source-file inclusion in Smalltalk. However, in a REPL or anywhere in code, source code can be loaded with:
+<lang smalltalk>aFilename asFilename readStream fileIn</lang>
+or:
+<lang smalltalk>Smalltalk fileIn: aFilename</lang> 
+In Smalltalk/X, which supports binary code loading, aFilename may either be sourcecode or a dll containing a precompiled class library.
+
+=={{header|Standard ML}}==
+{{Works with|SML/NJ}}
+<lang sml>use "path/to/file";</lang>
+
+=={{header|Tcl}}==
+The built-in <code>source</code> command does exactly inclusion of code into the currently executing scope, subject to minor requirements of being well-formed Tcl script that is sourced in the first place (and the ability to introspect via <code>info script</code>):
+<lang tcl>source "foobar.tcl"</lang>
+
+Note that it is more usually considered good practice to arrange code into ''packages'' that can be loaded in with more regular semantics (including version handling, only-once semantics, integration of code written in other languages such as [[C]], etc.)
+<lang tcl>package require foobar 1.3</lang>
+In the case of packages that are implemented using Tcl code, these will actually be incorporated into the program using the <code>source</code> command, though this is formally an implementation detail of those packages.
+
+=={{header|UNIX Shell}}==
+
+With Bourne-compatible shells, the ''dot operator'' includes another file.
+
+{{works with|Bourne Shell}}
+<lang bash>. myfile.sh    # Include the contents of myfile.sh </lang>
+
+==={{header|C Shell}}===
+<lang csh>source myfile.csh</lang>
+
+==={{header|Bash}}===
+<lang shell>. myfile.sh
+source myfile.sh</lang>
+
+GNU Bash has both  <code>.</code> and the C-Shell style <code>source</code>.  See [http://www.gnu.org/software/bash/manual/html_node/Bash-Builtins.html#index-source Bash manual on <code>source</code>]
+
+=={{header|Vala}}==
+Importing/including is done during compilation. For example, to compile the program called "maps.vala" with the package "gee":
+<pre>
+valac maps.vala --pkg gee-1.0
+</pre>
+
+Functions can be called then using Gee.<function> calls:
+<lang vala>
+var map = new Gee.HashMap<string, int> ();
+</lang>
+
+or with a using statement:
+<lang vala>
+using Gee;
+
+var map = new HashMap<string, int>();
+</lang>
+
+=={{header|x86 Assembly}}==
+
+{{works with|FASM on Windows}}
+<lang asm>include 'MyFile.INC'</lang>
+
+{{works with|nasm}}
+<lang asm>%include "MyFile.INC"</lang>
+
+=={{header|XPL0}}==
+<lang XPL0>include c:\cxpl\stdlib;
+DateOut(0, GetDate)</lang>
+
+Example output:
+<pre>
+09-28-12
+</pre>
+
+=={{header|zkl}}==
+<lang zkl>include(vm.h.zkl, compiler.h.zkl, zkl.h.zkl, opcode.h.zkl);</lang>
+
+=={{header|ZX Spectrum Basic}}==
+
+It is possible to include the contents of another program using the merge command. However, line numbers that coincide with those of the original program shall be overwritten, so it is best to reserve a block of line numbers for merged code:
+
+<lang zxbasic>10 GO TO 9950
+5000 REM We reserve line numbers 5000 to 8999 for merged code
+9000 STOP: REM In case our line numbers are wrong
+9950 REM Merge in our module
+9955 MERGE "MODULE"
+9960 REM Jump to the merged code. Pray it has the right line numbers!
+9965 GO TO 5000 </lang>
+
+
+{{omit from|F Sharp}}
+{{omit from|Go}}
+{{omit from|GUISS}}
+{{omit from|NetRexx}}
+
+[[Category:Basic language learning]]
+[[Category:Initialization]]

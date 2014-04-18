@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import db
-import code_format
+#import code_format
 from db import Lang, Task, Code
 from sqlalchemy import or_, and_, func
 
@@ -29,8 +29,8 @@ def set_globals():
 
 app = Flask(__name__)
 
-@app.route("/twincol.html", methods = ["GET", "POST"])
-def twincol():
+@app.route("/twocol.html", methods = ["GET", "POST"])
+def twocol():
 
 
     #How to restructure this sensibly?
@@ -69,11 +69,11 @@ def twincol():
         content["tasklist"] = get_tasklist_noway(content["taskfilter"])
         # do some init stuff?
 
-    return render_template("twincol.html", **content)
+    return render_template("twocol.html", **content)
 
 @app.route("/")
 def toindex():
-    return redirect(url_for("twincol"))
+    return redirect(url_for("twocol"))
 
 def notnull(s):
     if s == gb.nullstr:
@@ -89,9 +89,9 @@ def get_content(content):
         content["langlist1"] = get_langlist(content["taskname"], content["lang1filter"])
         content["langlist2"] = get_langlist(content["taskname"], content["lang2filter"])
         if content["lang1"]:
-            (content["code1"], content["css1"]) = get_snippet(content["taskname"], content["lang1"])
+            content["code1"] = get_snippet(content["taskname"], content["lang1"])
         if content["lang2"]:
-            (content["code2"], content["css2"]) = get_snippet(content["taskname"], content["lang2"])
+            content["code2"] = get_snippet(content["taskname"], content["lang2"])
     else:
         content["langlist1"] = get_langlist_notask(content["lang1filter"])
         content["langlist2"] = get_langlist_notask(content["lang2filter"])
@@ -120,16 +120,14 @@ def get_snippet(task, lang):
     else:
         session = db.Session()
         snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task)).one().text
-        (html, css) = code_format.formatter(snippet, lang)
-        gb.snippetdict[task,lang] = (html, css)
-        return (html, css)
+        gb.snippetdict[task,lang] = snippet
+        return snippet
 
 def get_task_desc(task):
     if task in gb.taskdict:
         return gb.taskdict[task]
     session = db.Session()
     taskdesc = session.query(Task).filter_by(name=task).one().description
-    taskdesc = code_format.md_format(taskdesc, task)
     gb.taskdict[task] = taskdesc
     return taskdesc
 
