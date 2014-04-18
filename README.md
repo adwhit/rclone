@@ -3,8 +3,9 @@ Rosetta Clone
 
 Improved UI for browsing the [Rosetta Code](www.rosettacode.org) website.
 
-To be hosted [here](www.rosettaclone.org). Use AWS.
+To be hosted [here](http://www.rosettaclone.org). Use AWS.
 
+Screenshot: ![shot](misc/Screenshot04182014.jpg) 
 
 TODO:
 -----
@@ -25,8 +26,11 @@ More tricky:
 - Implement as full WikiMedia server
 
 
+
 XXX:
 ----
 - Parsing does not handle templates
-- Parser confused by "twin" headers (eg =={{header|C}} / {{header|C++}}== )
+- Parser confused by "twin" headers (eg `=={{header|C}} / {{header|C++}}==` )
+
+
 - 
