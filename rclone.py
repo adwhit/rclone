@@ -39,15 +39,30 @@ def set_globals():
 
 app = Flask(__name__)
 
-@app.route("/<task>/<lang1>/")
+@app.route("/<task>/<lang1>/", methods=["POST", "GET"])
 def one_lang(task,lang1):
-    formdata = get_form_data(1)
-    contents = get_content(formdata)
-    pass
+    if method == POST:
+        #process and redirect
+        formdata = get_form_data(1)
+        return redirect(get_redirect(formdata))
+    
+    formdata["taskname"] = task
+    formdata["lang1"] = lang1
+    formdata["numcols"] = 1
+    content = get_content(formdata)
+    return render_template("onecol.html", **content)
 
 @app.route("/<task>/<lang1>/<lang2>/")
 def two_lang(task, lang1, lang2):
-    pass
+    if method == POST:
+        #process and redirect
+        formdata = get_form_data(1)
+        return redirect(get_redirect(formdata))
+    
+    formdata["taskname"] = task
+    formdata["lang1"] = lang1
+    formdata["numcols"] = 1
+    contents = get_content(formdata)
 
 def get_form_data(numcols):
     #update formdata fields
@@ -78,8 +93,25 @@ def notnull(s):
         return s
 
 def get_content(formdata):
+    content = {}
 
-            
+    lang1 = formdata["lang1"]
+    lang2 = formdata["lang2"]
+    task = formdata["task"]
+
+    if lang1:
+        content["tasklist"] = get_tasklist(lang1)
+        if task:
+            content["lang1"] = get_snippet(task, lang1)
+
+    if task:
+        content["taskdesc"] = get_task_desc(task)
+
+    if lang2 and formdata["numcols"] == 2:
+        content["tasklist"] &= get_tasklist(lang2)
+        if task:
+            content["lang2"] = get_snippet(task, lang2)
+
     return content
 
 
@@ -89,7 +121,7 @@ def get_snippet(task, lang):
     else:
         session = Session()
         snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task)).one().text
-        gb.snippetdict[task,lang] = snippet
+        gb.snippetdict[task,lang] = snippet    #cache
         return snippet
 
 
