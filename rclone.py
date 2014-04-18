@@ -4,6 +4,11 @@ import db
 from db import Lang, Task, Code
 from sqlalchemy import or_, and_, func
 
+lang_filters = { 
+                 "popular" : set("C,C++,JavaScript,Java,Python,D,Objective-C,PHP,Ruby,\
+                             Go,Rust,Julia,Haskell,Clojure,C#,UNIX shell,Perl".split(","))
+             }
+
 
 class gb():
     langlist = None
