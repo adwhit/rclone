@@ -1,7 +1,10 @@
 from collections import defaultdict
 from flask import Flask, render_template, request, redirect, url_for
-from db import Lang, Task, Code, Session
+import db
+from db import Lang, Task, Code
 from sqlalchemy import or_, and_, func
+import argparse
+import sys
 
 #globals
 class gb():
@@ -13,9 +16,12 @@ class gb():
     lang2task = defaultdict(set)
     task_filters = {}
     lang_filters = {}
+    Session = None
     
-def set_globals():
-    session = Session()
+def init_globals(dbpath):
+    _, gb.Session = db.connect_to_db(dbpath)
+
+    session = gb.Session()
 
     #build task2lang and lang2task maps
     l2t = gb.lang2task
@@ -99,7 +105,7 @@ def handle_GET(numcols, task, lang1, lang2=None):
 
 @app.route("/")
 def toindex():
-    return redirect("/twocol/100 doors/Python/Python/")
+    return redirect("/twocol/0/0/0/")
 
 def notnull(s):
     if s == gb.nullstr or s == gb.urlplaceholder:
@@ -140,7 +146,7 @@ def get_snippet(task, lang):
     if (task, lang) in gb.snippetdict:
         return gb.snippetdict[task,lang]
     else:
-        session = Session()
+        session = gb.Session()
         snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task)).one().text
         gb.snippetdict[task,lang] = snippet    #cache
         return snippet
@@ -149,7 +155,7 @@ def get_snippet(task, lang):
 def get_task_desc(task):
     if task in gb.taskdict:
         return gb.taskdict[task]
-    session = Session()
+    session = gb.Session()
     taskdesc = session.query(Task).filter_by(name=task).one().description
     gb.taskdict[task] = taskdesc
     return taskdesc
@@ -166,11 +172,19 @@ def get_langlist(task):
 def filter_list(list1, set1):
     return [l for l in list1 if l in set1]
 
-
-if __name__ == "__main__":
-    set_globals()
-    import sys
-    if len(sys.argv) == 2 and sys.argv[1] == "-d":  #debug mode
+def main(dbpath, debug):
+    init_globals(dbpath)
+    if debug:
         app.run(debug=True, port = 3000)
     else:
         app.run(host="0.0.0.0")
+
+def argparser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--database", default="data.sqlite")
+    parser.add_argument("-d", "--debug", action="store_true")
+    args = parser.parse_args()
+    return(args.database, args.debug)
+
+if __name__ == "__main__":
+    main(*argparser())

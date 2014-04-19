@@ -1,0 +1,62 @@
+html, body        { font-family: 'Arial', serif; background: #999; height:100%; width 90%;}
+h1,h3         { margin: 0; text-align:center; }
+
+#wrap {
+    width:90%;
+    margin: 0 auto;
+    min-height:95%;
+    background: #444444;
+}
+
+#main { 
+    font-size: 0.8em;
+    color: #eeeeee; 
+    overflow:auto;
+    padding-bottom:10px;
+    height:100%;
+}
+
+select.tasks { width:250px; }
+select.lang { width:150px; }
+
+#output { 
+    padding:10px; 
+    color: #222222; 
+    background:#eeeeee;
+}
+
+#header {
+    padding:15px;
+    color: #eeeeee 
+}
+
+#descr {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#descrwrapper {
+    color: #222222; 
+    background:#eeeeee;
+    padding:10px;
+    font-size: 1em; 
+}
+
+#centre { text-align:center }
+
+#footer {
+    position:relative;
+    background:#eeeeee;
+    color: #222222; 
+    text-align: center;
+    width:90%;
+    margin:0 auto;
+    top:-30px;
+    height:30px;
+    line-height:30px;
+}
+
+pre { background: #eeeeee; 
+      color: #000;
+      padding: 10px;
+      border-radius: 7px }

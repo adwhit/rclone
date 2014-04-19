@@ -1,16 +1,14 @@
 import sys
-from lxml import etree
+import os.path
 import re
+import argparse
+from lxml import etree
 from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 from subprocess import Popen, PIPE, STDOUT
 
-### DB INIT STUFF
-
-engine = create_engine("sqlite:///data.sqlite", echo=False)
-Base = declarative_base(bind=engine)
-Session = scoped_session(sessionmaker(bind=engine))
+Base = declarative_base()
 
 class Code(Base):
     __tablename__ = "code"
@@ -48,8 +46,8 @@ def cleanstr(s):
             arr.append(c)
     return "\n".join(arr)
 
-def newdb():
-    Base.metadata.create_all()
+def newdb(engine):
+    Base.metadata.create_all(engine)
 
 class Scraper():
     tagbase = "{http://www.mediawiki.org/xml/export-0.7/}"
@@ -90,8 +88,7 @@ class Scraper():
         """Split code from description"""
         langarr = re.findall(r+"(.*)"+r, self.htmlpages[pagekey])
         sections = re.split(r+".*"+r, self.htmlpages[pagekey])
-        print len(langarr)
-        print len(sections)
+        assert(len(langarr) > 0)
         assert(len(sections) == len(langarr) + 1)
         description = sections[0]
         codedict = {}
@@ -143,13 +140,14 @@ def build_sql_objects(scraper):
         langs.append(Lang(name=lang))
     return tasks, langs, codes
 
-def create_db(datapath):
+def create_db(datapath, dbpath):
     #parse xml
     scraper = Scraper(datapath)
     scraper.parse()
 
     #make db
-    newdb()
+    engine, Session = connect_to_db(dbpath)
+    newdb(engine)
     session = Session()
 
     #obtain data
@@ -166,13 +164,20 @@ def create_db(datapath):
     session.commit()
 
 
-def main(datapath):
-    create_db(datapath)
+def connect_to_db(dbpath):
+    engine = create_engine("sqlite:///"+ dbpath, echo=False)
+    return engine, scoped_session(sessionmaker(bind=engine))
 
 
+def main(datapath, dbpath):
+    create_db(datapath, dbpath)
+
+def argparser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("INPUT", help="XML or XML.GZ file to parse as input")
+    parser.add_argument("DATABASE", help="path to create database")
+    args = parser.parse_args()
+    return(args.INPUT, args.DATABASE)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print "Please supply database file in XML or XML.GZ format"
-        sys.exit()
-    main(sys.argv[1])
+    main(*argparser())
