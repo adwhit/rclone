@@ -60,3 +60,12 @@ pre { background: #eeeeee;
       color: #000;
       padding: 10px;
       border-radius: 7px }
+
+select {
+    padding: 1px 0px 1px 4px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background-image: none;
+    -webkit-appearance: none;
+}

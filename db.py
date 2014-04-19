@@ -115,11 +115,11 @@ def dict2html(d):
     
 def substitute_tag(txt):
     r = Scraper.rarestring
-    # how to capture "=={{header|C}} / {{header|C++}}==" ?
+    # XXX how to capture "=={{header|C}} / {{header|C++}}==" ?
     # ideally want to create two separate entries
     # the below match will completely miss it
     tmp1 = re.sub("=={{header\|([^}]*)}}==",r+"\g<1>"+r,txt)
-    tmp2 =  re.sub("<lang ([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
+    tmp2 =  re.sub("<lang\s*([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
     return re.sub("</lang>", "</syntaxhighlight>", tmp2)
 
 

@@ -10,6 +10,8 @@ import sys
 class gb():
     nullstr = "--"
     urlplaceholder = "0"
+    slashsub = "."
+    spacesub = "_"
     snippetdict = {}
     taskdict = {}
     task2lang = defaultdict(set)
@@ -51,18 +53,18 @@ app = Flask(__name__)
 
 @app.route("/onecol/<task>/<lang1>/", methods=["POST", "GET"])
 def one_lang(task,lang1):
-    task, lang = map(notnull, [task, lang1])
     if request.method == "POST":
         return handle_POST(1)
     else:
+        task, lang1 = unclean_strings([notnull(s) for s in [task, lang1]])
         return handle_GET(1, task, lang1)
 
 @app.route("/twocol/<task>/<lang1>/<lang2>/", methods=["POST", "GET"])
 def two_lang(task, lang1, lang2):
-    task, lang , lang2 = map(notnull, [task, lang1, lang2])
     if request.method == "POST":
         return handle_POST(2)
     else:
+        task, lang1, lang2 = unclean_strings([notnull(s) for s in [task, lang1, lang2]])
         return handle_GET(2, task, lang1, lang2)
 
 def get_form_data(numcols):
@@ -88,10 +90,10 @@ def handle_POST(numcols):
     task = formdata["taskname"] if formdata["taskname"] else gb.urlplaceholder
     lang1 = formdata["lang1"] if formdata["lang1"] else gb.urlplaceholder
     if formdata["numcolschoice"] == 1:
-        return redirect("/onecol/%s/%s/" % (task, lang1))
+        return redirect("/onecol/%s/%s/" % tuple(clean_strings([task, lang1])))
     elif formdata["numcolschoice"] == 2:
         lang2 = formdata["lang2"] if formdata["lang2"] else gb.urlplaceholder
-        return redirect("/twocol/%s/%s/%s/" % (task, lang1, lang2))
+        return redirect("/twocol/%s/%s/%s/" % tuple(clean_strings([task, lang1, lang2])))
 
 def handle_GET(numcols, task, lang1, lang2=None):
     print numcols, task, lang1, lang2
@@ -105,7 +107,9 @@ def handle_GET(numcols, task, lang1, lang2=None):
 
 @app.route("/")
 def toindex():
-    return redirect("/twocol/0/0/0/")
+    u = gb.urlplaceholder
+    return redirect("/twocol/%s/%s/%s/" % (
+        u, u, u))
 
 def notnull(s):
     if s == gb.nullstr or s == gb.urlplaceholder:
@@ -133,8 +137,8 @@ def get_content(task, lang1, lang2, **kwargs):
         if task:
             content["lang2code"] = get_snippet(task, lang2)
 
-    content["tasklist"] = sorted(tasklist)
-    content["langlist"] = sorted(langlist)
+    content["tasklist"] = [gb.nullstr] + sorted(tasklist)
+    content["langlist"] = [gb.nullstr] + sorted(langlist)
 
     for k,v in content.iteritems():
         print k
@@ -168,6 +172,19 @@ def get_tasklist(lang):
 def get_langlist(task):
     return gb.task2lang[task]
 
+def clean_string(s):
+    return s.replace(" ",gb.spacesub).replace("/",gb.slashsub)
+
+def clean_strings(l):
+    return map(clean_string,l)
+
+def unclean_string(s):
+    return s.replace(gb.spacesub," ").replace(gb.slashsub,"/")
+
+def unclean_strings(l):
+    return map(unclean_string,l)
+
+
 
 def filter_list(list1, set1):
     return [l for l in list1 if l in set1]
@@ -181,7 +198,7 @@ def main(dbpath, debug):
 
 def argparser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--database", default="data.sqlite")
+    parser.add_argument("--database", default="data/data.sqlite")
     parser.add_argument("-d", "--debug", action="store_true")
     args = parser.parse_args()
     return(args.database, args.debug)
