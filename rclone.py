@@ -51,64 +51,44 @@ def init_globals(dbpath):
 
 app = Flask(__name__)
 
-@app.route("/onecol/<task>/<lang1>/", methods=["POST", "GET"])
-def one_lang(task,lang1):
-    if request.method == "POST":
-        return handle_POST(1)
-    else:
-        task, lang1 = unclean_strings([notnull(s) for s in [task, lang1]])
-        return handle_GET(1, task, lang1)
+@app.route("/app")
+def handler():
+    print request.form
+    formdata = get_form_data()
+    content = get_content(**formdata)
+    if formdata["ncols"] == 1:
+        return render_template("onecol.html", **content)
+    elif formdata["ncols"] == 2:
+        return render_template("twocol.html", **content)
 
-@app.route("/twocol/<task>/<lang1>/<lang2>/", methods=["POST", "GET"])
-def two_lang(task, lang1, lang2):
-    if request.method == "POST":
-        return handle_POST(2)
-    else:
-        task, lang1, lang2 = unclean_strings([notnull(s) for s in [task, lang1, lang2]])
-        return handle_GET(2, task, lang1, lang2)
-
-def get_form_data(numcols):
+def get_form_data():
     #update formdata fields
     formdata = defaultdict(str)
 
-    formdata["taskname"] = notnull(request.form.get("taskname"))
-    formdata["taskfilter"] = request.form.get("taskfilter")
+    formdata["task"] = notnull(request.args.get("task"))
+    formdata["taskfilter"] = request.args.get("taskfilter")
 
-    formdata["lang1"] = notnull(request.form.get("col1"))
-    formdata["lang1filter"] = request.form.get("lang1filter")
+    formdata["lang1"] = notnull(request.args.get("lang1"))
+    formdata["lang1filter"] = request.args.get("lang1filter")
 
-    formdata["numcolschoice"] = int(request.form.get("colchoice"))
+    ncols = request.args.get("ncols")
+    ncols = int(ncols) if ncols else 2
+    formdata["ncols"] = ncols
 
-    if numcols == 2:
-        formdata["lang2"] = notnull(request.form.get("col2"))
-        formdata["lang2filter"] = request.form.get("lang2filter")
+    if ncols == 2:
+        formdata["lang2"] = notnull(request.args.get("lang2"))
+        formdata["lang2filter"] = request.args.get("lang2filter")
+    else:
+        formdata["lang2"] = None
 
+    print formdata
     return formdata
 
-def handle_POST(numcols):
-    formdata = get_form_data(numcols)
-    task = formdata["taskname"] if formdata["taskname"] else gb.urlplaceholder
-    lang1 = formdata["lang1"] if formdata["lang1"] else gb.urlplaceholder
-    if formdata["numcolschoice"] == 1:
-        return redirect("/onecol/%s/%s/" % tuple(clean_strings([task, lang1])))
-    elif formdata["numcolschoice"] == 2:
-        lang2 = formdata["lang2"] if formdata["lang2"] else gb.urlplaceholder
-        return redirect("/twocol/%s/%s/%s/" % tuple(clean_strings([task, lang1, lang2])))
-
-def handle_GET(numcols, task, lang1, lang2=None):
-    print numcols, task, lang1, lang2
-    content = get_content(task, lang1, lang2)
-    if numcols == 1:
-        content["numcols"] = 1
-        return render_template("onecol.html", **content)
-    elif numcols == 2:
-        content["numcols"] = 2
-        return render_template("twocol.html", **content)
 
 @app.route("/")
 def toindex():
     u = gb.urlplaceholder
-    return redirect("/twocol/%s/%s/%s/" % (
+    return redirect("/app?ncols=2&task=%s&lang1=%s&lang2=%s" % (
         u, u, u))
 
 def notnull(s):
@@ -117,8 +97,8 @@ def notnull(s):
     else:
         return s
 
-def get_content(task, lang1, lang2, **kwargs):
-    content = {"taskname": task, "lang1": lang1, "lang2": lang2}
+def get_content(ncols, task, lang1, lang2, **kwargs):
+    content = {"task": task, "lang1": lang1, "lang2": lang2}
     tasklist = gb.task_filters["all"].copy()
     langlist = gb.lang_filters["all"].copy()
 
@@ -143,6 +123,7 @@ def get_content(task, lang1, lang2, **kwargs):
     for k,v in content.iteritems():
         print k
         if v: print len(v)
+
     return content
 
 
