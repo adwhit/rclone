@@ -3,7 +3,11 @@
 <head>
 <title>Rosetta Clone</title>
 <link rel=stylesheet type=text/css href='{{url_for('static', filename='shared.css')}}'>
+{% if ncols == 1 %}
+<link rel=stylesheet type=text/css href='{{url_for('static', filename='onecol.css')}}'>
+{% else %}
 <link rel=stylesheet type=text/css href='{{url_for('static', filename='twocol.css')}}'>
+{% endif %}
 <link rel=stylesheet type=text/css href='{{url_for('static', filename='pyg.css')}}'>
 </head>
 <body>
@@ -19,12 +23,12 @@
                     <div id=centre>
                         <p>
                         Columns:
-                        <input type="radio" onchange="this.form.submit()" name="ncols" value="1" {%if numcols == 1 %}checked="checked"{%endif %}> One
-                        <input type="radio" onchange="this.form.submit()" name="ncols" value="2" {%if numcols == 2 %}checked="checked"{%endif %}> Two
+                        <input type="radio" onchange="this.form.submit()" name="ncols" value=1 {% if ncols == 1 %}checked="checked"{% endif %}> One
+                        <input type="radio" onchange="this.form.submit()" name="ncols" value=2 {% if ncols == 2 %}checked="checked"{% endif %}> Two
                         </p>
                         <span>Task:</span>
                         <select class="tasks" name="task" onchange="this.form.submit()">
-                            {% for t in tasklist %}<option value="{{t}}"{% if t == task %}selected="selected"{% endif %}>{{t}}</option>{% endfor %}
+                            {% for t in tasklist %}<option value="{{t}}" {% if t == task %}selected="selected"{% endif %}>{{t}}</option>{% endfor %}
                         </select>
                         <input type="radio" onchange="this.form.submit()" name="taskfilter" value="all" {%if taskfilter == "all" %}checked="checked"{%endif %}> All
                         <input type="radio" onchange="this.form.submit()" name="taskfilter" value="top" {%if taskfilter == "top" %}checked="checked"{%endif %}> Top
@@ -58,7 +62,7 @@
     </div>
 </div>
 <div id=footer>
-    <p><a href=#top>RETURN</a></p>
+    <p><a href=#top>Return</a> <a href=/>Reset<a/></p>
 </div>
 </body>
 </html>

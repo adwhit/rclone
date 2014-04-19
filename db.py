@@ -72,7 +72,7 @@ class Scraper():
             if title is not None:
                 text = page.find(Scraper.tagbase + "revision").find(
                         Scraper.tagbase + "text").text
-                pagedict[title.text] = text
+                pagedict[title.text.title()] = text
         return pagedict
 
     def getdata(self):
@@ -87,6 +87,7 @@ class Scraper():
     def splitcode(self, pagekey):
         r = Scraper.rarestring
         """Split code from description"""
+        print "Splitting task ", pagekey
         langarr = re.findall(r+"(.*?)"+r, self.htmlpages[pagekey])
         sections = re.split(r+".*?"+r, self.htmlpages[pagekey])
         assert(len(langarr) > 0)
@@ -108,10 +109,10 @@ def mw2html(mwstring):
 
 def dict2html(d):
     h = {}
-    for k,v in d.iteritems():
-        print k
-        txt = substitute_tag(v)
-        h[k] = mw2html(txt).decode('utf8')
+    for k in sorted(d):
+        print "Converting task ", k
+        txt = substitute_tag(d[k])
+        h[k] = postprocess(mw2html(txt).decode('utf8'))
     return h
     
 def substitute_tag(txt):
@@ -123,6 +124,11 @@ def substitute_tag(txt):
     tmp2 =  re.sub("<lang\s*([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
     return re.sub("</lang>", "</syntaxhighlight>", tmp2)
 
+def replace_wikilinks(txt):
+    return re.sub('a href="wp:(.*?)"', 'a href="http://en.wikipedia.org/wiki/\g<1>"', txt)
+
+def postprocess(html):
+    return replace_wikilinks(html)
 
 def build_sql_objects(scraper):
     langset = set()

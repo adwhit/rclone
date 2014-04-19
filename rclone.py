@@ -9,9 +9,6 @@ import sys
 #globals
 class gb():
     nullstr = "--"
-    urlplaceholder = "0"
-    slashsub = "."
-    spacesub = "_"
     snippetdict = {}
     taskdict = {}
     task2lang = defaultdict(set)
@@ -51,15 +48,17 @@ def init_globals(dbpath):
 
 app = Flask(__name__)
 
-@app.route("/app")
+@app.route("/app/")
 def handler():
-    print request.form
     formdata = get_form_data()
     content = get_content(**formdata)
-    if formdata["ncols"] == 1:
-        return render_template("onecol.html", **content)
-    elif formdata["ncols"] == 2:
-        return render_template("twocol.html", **content)
+    return render_template("app.html", **content)
+
+@app.route("/app/<link>")
+def wikilink(link):
+    return redirect("/app/?task=%s" % link)
+
+
 
 def get_form_data():
     #update formdata fields
@@ -71,37 +70,28 @@ def get_form_data():
     formdata["lang1"] = notnull(request.args.get("lang1"))
     formdata["lang1filter"] = request.args.get("lang1filter")
 
-    ncols = request.args.get("ncols")
-    ncols = int(ncols) if ncols else 2
-    formdata["ncols"] = ncols
+    formdata["ncols"] = request.args.get("ncols")
+    formdata["lang2"] = notnull(request.args.get("lang2"))
+    formdata["lang2filter"] = request.args.get("lang2filter")
 
-    if ncols == 2:
-        formdata["lang2"] = notnull(request.args.get("lang2"))
-        formdata["lang2filter"] = request.args.get("lang2filter")
-    else:
-        formdata["lang2"] = None
-
-    print formdata
     return formdata
 
 
 @app.route("/")
 def toindex():
-    u = gb.urlplaceholder
-    return redirect("/app?ncols=2&task=%s&lang1=%s&lang2=%s" % (
-        u, u, u))
+    return redirect("/app/")
 
 def notnull(s):
-    if s == gb.nullstr or s == gb.urlplaceholder:
+    if s == gb.nullstr:
         return ""
     else:
         return s
 
 def get_content(ncols, task, lang1, lang2, **kwargs):
-    content = {"task": task, "lang1": lang1, "lang2": lang2}
+    content = {"ncols": ncols,"task": task, "lang1": lang1, "lang2": lang2}
     tasklist = gb.task_filters["all"].copy()
     langlist = gb.lang_filters["all"].copy()
-
+    print content
 
     if lang1:
         tasklist &= get_tasklist(lang1)
@@ -120,28 +110,28 @@ def get_content(ncols, task, lang1, lang2, **kwargs):
     content["tasklist"] = [gb.nullstr] + sorted(tasklist)
     content["langlist"] = [gb.nullstr] + sorted(langlist)
 
-    for k,v in content.iteritems():
-        print k
-        if v: print len(v)
-
     return content
 
 
 def get_snippet(task, lang):
+    print "Fetching snippet:"
+    print task, lang
     if (task, lang) in gb.snippetdict:
         return gb.snippetdict[task,lang]
     else:
         session = gb.Session()
-        snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task)).one().text
+        snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task.title())).one().text
         gb.snippetdict[task,lang] = snippet    #cache
         return snippet
 
 
 def get_task_desc(task):
+    print "Fetching taskdesc:"
+    print task
     if task in gb.taskdict:
         return gb.taskdict[task]
     session = gb.Session()
-    taskdesc = session.query(Task).filter_by(name=task).one().description
+    taskdesc = session.query(Task).filter_by(name=task.title()).one().description
     gb.taskdict[task] = taskdesc
     return taskdesc
 
@@ -152,19 +142,6 @@ def get_tasklist(lang):
 
 def get_langlist(task):
     return gb.task2lang[task]
-
-def clean_string(s):
-    return s.replace(" ",gb.spacesub).replace("/",gb.slashsub)
-
-def clean_strings(l):
-    return map(clean_string,l)
-
-def unclean_string(s):
-    return s.replace(gb.spacesub," ").replace(gb.slashsub,"/")
-
-def unclean_strings(l):
-    return map(unclean_string,l)
-
 
 
 def filter_list(list1, set1):
