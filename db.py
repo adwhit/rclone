@@ -33,6 +33,7 @@ class Lang(Base):
 class Task(Base):
     __tablename__ = "task"
     name = Column(String(), primary_key=True)
+    raw = Column(String())  #raw markdown output
     description = Column(String())
 
     def __repr__(self):
@@ -86,8 +87,8 @@ class Scraper():
     def splitcode(self, pagekey):
         r = Scraper.rarestring
         """Split code from description"""
-        langarr = re.findall(r+"(.*)"+r, self.htmlpages[pagekey])
-        sections = re.split(r+".*"+r, self.htmlpages[pagekey])
+        langarr = re.findall(r+"(.*?)"+r, self.htmlpages[pagekey])
+        sections = re.split(r+".*?"+r, self.htmlpages[pagekey])
         assert(len(langarr) > 0)
         assert(len(sections) == len(langarr) + 1)
         description = sections[0]
@@ -131,7 +132,7 @@ def build_sql_objects(scraper):
 
     for task, pagetext in scraper.htmlpages.items():
         description, codedict = scraper.splitcode(task)
-        tasks.append(Task(name=task, description=description))
+        tasks.append(Task(name=task, description=description, raw=scraper.pages[task]))
         for (lang, text) in codedict.items():
             langset.add(lang)
             codes.append(Code(text=text, language=lang, task=task))
