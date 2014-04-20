@@ -90,8 +90,12 @@ class Scraper():
         print "Splitting task ", pagekey
         langarr = re.findall(r+"(.*?)"+r, self.htmlpages[pagekey])
         sections = re.split(r+".*?"+r, self.htmlpages[pagekey])
-        assert(len(langarr) > 0)
-        assert(len(sections) == len(langarr) + 1)
+        if (len(langarr) > 0):
+            print "WARNING: splitting failed for page:", pagekey
+        if (len(sections) == len(langarr) + 1):
+            print "WARNING: wrong number of sections for page:", pagekey
+            print "N sections:", len(sections)
+            print "N langarr:", len(langarr)
         description = sections[0]
         codedict = {}
         codedict = dict(zip(langarr,sections[1:]))

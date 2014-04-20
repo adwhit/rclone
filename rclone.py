@@ -54,7 +54,7 @@ def handler():
     content = get_content(**formdata)
     return render_template("app.html", **content)
 
-@app.route("/app/<link>")
+@app.route("/app/<path:link>")
 def wikilink(link):
     return redirect("/app/?task=%s" % link)
 
