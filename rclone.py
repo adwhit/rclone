@@ -3,12 +3,16 @@ from flask import Flask, render_template, request, redirect, url_for
 import db
 from db import Lang, Task, Code
 from sqlalchemy import or_, and_, func
+from sqlalchemy.orm.exc import NoResultFound
 import argparse
 import sys
 
 #globals
 class gb():
     nullstr = "--"
+    notfounderr = "No page found. You may be able to find it on <a href=http://www.rosettacode.org" \
+            "/wiki/%s>RosettaCode.org</a>.  <a href='javascript:history.back()'> Back</a>. "\
+            "<span id=why><small><a href='/why'>Why did this happen?</a></small></span>"
     snippetdict = {}
     taskdict = {}
     task2lang = defaultdict(set)
@@ -131,7 +135,10 @@ def get_task_desc(task):
     if task in gb.taskdict:
         return gb.taskdict[task]
     session = gb.Session()
-    taskdesc = session.query(Task).filter_by(name=task.title()).one().description
+    try:
+        taskdesc = session.query(Task).filter_by(name=task.title()).one().description
+    except NoResultFound:
+        taskdesc = gb.notfounderr % task
     gb.taskdict[task] = taskdesc
     return taskdesc
 
