@@ -1,36 +1,34 @@
 Rosetta Clone
 =============
 
-Improved UI for browsing the [Rosetta Code](www.rosettacode.org) website.
+Improved UI for browsing the [Rosetta Code](http://www.rosettacode.org) website.
 
-To be hosted [here](http://www.rosettaclone.org). Use AWS.
+To be hosted [here](http://www.rosettaclone.org) (use AWS).
 
 Screenshot: ![shot](misc/Screenshot04182014.jpg) 
 
 TODO:
 -----
 
-Easy:
+Easier:
 
-- Add a 1-column option
 - proper configuration script (for downloading and parsing database)
 - Improve markdown parsing
 - upload to AWS
+- About page
 
 More tricky:
 
-- Tidy up code
+- Tidy up code (MVC)
 - Make RESTful ("www.rosettaclone.org/Append/Python/Haskell")
 - Unit tests
 - Make website "responsive" (i.e. javascript) 
-- Implement as full WikiMedia server
-
+- Statistics page
 
 
 XXX:
 ----
 - Parsing does not handle templates
-- Parser confused by "twin" headers (eg `=={{header|C}} / {{header|C++}}==` )
-
-
-- 
+- Parser confused by "twin" headers (eg =={{header|C}} / {{header|C++}}== )
+- Forward slashes in tasks must be removed
+- Better initialisation 

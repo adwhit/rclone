@@ -1,16 +1,14 @@
 import sys
-from lxml import etree
+import os.path
 import re
+import argparse
+from lxml import etree
 from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 from subprocess import Popen, PIPE, STDOUT
 
-### DB INIT STUFF
-
-engine = create_engine("sqlite:///data.sqlite", echo=False)
-Base = declarative_base(bind=engine)
-Session = scoped_session(sessionmaker(bind=engine))
+Base = declarative_base()
 
 class Code(Base):
     __tablename__ = "code"
@@ -35,6 +33,7 @@ class Lang(Base):
 class Task(Base):
     __tablename__ = "task"
     name = Column(String(), primary_key=True)
+    raw = Column(String())  #raw markdown output
     description = Column(String())
 
     def __repr__(self):
@@ -48,8 +47,8 @@ def cleanstr(s):
             arr.append(c)
     return "\n".join(arr)
 
-def newdb():
-    Base.metadata.create_all()
+def newdb(engine):
+    Base.metadata.create_all(engine)
 
 class Scraper():
     tagbase = "{http://www.mediawiki.org/xml/export-0.7/}"
@@ -73,7 +72,7 @@ class Scraper():
             if title is not None:
                 text = page.find(Scraper.tagbase + "revision").find(
                         Scraper.tagbase + "text").text
-                pagedict[title.text] = text
+                pagedict[title.text.title()] = text
         return pagedict
 
     def getdata(self):
@@ -88,11 +87,15 @@ class Scraper():
     def splitcode(self, pagekey):
         r = Scraper.rarestring
         """Split code from description"""
-        langarr = re.findall(r+"(.*)"+r, self.htmlpages[pagekey])
-        sections = re.split(r+".*"+r, self.htmlpages[pagekey])
-        print len(langarr)
-        print len(sections)
-        assert(len(sections) == len(langarr) + 1)
+        print "Splitting task ", pagekey
+        langarr = re.findall(r+"(.*?)"+r, self.htmlpages[pagekey])
+        sections = re.split(r+".*?"+r, self.htmlpages[pagekey])
+        if (len(langarr) == 0):
+            print "WARNING: splitting failed for page:", pagekey
+        if (len(sections) != len(langarr) + 1):
+            print "WARNING: wrong number of sections for page:", pagekey
+            print "N sections:", len(sections)
+            print "N langarr:", len(langarr)
         description = sections[0]
         codedict = {}
         codedict = dict(zip(langarr,sections[1:]))
@@ -110,21 +113,26 @@ def mw2html(mwstring):
 
 def dict2html(d):
     h = {}
-    for k,v in d.iteritems():
-        print k
-        txt = substitute_tag(v)
-        h[k] = mw2html(txt).decode('utf8')
+    for k in sorted(d):
+        print "Converting task ", k
+        txt = substitute_tag(d[k])
+        h[k] = postprocess(mw2html(txt).decode('utf8'))
     return h
     
 def substitute_tag(txt):
     r = Scraper.rarestring
-    # how to capture "=={{header|C}} / {{header|C++}}==" ?
+    # XXX how to capture "=={{header|C}} / {{header|C++}}==" ?
     # ideally want to create two separate entries
     # the below match will completely miss it
     tmp1 = re.sub("=={{header\|([^}]*)}}==",r+"\g<1>"+r,txt)
-    tmp2 =  re.sub("<lang ([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
+    tmp2 =  re.sub("<lang\s*([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
     return re.sub("</lang>", "</syntaxhighlight>", tmp2)
 
+def replace_wikilinks(txt):
+    return re.sub('a href="wp:(.*?)"', 'a href="http://en.wikipedia.org/wiki/\g<1>"', txt)
+
+def postprocess(html):
+    return replace_wikilinks(html)
 
 def build_sql_objects(scraper):
     langset = set()
@@ -134,7 +142,7 @@ def build_sql_objects(scraper):
 
     for task, pagetext in scraper.htmlpages.items():
         description, codedict = scraper.splitcode(task)
-        tasks.append(Task(name=task, description=description))
+        tasks.append(Task(name=task, description=description, raw=scraper.pages[task]))
         for (lang, text) in codedict.items():
             langset.add(lang)
             codes.append(Code(text=text, language=lang, task=task))
@@ -143,13 +151,14 @@ def build_sql_objects(scraper):
         langs.append(Lang(name=lang))
     return tasks, langs, codes
 
-def create_db(datapath):
+def create_db(datapath, dbpath):
     #parse xml
     scraper = Scraper(datapath)
     scraper.parse()
 
     #make db
-    newdb()
+    engine, Session = connect_to_db(dbpath)
+    newdb(engine)
     session = Session()
 
     #obtain data
@@ -165,14 +174,9 @@ def create_db(datapath):
 
     session.commit()
 
+def connect_to_db(dbpath):
+    engine = create_engine("sqlite:///"+ dbpath, echo=False)
+    return engine, scoped_session(sessionmaker(bind=engine))
 
-def main(datapath):
-    create_db(datapath)
 
 
-
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print "Please supply database file in XML or XML.GZ format"
-        sys.exit()
-    main(sys.argv[1])

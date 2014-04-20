@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<title>Rosetta Clone</title>
+<link rel=stylesheet type=text/css href='{{url_for('static', filename='shared.css')}}'>
+{% if ncols == "1" %} <link rel=stylesheet type=text/css href='{{url_for('static', filename='onecol.css')}}'>
+{% else %}<link rel=stylesheet type=text/css href='{{url_for('static', filename='twocol.css')}}'>{% endif %}
+<link rel=stylesheet type=text/css href='{{url_for('static', filename='pyg.css')}}'>
+</head>
+<body>
+<a name="top"></a>   
+<div id=wrap class=blackbg>
+    <div id=main>
+        <div id=header>
+            <h1>Rosetta Clone</h1>
+        </div>
+        <form action="#">
+            <div id=descrwrapper class=whitebg>
+                <div id=descr>
+                    <div id=centre>
+                        <p>
+                        Columns:
+                        <input type="radio" onchange="this.form.submit()" name="ncols" value=1 {% if ncols == "1" %}checked="checked"{% endif %}> One
+                        <input type="radio" onchange="this.form.submit()" name="ncols" value=2 {% if ncols == "2" %}checked="checked"{% endif %}> Two
+                        </p><p id=reset> <a href=/>Reset</a></p>
+                        <span>Task:</span>
+                        <select class="tasks" name="task" onchange="this.form.submit()">
+                            {% for t in tasklist %}<option value="{{t}}" {% if t == task %}selected="selected"{% endif %}>{{t}}</option>{% endfor %}
+                        </select>
+                        <input type="radio" onchange="this.form.submit()" name="taskfilter" value="all" {%if taskfilter == "all" %}checked="checked"{%endif %}> All
+                        <input type="radio" onchange="this.form.submit()" name="taskfilter" value="top" {%if taskfilter == "top" %}checked="checked"{%endif %}> Top
+                    </div><br>
+                    <div id=task class="blackbg">{{taskdesc|safe}}</div>
+                </div>
+            </div>
+            <div id=col1>
+                <div id=centre>
+                    <span>Language 1:</span>
+                    <select class="lang" name="lang1" onchange="this.form.submit()">
+                        {% for lang in lang1list %}<option value="{{lang}}"{% if lang == lang1 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                    </select>
+                    <input type="checkbox" onchange="this.form.submit()" name="l1top" value="true" {% if l1top %}checked{% endif %}><span>Filter top</span>
+                </div>
+                <p>{{lang1code|safe}}</p>
+            </div>
+            <div id=col2>
+                <div id=centre>
+                    <span>Language 2:</span>
+                    <select class="lang" name="lang2" onchange="this.form.submit()">
+                        {% for lang in lang2list %}<option value="{{lang}}"{% if lang == lang2 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                    </select>
+                    <input type="radio" onchange="this.form.submit()" name="lang2filter" value="all" {%if lang2filter == "all" %}checked="checked"{%endif %}> All
+                    <input type="radio" onchange="this.form.submit()" name="lang2filter" value="top" {%if lang2filter == "top" %}checked="checked"{%endif %}> Top
+                </div>
+                <p>{{lang2code|safe}}</p>
+            </div>
+        </form>
+    </div>
+</div>
+<div id=footer class=whitebg>
+    <p><a href=#top>Top</a> <a href=/>Reset</a></p>
+</div>
+</body>
+</html>
