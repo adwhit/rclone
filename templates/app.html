@@ -37,10 +37,9 @@
                 <div id=centre>
                     <span>Language 1:</span>
                     <select class="lang" name="lang1" onchange="this.form.submit()">
-                        {% for lang in langlist %}<option value="{{lang}}"{% if lang == lang1 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                        {% for lang in lang1list %}<option value="{{lang}}"{% if lang == lang1 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                     </select>
-                    <input type="radio" onchange="this.form.submit()" name="lang1filter" value="all" {%if lang1filter == "all" %}checked="checked"{%endif %}> All
-                    <input type="radio" onchange="this.form.submit()" name="lang1filter" value="top" {%if lang1filter == "top" %}checked="checked"{%endif %}> Top
+                    <input type="checkbox" onchange="this.form.submit()" name="l1top" value="true" {% if l1top %}checked{% endif %}><span>Filter top</span>
                 </div>
                 <p>{{lang1code|safe}}</p>
             </div>
@@ -48,7 +47,7 @@
                 <div id=centre>
                     <span>Language 2:</span>
                     <select class="lang" name="lang2" onchange="this.form.submit()">
-                        {% for lang in langlist %}<option value="{{lang}}"{% if lang == lang2 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                        {% for lang in lang2list %}<option value="{{lang}}"{% if lang == lang2 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                     </select>
                     <input type="radio" onchange="this.form.submit()" name="lang2filter" value="all" {%if lang2filter == "all" %}checked="checked"{%endif %}> All
                     <input type="radio" onchange="this.form.submit()" name="lang2filter" value="top" {%if lang2filter == "top" %}checked="checked"{%endif %}> Top
