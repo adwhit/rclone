@@ -17,8 +17,6 @@ h1,h3         {
     border-radius: 7px;
 }
 
-.blackbg a:link { color: #9a96eb }
-.blackbg a:visited { color: #9a75eb }
 
 .whitebg {
     background: #eeeeee;
@@ -26,6 +24,13 @@ h1,h3         {
     padding: 10px;
     border-radius: 7px;
 }
+
+
+.whitebg a:link { color: #333333 }
+.whitebg a:visited { color: #666666 }
+
+.blackbg a:link { color: #ffffff }
+.blackbg a:visited { color: #aaaaaa }
 
 #wrap {
     width:90%;
@@ -58,7 +63,7 @@ select.lang { width:150px; }
     padding:1px;
 }
 
-pre { 
+.blackbg pre { 
     padding: 10px;
     border-radius: 7px;
     overflow: auto;

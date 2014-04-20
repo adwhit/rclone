@@ -63,7 +63,6 @@ def handler():
     filters = get_filters()
     get_content(pagedata)
     filter_content(pagedata, filters)
-    print "Content keys:", pagedata.keys()
     return render_template("app.html", **pagedata)
 
 @app.route("/app/<path:link>")
@@ -105,16 +104,16 @@ def notnull(s):
 
 def get_content(content):
 
-    print content
-
     task = content["task"]
     lang1 = content["lang1"]
     lang2 = content["lang2"]
+    
 
     tasklist = gb.task_filters["all"].copy()
     langlist = gb.lang_filters["all"].copy()
 
     if task:
+        content["rclink"] = task2link(task)
         langlist &= get_langlist(task)
         content["taskdesc"] = get_task_desc(task)
 
@@ -134,16 +133,12 @@ def get_content(content):
     return content
 
 def filter_content(content, filters):
-    print "Filters:", filters
-
     for tf in filters["task"]:
         content["tasklist"] &= gb.task_filters[tf]
         content[tf] = True
     for l1f in filters["lang1"]:
-        print len(content["lang1list"])
         content["lang1list"] &= gb.lang_filters[l1f]
         content["l1" + l1f] = True
-        print len(content["lang1list"])
     for l2f in filters["lang2"]:
         content["lang2list"] &= gb.lang_filters[l2f]
         content["l2" + l2f] = True
@@ -153,8 +148,6 @@ def filter_content(content, filters):
 
 
 def get_snippet(task, lang):
-    print "Fetching snippet:"
-    print task, lang
     if (task, lang) in gb.snippetdict:
         return gb.snippetdict[task,lang]
     else:
@@ -165,8 +158,6 @@ def get_snippet(task, lang):
 
 
 def get_task_desc(task):
-    print "Fetching taskdesc:"
-    print task
     if task in gb.taskdict:
         return gb.taskdict[task]
     session = gb.Session()
@@ -188,6 +179,10 @@ def get_langlist(task):
 
 def filter_list(list1, set1):
     return [l for l in list1 if l in set1]
+
+def task2link(task):
+    link = "/".join([t.capitalize() for t in task.replace(" ","_").split("/")])
+    return "http://rosettacode.org/wiki/"+link
 
 def main(dbpath, debug):
     init_globals(dbpath)

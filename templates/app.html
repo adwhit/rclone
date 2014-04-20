@@ -11,7 +11,7 @@
 <a name="top"></a>   
 <div id=wrap class=blackbg>
     <div id=main>
-        <div id=header><h1>Rosetta Clone</h1></div>
+        <div id=header><p><h1>Rosetta Clone</h1></p></div>
         <form action="#">
             <div id=descrwrapper class=whitebg>
                 <div id=langwrapper class=blackbg>
@@ -47,6 +47,8 @@
                             {% for t in tasklist %}<option value="{{t}}" {% if t == task %}selected="selected"{% endif %}>{{t}}</option>{% endfor %}
                             </select>
                         </p>
+                        {% if rclink %} <span><a href="{{rclink}}">RosettaCode link</a></span> {% endif %}
+
                     </div>
                     <p>{{taskdesc|safe}}</p>
                 </div>
@@ -62,7 +64,7 @@
         </form>
     </div>
     <div id=footer class=whitebg>
-        <p><a href=#top>Top</a><a href=/>Reset</a></p>
+        <p><a href=#top>Top</a> <a href=/>Reset</a></p>
     </div>
 </div>
 </body>
