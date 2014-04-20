@@ -14,7 +14,7 @@ class gb():
     notfounderr = "No page found. You may be able to find it on <a href=http://www.rosettacode.org" \
             "/wiki/%s>RosettaCode.org</a>.  <a href='javascript:history.back()'> Back</a>. "\
             "<span id=why><small><a href='/why'>Why did this happen?</a></small></span>"
-    pageitems = "task lang1 lang2 ncols".split()
+    pageitems = "task lang1 lang2 hide".split()
 
     snippetdict = {}
     taskdict = {}
@@ -49,22 +49,22 @@ def init_globals(dbpath):
 
     gb.task_filters["top"] = set([r[0] for r in top_tasks])
 
-    gb.lang_filters["top"] = set([r[0] for r in 
-        session.query(Code.language, func.count(Code.language)).group_by(Code.language).all()])
+    #gb.lang_filters["top"] = set([r[0] for r in 
+    #    session.query(Code.language, func.count(Code.language)).group_by(Code.language).limit(20).all()])
 
-    gb.lang_filters["popular"] = set("C,C++,JavaScript,Java,Python,D,Objective-C,PHP,Ruby,\
+    gb.lang_filters["top"] = set("C,C++,JavaScript,Java,Python,D,Objective-C,PHP,Ruby,\
                  Go,Rust,Julia,Haskell,Clojure,C#,UNIX shell,Perl".split(","))
+    gb.lang_filters["python"] = set(["Python"])
 
 
 @app.route("/app/")
 def handler():
-    formdata = get_form_data()
+    pagedata = get_form_data()
     filters = get_filters()
-    content = get_content(**formdata)
-    filter_content(content)
-    print content["lang1list"]
-    print filters
-    return render_template("app.html", **content)
+    get_content(pagedata)
+    filter_content(pagedata, filters)
+    print "Content keys:", pagedata.keys()
+    return render_template("app.html", **pagedata)
 
 @app.route("/app/<path:link>")
 def wikilink(link):
@@ -81,7 +81,6 @@ def get_filters():
     lang1filters = []
     lang2filters = []
 
-
     for filter in gb.task_filters:
         if request.args.get(filter):
             taskfilters.append(filter)
@@ -91,7 +90,6 @@ def get_filters():
             lang1filters.append(filter)
         if request.args.get("l2" + filter):
             lang2filters.append(filter)
-
 
     return {"task": taskfilters, "lang1": lang1filters, "lang2" :lang2filters}
 
@@ -105,15 +103,16 @@ def notnull(s):
     else:
         return s
 
-def get_content(ncols, task, lang1, lang2, **kwargs):
-    #XXX need separate filtering step
-    content = {"ncols": ncols,"task": task, "lang1": lang1, "lang2": lang2}
+def get_content(content):
+
+    print content
+
+    task = content["task"]
+    lang1 = content["lang1"]
+    lang2 = content["lang2"]
 
     tasklist = gb.task_filters["all"].copy()
     langlist = gb.lang_filters["all"].copy()
-    print langlist
-
-    print content
 
     if task:
         langlist &= get_langlist(task)
@@ -123,7 +122,6 @@ def get_content(ncols, task, lang1, lang2, **kwargs):
         tasklist &= get_tasklist(lang1)
         if task:
             content["lang1code"] = get_snippet(task, lang1)
-
 
     if lang2:
         tasklist &= get_tasklist(lang2)
@@ -135,7 +133,21 @@ def get_content(ncols, task, lang1, lang2, **kwargs):
     content["lang2list"] = langlist.copy()
     return content
 
-def filter_content(content):
+def filter_content(content, filters):
+    print "Filters:", filters
+
+    for tf in filters["task"]:
+        content["tasklist"] &= gb.task_filters[tf]
+        content[tf] = True
+    for l1f in filters["lang1"]:
+        print len(content["lang1list"])
+        content["lang1list"] &= gb.lang_filters[l1f]
+        content["l1" + l1f] = True
+        print len(content["lang1list"])
+    for l2f in filters["lang2"]:
+        content["lang2list"] &= gb.lang_filters[l2f]
+        content["l2" + l2f] = True
+
     content["lang1list"] = [gb.nullstr] + sorted(content["lang1list"])
     content["lang2list"] = [gb.nullstr] + sorted(content["lang2list"])
 

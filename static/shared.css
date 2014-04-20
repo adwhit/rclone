@@ -1,9 +1,20 @@
-html, body        { font-family: 'Arial', serif; background: #999; height:100%; width 90%;}
-h1,h3         { margin: 0; text-align:center; }
+html, body    { 
+    font-family: 'Arial', serif;
+    background: #999; 
+    height:100%; 
+    width 90%;
+}
+
+h1,h3         { 
+    margin: 0; 
+    text-align:center; 
+}
 
 .blackbg {
     background: #444444;
     color: #eeeeee;
+    padding: 10px;
+    border-radius: 7px;
 }
 
 .blackbg a:link { color: #9a96eb }
@@ -12,6 +23,8 @@ h1,h3         { margin: 0; text-align:center; }
 .whitebg {
     background: #eeeeee;
     color: #444444;
+    padding: 10px;
+    border-radius: 7px;
 }
 
 #wrap {
@@ -20,52 +33,29 @@ h1,h3         { margin: 0; text-align:center; }
     min-height:95%;
 }
 
+#langwrapper { overflow:hidden;
+               height:100%; }
+
 #main { 
     font-size: 0.8em;
     overflow:auto;
-    padding-bottom:10px;
     height:100%;
 }
 
 select.tasks { width:250px; }
 select.lang { width:150px; }
 
-#output { 
-    padding:10px; 
-}
-
-#header {
-    padding:15px;
-}
-
-#descrwrapper {
-    padding:10px;
-    font-size: 1em; 
-}
-
 #descr {
     width: 70%;
     margin: 0 auto;
 }
 
-#task {
-    padding: 10px;
-    border-radius: 7px;
-}
-
-#why { float:right }
-
-
 #centre { text-align:center }
 
 #footer {
-    position:relative;
     text-align: center;
-    width:90%;
     margin:0 auto;
-    top:-30px;
-    height:30px;
-    line-height:30px;
+    padding:1px;
 }
 
 pre { 
