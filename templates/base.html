@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<title>Rosetta Clone</title>
+<link rel=stylesheet type=text/css href='{{url_for('static', filename='shared.css')}}'>
+{% block styles %}{% endblock %}
+</head>
+<body>
+<a name="top"></a>   
+<div id=wrap class=blackbg>
+    <div id=main>
+        <div id=header>
+            <h1>Rosetta Clone</h1> <span><a href=/faq>FAQ</a> <a href=/>Home</a><span>
+        </div>
+    {% block main %}{% endblock %}
+    </div>
+    <div id=footer class=whitebg>
+        <p><a href=#top>Top</a> <a href=/>Home</a></p>
+    </div>
+</div>
+</body>
+</html>

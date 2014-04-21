@@ -1,40 +1,33 @@
-<!doctype html>
-<html>
-<head>
-<title>Rosetta Clone</title>
-<link rel=stylesheet type=text/css href='{{url_for('static', filename='shared.css')}}'>
-{% if hide %} <link rel=stylesheet type=text/css href='{{url_for('static', filename='onecol.css')}}'>
+{% extends "base.html" %}
+{% block styles %}
+{% if hide %}<link rel=stylesheet type=text/css href='{{url_for('static', filename='onecol.css')}}'>
 {% else %}<link rel=stylesheet type=text/css href='{{url_for('static', filename='twocol.css')}}'>{% endif %}
 <link rel=stylesheet type=text/css href='{{url_for('static', filename='pyg.css')}}'>
-</head>
-<body>
-<a name="top"></a>   
-<div id=wrap class=blackbg>
-    <div id=main>
-        <div id=header><p><h1>Rosetta Clone</h1></p></div>
+{% endblock %}
+{% block main %}
         <form action="#">
             <div id=descrwrapper class=whitebg>
                 <div id=langwrapper class=blackbg>
-                    <div style="float:left;"><span>Language 1:</span>
+                    <div style="float:left;"><span>language 1:</span>
                         <select class="lang" name="lang1" onchange="this.form.submit()">
-                            {% for lang in lang1list %}<option value="{{lang}}"{% if lang == lang1 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                            {% for lang in lang1list %}<option value="{{lang}}"{% if lang == lang1 %} selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                         </select>
-                        <span>Filter:</span>
-                        <span>Top</span>
+                        <span>filter:</span>
+                        <span>top</span>
                         <input type="checkbox" onchange="this.form.submit()" name="l1top" value="true" {% if l1top %}checked{% endif %}>
-                        <span>Python</span>
+                        <span>python</span>
                         <input type="checkbox" onchange="this.form.submit()" name="l1python" value="true" {% if l1python %}checked{% endif %}>
                     </div>
-                    <div style="float:right;"><span>Language 2:</span>
+                    <div style="float:right;"><span>language 2:</span>
                         <select class="lang" name="lang2" onchange="this.form.submit()">
-                            {% for lang in lang2list %}<option value="{{lang}}"{% if lang == lang2 %}selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
+                            {% for lang in lang2list %}<option value="{{lang}}"{% if lang == lang2 %} selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                         </select>
-                        <span>Filter:</span>
-                        <span>Top</span>
+                        <span>filter:</span>
+                        <span>top</span>
                         <input type="checkbox" onchange="this.form.submit()" name="l2top" value="true" {% if l2top %}checked{% endif %}>
-                        <span>Python</span>
+                        <span>python</span>
                         <input type="checkbox" onchange="this.form.submit()" name="l2python" value="true" {% if l2python %}checked{% endif %}>
-                        <span>Hide</span>
+                        <span>hide</span>
                         <input type="checkbox" onchange="this.form.submit()" name="hide" value="true" {% if hide %}checked{% endif %}>
                     </div>
                 </div>
@@ -48,7 +41,6 @@
                             </select>
                         </p>
                         {% if rclink %} <span><a href="{{rclink}}">RosettaCode link</a></span> {% endif %}
-
                     </div>
                     <p>{{taskdesc|safe}}</p>
                 </div>
@@ -62,10 +54,4 @@
                 <p>{{lang2code|safe}}</p>
             </div>
         </form>
-    </div>
-    <div id=footer class=whitebg>
-        <p><a href=#top>Top</a> <a href=/>Reset</a></p>
-    </div>
-</div>
-</body>
-</html>
+{% endblock %}

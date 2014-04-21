@@ -69,6 +69,10 @@ def handler():
 def wikilink(link):
     return redirect("/app/?task=%s" % link)
 
+@app.route("/faq/")
+def faq():
+    return render_template("faq.html")
+
 def get_form_data():
     formdata = {}
     for item in gb.pageitems:
@@ -158,13 +162,16 @@ def get_snippet(task, lang):
 
 
 def get_task_desc(task):
+    #assume not found, then lookup
+    taskdesc = gb.notfounderr % task
     if task in gb.taskdict:
         return gb.taskdict[task]
-    session = gb.Session()
-    try:
-        taskdesc = session.query(Task).filter_by(name=task.title()).one().description
-    except NoResultFound:
-        taskdesc = gb.notfounderr % task
+    if task in gb.task_filters["all"]:
+        session = gb.Session()
+        try:
+            taskdesc = session.query(Task).filter_by(name=task.title()).one().description
+        except NoResultFound:
+            pass
     gb.taskdict[task] = taskdesc
     return taskdesc
 
