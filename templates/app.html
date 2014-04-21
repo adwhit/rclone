@@ -8,7 +8,7 @@
         <form action="#">
             <div id=descrwrapper class=whitebg>
                 <div id=langwrapper class=blackbg>
-                    <div style="float:left;"><span>language 1:</span>
+                    <div style="float:left;"><span>Language 1:</span>
                         <select class="lang" name="lang1" onchange="this.form.submit()">
                             {% for lang in lang1list %}<option value="{{lang}}"{% if lang == lang1 %} selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                         </select>
@@ -18,7 +18,7 @@
                         <span>python</span>
                         <input type="checkbox" onchange="this.form.submit()" name="l1python" value="true" {% if l1python %}checked{% endif %}>
                     </div>
-                    <div style="float:right;"><span>language 2:</span>
+                    <div style="float:right;"><span>Language 2:</span>
                         <select class="lang" name="lang2" onchange="this.form.submit()">
                             {% for lang in lang2list %}<option value="{{lang}}"{% if lang == lang2 %} selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                         </select>
@@ -33,7 +33,7 @@
                 </div>
                 <p></p>
                 <div id=descr class="blackbg">
-                    <div id=centre>
+                    <div style="text-align:center">
                         <p>
                             <span>Task:</span>
                             <select class="tasks" name="task" onchange="this.form.submit()">

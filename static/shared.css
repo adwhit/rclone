@@ -10,6 +10,8 @@ h1,h3         {
     text-align:center; 
 }
 
+#header { text-align:center }
+
 .blackbg {
     background: #444444;
     color: #eeeeee;
@@ -25,8 +27,15 @@ h1,h3         {
     border-radius: 7px;
 }
 
-a:link,
-a:visited { color:inherit }
+
+/*.whitebg a, .whitebg a:visited { color: #ff0000 }
+
+.blackbg a, .blackbg a:visited { color: #00ff00 }
+
+.whitebg #footer a, .whitebg #footer a:visited { color: #ff0000 }
+*/
+ 
+a { color: inherit 
 
 #wrap {
     width:90%;
@@ -50,10 +59,9 @@ select.lang { width:150px; }
     margin: 0 auto;
 }
 
-#centre { text-align:center }
+.centre { text-align:center }
 
 #footer {
-    borderjkk
     text-align: center;
     margin:0 auto;
     padding:1px;
