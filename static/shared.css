@@ -27,15 +27,7 @@ h1,h3         {
     border-radius: 7px;
 }
 
-
-/*.whitebg a, .whitebg a:visited { color: #ff0000 }
-
-.blackbg a, .blackbg a:visited { color: #00ff00 }
-
-.whitebg #footer a, .whitebg #footer a:visited { color: #ff0000 }
-*/
- 
-a { color: inherit 
+a { color: inherit }
 
 #wrap {
     width:90%;
