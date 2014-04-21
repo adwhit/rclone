@@ -10,24 +10,18 @@ Screenshot: ![shot](misc/Screenshot04182014.jpg)
 TODO:
 -----
 
-Easier:
-
-- proper configuration script (for downloading and parsing database)
 - Improve markdown parsing
 - upload to AWS
+- Statistics page
 - About page
-
-More tricky:
-
+- FAQ page
+- Add more/better filters
 - Tidy up code (MVC)
-- Make RESTful ("www.rosettaclone.org/Append/Python/Haskell")
+- configuration script (for downloading and parsing database)
 - Unit tests
 - Make website "responsive" (i.e. javascript) 
-- Statistics page
 
-
-XXX:
-----
+####XXX:
 - Parsing does not handle templates
 - Parser confused by "twin" headers (eg =={{header|C}} / {{header|C++}}== )
 - Forward slashes in tasks must be removed

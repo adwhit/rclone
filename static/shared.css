@@ -63,6 +63,8 @@ select.lang { width:150px; }
     padding:1px;
 }
 
+#why { float:right; }
+
 .blackbg pre { 
     padding: 10px;
     border-radius: 7px;
