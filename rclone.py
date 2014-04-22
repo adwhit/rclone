@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 #globals
 class gb():
-    nullstr = "--"
+    nullstr = ""
     notfounderr = "No page found. You may be able to find it on <a href=http://www.rosettacode.org" \
             "/wiki>RosettaCode.org</a>.<br><a href='javascript:history.back()'> Go back</a> "\
             "<span id=why><small><a href='/faq#why'>Why did this happen?</a></small></span>"
