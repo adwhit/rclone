@@ -2,7 +2,7 @@
 {% block styles %}
 {% if hide %}<link rel=stylesheet type=text/css href='{{url_for('static', filename='onecol.css')}}'>
 {% else %}<link rel=stylesheet type=text/css href='{{url_for('static', filename='twocol.css')}}'>{% endif %}
-<link rel=stylesheet type=text/css href='{{url_for('static', filename='pyg.css')}}'>
+<link rel=stylesheet type=text/css href='{{url_for('static', filename='espresso.css')}}'>
 {% endblock %}
 {% block main %}
         <form action="#">
@@ -31,26 +31,24 @@
                         <input type="checkbox" onchange="this.form.submit()" name="hide" value="true" {% if hide %}checked{% endif %}>
                     </div>
                 </div>
-                <p></p>
                 <div id=descr class="blackbg">
                     <div style="text-align:center">
-                        <p>
                             <span>Task:</span>
                             <select class="tasks" name="task" onchange="this.form.submit()">
                             {% for t in tasklist %}<option value="{{t}}" {% if t == task %}selected="selected"{% endif %}>{{t}}</option>{% endfor %}
                             </select>
                         </p>
-                        {% if rclink %} <span><a href="{{rclink}}">RosettaCode link</a></span> {% endif %}
+                        {% if rclink %} <span><a href="{{rclink}}">RosettaCode entry</a></span> {% endif %}
                     </div>
                     <p>{{taskdesc|safe}}</p>
                 </div>
             </div>
-            <div id=col1>
-                <h3>{{lang1}}</h3>
+            <div id=col1 class=whitebg>
+                <h3>{% if lang1 %}{{lang1}}{% else %}Select language{% endif %}</h3>
                 <p>{{lang1code|safe}}</p>
             </div>
-            <div id=col2>
-                <h3>{{lang2}}</h3>
+            <div id=col2 class=whitebg>
+                <h3>{% if lang2 %}{{lang2}}{% else %}Select language{% endif %}</h3>
                 <p>{{lang2code|safe}}</p>
             </div>
         </form>

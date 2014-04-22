@@ -10,6 +10,7 @@ h1,h3         {
     text-align:center; 
 }
 
+
 #header { text-align:center }
 
 .blackbg {
@@ -17,6 +18,7 @@ h1,h3         {
     color: #eeeeee;
     padding: 10px;
     border-radius: 7px;
+    margin:1%;
 }
 
 
@@ -25,14 +27,17 @@ h1,h3         {
     color: #444444;
     padding: 10px;
     border-radius: 7px;
+    margin:1%;
 }
 
-a { color: inherit }
+a { color:inherit }
 
 #wrap {
     width:90%;
     margin: 0 auto;
-    min-height:95%;
+    min-height:90%;
+    position: relative;
+    padding-bottom:4%;
 }
 
 #langwrapper { overflow:hidden;
@@ -55,8 +60,11 @@ select.lang { width:150px; }
 
 #footer {
     text-align: center;
-    margin:0 auto;
     padding:1px;
+    position:absolute;
+    bottom:0;
+    left:0.5%;
+    right:0.5%;
 }
 
 #why { float:right; }
@@ -65,8 +73,8 @@ select.lang { width:150px; }
     padding: 10px;
     border-radius: 7px;
     overflow: auto;
-    background: #eeeeee;
-    color: #444444;
+    color: #eeeeee;
+    background: #444444;
 }
 
 select {

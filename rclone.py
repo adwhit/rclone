@@ -13,7 +13,7 @@ class gb():
     nullstr = "--"
     notfounderr = "No page found. You may be able to find it on <a href=http://www.rosettacode.org" \
             "/wiki/%s>RosettaCode.org</a>.  <a href='javascript:history.back()'> Back</a>. "\
-            "<span id=why><small><a href='/why'>Why did this happen?</a></small></span>"
+            "<span id=why><small><a href='/faq#why'>Why did this happen?</a></small></span>"
     pageitems = "task lang1 lang2 hide".split()
 
     snippetdict = {}
@@ -22,6 +22,7 @@ class gb():
     lang2task = defaultdict(set)
     task_filters = {}
     lang_filters = {}
+    link_guesses = {}
     Session = None
     
 def init_globals(dbpath):
@@ -67,7 +68,12 @@ def handler():
 
 @app.route("/app/<path:link>")
 def wikilink(link):
-    return redirect("/app/?task=%s" % link)
+    guess = guess_link(link)
+    if guess:
+        return redirect("/app/?task=%s" % guess_link(link))
+    else:
+        return redirect("/app/?task=%s" % link)
+
 
 @app.route("/faq/")
 def faq():
@@ -102,7 +108,7 @@ def toindex():
 
 def notnull(s):
     if s == gb.nullstr:
-        return ""
+        return None
     else:
         return s
 
@@ -152,13 +158,14 @@ def filter_content(content, filters):
 
 
 def get_snippet(task, lang):
+    snippet = gb.notfounderr % task
     if (task, lang) in gb.snippetdict:
         return gb.snippetdict[task,lang]
-    else:
+    if lang in gb.lang_filters["all"]:
         session = gb.Session()
         snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task.title())).one().text
-        gb.snippetdict[task,lang] = snippet    #cache
-        return snippet
+    gb.snippetdict[task,lang] = snippet    #cache
+    return snippet
 
 
 def get_task_desc(task):
@@ -168,10 +175,7 @@ def get_task_desc(task):
         return gb.taskdict[task]
     if task in gb.task_filters["all"]:
         session = gb.Session()
-        try:
-            taskdesc = session.query(Task).filter_by(name=task.title()).one().description
-        except NoResultFound:
-            pass
+        taskdesc = session.query(Task).filter_by(name=task.title()).one().description
     gb.taskdict[task] = taskdesc
     return taskdesc
 
@@ -186,6 +190,30 @@ def get_langlist(task):
 
 def filter_list(list1, set1):
     return [l for l in list1 if l in set1]
+
+def guess_link(link):
+    if link in gb.task_filters["all"]:
+        return link
+    elif link in gb.link_guesses:
+        return gb.link_guesses[link]
+    else:
+        score = 1000
+        guess = ""
+        sl = set(link.lower())
+        ll = len(link)
+        for task in gb.task_filters["all"]:
+            scr = len(set(task.lower()).symmetric_difference(sl)) + abs(len(task) - ll)
+            if scr < score:
+                score = scr
+                guess = task
+        print "Guessing link: %s, Guess: %s, Score: %s" % (link, guess, score)
+        if score < 4:
+            gb.link_guesses[link] = guess
+            return guess
+        else:
+            gb.link_guesses[link] = None
+            return None
+
 
 def task2link(task):
     link = "/".join([t.capitalize() for t in task.replace(" ","_").split("/")])
