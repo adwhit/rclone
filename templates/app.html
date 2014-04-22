@@ -2,7 +2,7 @@
 {% block styles %}
 {% if hide %}<link rel=stylesheet type=text/css href='{{url_for('static', filename='onecol.css')}}'>
 {% else %}<link rel=stylesheet type=text/css href='{{url_for('static', filename='twocol.css')}}'>{% endif %}
-<link rel=stylesheet type=text/css href='{{url_for('static', filename='espresso.css')}}'>
+<link rel=stylesheet type=text/css href='{{url_for('static', filename='espressoMod.css')}}'>
 {% endblock %}
 {% block main %}
         <form action="#">
@@ -15,8 +15,6 @@
                         <span>filter:</span>
                         <span>top</span>
                         <input type="checkbox" onchange="this.form.submit()" name="l1top" value="true" {% if l1top %}checked{% endif %}>
-                        <span>python</span>
-                        <input type="checkbox" onchange="this.form.submit()" name="l1python" value="true" {% if l1python %}checked{% endif %}>
                     </div>
                     <div style="float:right;"><span>Language 2:</span>
                         <select class="lang" name="lang2" onchange="this.form.submit()">
@@ -25,8 +23,6 @@
                         <span>filter:</span>
                         <span>top</span>
                         <input type="checkbox" onchange="this.form.submit()" name="l2top" value="true" {% if l2top %}checked{% endif %}>
-                        <span>python</span>
-                        <input type="checkbox" onchange="this.form.submit()" name="l2python" value="true" {% if l2python %}checked{% endif %}>
                         <span>hide</span>
                         <input type="checkbox" onchange="this.form.submit()" name="hide" value="true" {% if hide %}checked{% endif %}>
                     </div>

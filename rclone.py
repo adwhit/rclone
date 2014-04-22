@@ -12,7 +12,7 @@ app = Flask(__name__)
 class gb():
     nullstr = "--"
     notfounderr = "No page found. You may be able to find it on <a href=http://www.rosettacode.org" \
-            "/wiki/%s>RosettaCode.org</a>.  <a href='javascript:history.back()'> Back</a>. "\
+            "/wiki>RosettaCode.org</a>.<br><a href='javascript:history.back()'> Go back</a> "\
             "<span id=why><small><a href='/faq#why'>Why did this happen?</a></small></span>"
     pageitems = "task lang1 lang2 hide".split()
 
@@ -158,7 +158,7 @@ def filter_content(content, filters):
 
 
 def get_snippet(task, lang):
-    snippet = gb.notfounderr % task
+    snippet = gb.notfounderr
     if (task, lang) in gb.snippetdict:
         return gb.snippetdict[task,lang]
     if lang in gb.lang_filters["all"]:
@@ -170,7 +170,7 @@ def get_snippet(task, lang):
 
 def get_task_desc(task):
     #assume not found, then lookup
-    taskdesc = gb.notfounderr % task
+    taskdesc = gb.notfounderr
     if task in gb.taskdict:
         return gb.taskdict[task]
     if task in gb.task_filters["all"]:
@@ -224,7 +224,7 @@ def main(dbpath, debug):
     if debug:
         app.run(debug=True, port = 3000)
     else:
-        app.run(host="0.0.0.0")
+        app.run(host="0.0.0.0", port = 80)
 
 def argparser():
     parser = argparse.ArgumentParser()
