@@ -2,7 +2,6 @@ html, body    {
     font-family: 'Arial', serif;
     background: #999; 
     height:100%; 
-    width 90%;
 }
 
 h1,h3         { 
@@ -32,6 +31,9 @@ h1,h3         {
 
 a { color:inherit }
 
+.active-result { color:#444444; text-align: left}
+
+
 #wrap {
     width:90%;
     margin: 0 auto;
@@ -40,16 +42,12 @@ a { color:inherit }
     padding-bottom:4%;
 }
 
-#langwrapper { overflow:hidden;
-               height:100%; }
+#langwrapper { height:1.5em; }
 
-#main { 
-    overflow:auto;
-    height:100%;
-}
 
-select.tasks { width:250px; }
-select.lang { width:150px; }
+.tasks { width:250px; color:#ff0000 }
+.lang { width:150px; color:#ff0000 }
+
 
 #descr {
     width: 70%;

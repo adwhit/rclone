@@ -9,7 +9,7 @@
             <div id=descrwrapper class=whitebg>
                 <div id=langwrapper class=blackbg>
                     <div style="float:left;"><span>Language 1:</span>
-                        <select class="lang" name="lang1" onchange="this.form.submit()">
+                        <select class="lang" data-placeholder="Select a Language" name="lang1" onchange="this.form.submit()">
                             {% for lang in lang1list %}<option value="{{lang}}"{% if lang == lang1 %} selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                         </select>
                         <span>filter:</span>
@@ -17,7 +17,7 @@
                         <input type="checkbox" onchange="this.form.submit()" name="l1top" value="true" {% if l1top %}checked{% endif %}>
                     </div>
                     <div style="float:right;"><span>Language 2:</span>
-                        <select class="lang" name="lang2" onchange="this.form.submit()">
+                        <select class="lang" data-placeholder="Select a Language" name="lang2" onchange="this.form.submit()">
                             {% for lang in lang2list %}<option value="{{lang}}"{% if lang == lang2 %} selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
                         </select>
                         <span>filter:</span>
@@ -30,13 +30,12 @@
                 <div id=descr class="blackbg">
                     <div style="text-align:center">
                             <span>Task:</span>
-                            <select class="tasks" name="task" onchange="this.form.submit()">
+                            <select class="tasks"  data-placeholder="Select a Task" name="task" onchange="this.form.submit()">
                             {% for t in tasklist %}<option value="{{t}}" {% if t == task %}selected="selected"{% endif %}>{{t}}</option>{% endfor %}
                             </select>
-                        </p>
-                        {% if rclink %} <span><a href="{{rclink}}">RosettaCode entry</a></span> {% endif %}
+                        {% if rclink %} <p><a href="{{rclink}}">RosettaCode entry</a></p> {% endif %}
                     </div>
-                    <p>{{taskdesc|safe}}</p>
+                    {% if taskdesc %}<p>{{taskdesc|safe}}</p>{% endif %}
                 </div>
             </div>
             <div id=col1 class=whitebg>
