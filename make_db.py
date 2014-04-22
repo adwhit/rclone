@@ -11,4 +11,5 @@ def argparser():
 def main(datapath, dbpath):
     model.create_db(datapath, dbpath)
 
-main(*argparser())
+if __name__ == "__main__":
+    main(*argparser())

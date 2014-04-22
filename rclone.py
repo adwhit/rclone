@@ -104,7 +104,7 @@ def get_filters():
 
 @app.route("/")
 def toindex():
-    return redirect("/app/")
+    return redirect("/app/?l1top=true&l2top=true")
 
 def notnull(s):
     if s == gb.nullstr:
