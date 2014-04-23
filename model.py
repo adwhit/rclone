@@ -157,8 +157,11 @@ def create_db(datapath, dbpath):
         task, langs, codes = page2ORM(task, mwtext)
         session.add(task)
         session.add_all(codes)
-        session.add_all(langs)
-        session.commit()
+        for lang in langs:
+            lang = session.merge(lang)
+            session.add(lang)
+        #session.add_all(langs)
+    session.commit()
 
 def connect_to_db(dbpath):
     engine = create_engine("sqlite:///"+ dbpath, echo=False)
