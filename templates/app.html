@@ -1,6 +1,6 @@
 {% macro langselector(position, langnum, lang, langlist) -%}
 <div style="float:{{position}};"><span>Language {{langnum}}:</span>
-                        <select class="lang" data-placeholder="Select a Language" name="lang" onchange="this.form.submit()">
+    <select class="lang" data-placeholder="Select a Language" name="lang{{langnum}}" onchange="this.form.submit()">
                             {% for curlang in langlist %}<option value="{{curlang}}"{% if curlang == lang %} selected="selected"{% endif %}>{{curlang}}</option>{% endfor %}
                         </select>
                         <span>filter:</span>

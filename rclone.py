@@ -16,8 +16,6 @@ class gb():
             "<span id=why><small><a href='/faq#why'>Why did this happen?</a></small></span>"
     pageitems = "task lang1 lang2 hide".split()
 
-    snippetdict = {}
-    taskdict = {}
     task2lang = defaultdict(set)
     lang2task = defaultdict(set)
     task_filters = {}
@@ -159,24 +157,18 @@ def filter_content(content, filters):
 
 def get_snippet(task, lang):
     snippet = gb.notfounderr
-    if (task, lang) in gb.snippetdict:
-        return gb.snippetdict[task,lang]
     if lang in gb.lang_filters["all"]:
         session = gb.Session()
         snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task.title())).one().text
-    gb.snippetdict[task,lang] = snippet    #cache
     return snippet
 
 
 def get_task_desc(task):
     #assume not found, then lookup
     taskdesc = gb.notfounderr
-    if task in gb.taskdict:
-        return gb.taskdict[task]
     if task in gb.task_filters["all"]:
         session = gb.Session()
         taskdesc = session.query(Task).filter_by(name=task.title()).one().description
-    gb.taskdict[task] = taskdesc
     return taskdesc
 
 
