@@ -39,10 +39,20 @@ a { color:inherit }
     margin: 0 auto;
     min-height:90%;
     position: relative;
-    padding-bottom:4%;
+    padding-bottom:4.7em;
 }
 
 #langwrapper { height:1.5em; }
+
+/*Clearfix*/
+#main:before,
+#main:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+#main:after {
+    clear: both;
+}
 
 
 .tasks { width:250px; color:#ff0000 }
@@ -55,6 +65,8 @@ a { color:inherit }
 }
 
 .centre { text-align:center }
+
+#clearer { clear:both; }
 
 #footer {
     text-align: center;
