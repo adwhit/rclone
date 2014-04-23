@@ -85,42 +85,34 @@ class Scraper():
         root = tree.getroot()
         return tree, root
 
-    def splitcode(self, pagekey):
-        r = Scraper.rarestring
-        """Split code from description"""
-        print "Splitting task ", pagekey
-        langarr = re.findall(r+"(.*?)"+r, self.htmlpages[pagekey])
-        sections = re.split(r+".*?"+r, self.htmlpages[pagekey])
-        if (len(langarr) == 0):
-            print "WARNING: splitting failed for page:", pagekey
-        if (len(sections) != len(langarr) + 1):
-            print "WARNING: wrong number of sections for page:", pagekey
-            print "N sections:", len(sections)
-            print "N langarr:", len(langarr)
-        description = sections[0]
-        codedict = {}
-        codedict = dict(zip(langarr,sections[1:]))
-        return description, codedict
-
     def parse(self):
         self.tree, self.root = self.getdata()
         self.pages = self.xml2dict(self.root)
-        self.htmlpages = dict2html(self.pages)
 
-def mw2html(mwstring):
+def splitcode(task, text):
+    r = Scraper.rarestring
+    """Split code from description"""
+    langarr = re.findall(r+"(.*?)"+r, text)
+    sections = re.split(r+".*?"+r, text)
+    if (len(langarr) == 0):
+        print "WARNING: splitting failed for page:", task
+    if (len(sections) != len(langarr) + 1):
+        print "WARNING: wrong number of sections for page:", task
+        print "N sections:", len(sections)
+        print "N langarr:", len(langarr)
+    description = sections[0]
+    codedict = {}
+    codedict = dict(zip(langarr,sections[1:]))
+    return description, codedict
+
+def mw2html(task, mwstring):
+    prepped = preprocess(mwstring)
     p = Popen(["pandoc","-f", "mediawiki","-t", "html"], 
             stdout=PIPE, stdin=PIPE, stderr=STDOUT)
-    return p.communicate(input=mwstring.encode('utf8'))[0]
+    return postprocess(p.communicate(input=prepped.encode('utf8'))[0])
 
-def dict2html(d):
-    h = {}
-    for k in sorted(d):
-        print "Converting task ", k
-        txt = substitute_tag(d[k])
-        h[k] = postprocess(mw2html(txt).decode('utf8'))
-    return h
-    
-def substitute_tag(txt):
+
+def sub_tag_to_token(txt):
     r = Scraper.rarestring
     # XXX how to capture "=={{header|C}} / {{header|C++}}==" ?
     # ideally want to create two separate entries
@@ -129,28 +121,25 @@ def substitute_tag(txt):
     tmp2 =  re.sub("<lang\s*([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
     return re.sub("</lang>", "</syntaxhighlight>", tmp2)
 
-def replace_wikilinks(txt):
+def sub_wp_to_links(txt):
     return re.sub('a href="wp:(.*?)"', 'a href="http://en.wikipedia.org/wiki/\g<1>"', txt)
 
 def postprocess(html):
-    return replace_wikilinks(html)
+    return sub_wp_to_links(html)
 
-def build_sql_objects(scraper):
-    langset = set()
-    tasks = []
-    langs = []
-    codes = []
+def preprocess(mwstring):
+    return sub_tag_to_token(mwstring)
 
-    for task, pagetext in scraper.htmlpages.items():
-        description, codedict = scraper.splitcode(task)
-        tasks.append(Task(name=task, description=description, raw=scraper.pages[task]))
-        for (lang, text) in codedict.items():
-            langset.add(lang)
-            codes.append(Code(text=text, language=lang, task=task))
-
-    for lang in langset:
-        langs.append(Lang(name=lang))
-    return tasks, langs, codes
+def page2ORM(task, mwtext):
+    htmltext = mw2html(task, mwtext).decode("utf8")
+    description, codedict = splitcode(task, htmltext)
+    ormtask = Task(name=task, description=description, raw=mwtext)
+    ormcodes = []
+    ormlangs = []
+    for (lang, text) in codedict.items():
+        ormcodes.append(Code(text=text, language=lang, task=task))
+        ormlangs.append(Lang(name=lang))
+    return ormtask, ormlangs, ormcodes
 
 def create_db(datapath, dbpath):
     #parse xml
@@ -163,17 +152,13 @@ def create_db(datapath, dbpath):
     session = Session()
 
     #obtain data
-    tasks, langs, codes = build_sql_objects(scraper)
-
-    #add
-    session.add_all(tasks)
-    print("Found {:d} tasks".format(len(tasks)))
-    session.add_all(langs)
-    print("Found {:d} langs".format(len(langs)))
-    session.add_all(codes)
-    print("Found {:d} snippets".format(len(codes)))
-
-    session.commit()
+    for task, mwtext in scraper.pages.items():
+        print "Processing task:  ",task
+        task, langs, codes = page2ORM(task, mwtext)
+        session.add(task)
+        session.add_all(codes)
+        session.add_all(langs)
+        session.commit()
 
 def connect_to_db(dbpath):
     engine = create_engine("sqlite:///"+ dbpath, echo=False)

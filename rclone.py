@@ -3,10 +3,12 @@ from flask import Flask, render_template, request, redirect, url_for
 from model import Lang, Task, Code, connect_to_db
 from sqlalchemy import or_, and_, func
 from sqlalchemy.orm.exc import NoResultFound
+from werkzeug.contrib.fixers import ProxyFix
 import argparse
 import sys
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app)
 
 #globals
 class gb():
