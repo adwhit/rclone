@@ -1,3 +1,14 @@
+{% macro langselector(position, langnum, lang, langlist) -%}
+<div style="float:{{position}};"><span>Language {{langnum}}:</span>
+                        <select class="lang" data-placeholder="Select a Language" name="lang" onchange="this.form.submit()">
+                            {% for curlang in langlist %}<option value="{{curlang}}"{% if curlang == lang %} selected="selected"{% endif %}>{{curlang}}</option>{% endfor %}
+                        </select>
+                        <span>filter:</span>
+                        <span>top</span>
+                        <input type="checkbox" onchange="this.form.submit()" name="l1top" value="true" {% if l1top %}checked{% endif %}>
+                    </div>
+{%- endmacro %}
+
 {% extends "base.html" %}
 {% block styles %}
 {% if hide %}<link rel=stylesheet type=text/css href='{{url_for('static', filename='onecol.css')}}'>
@@ -8,24 +19,8 @@
         <form action="#">
             <div id=descrwrapper class=whitebg>
                 <div id=langwrapper class=blackbg>
-                    <div style="float:left;"><span>Language 1:</span>
-                        <select class="lang" data-placeholder="Select a Language" name="lang1" onchange="this.form.submit()">
-                            {% for lang in lang1list %}<option value="{{lang}}"{% if lang == lang1 %} selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
-                        </select>
-                        <span>filter:</span>
-                        <span>top</span>
-                        <input type="checkbox" onchange="this.form.submit()" name="l1top" value="true" {% if l1top %}checked{% endif %}>
-                    </div>
-                    <div style="float:right;"><span>Language 2:</span>
-                        <select class="lang" data-placeholder="Select a Language" name="lang2" onchange="this.form.submit()">
-                            {% for lang in lang2list %}<option value="{{lang}}"{% if lang == lang2 %} selected="selected"{% endif %}>{{lang}}</option>{% endfor %}
-                        </select>
-                        <span>filter:</span>
-                        <span>top</span>
-                        <input type="checkbox" onchange="this.form.submit()" name="l2top" value="true" {% if l2top %}checked{% endif %}>
-                        <span>hide</span>
-                        <input type="checkbox" onchange="this.form.submit()" name="hide" value="true" {% if hide %}checked{% endif %}>
-                    </div>
+                    {{ langselector("left", 1, lang1, lang1list) }}
+                    {{ langselector("right", 2, lang2, lang2list) }}
                 </div>
                 <div id=descr class="blackbg">
                     <div style="text-align:center">
@@ -48,3 +43,5 @@
             </div>
         </form>
 {% endblock %}
+
+
