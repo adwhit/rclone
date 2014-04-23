@@ -152,8 +152,9 @@ def create_db(datapath, dbpath):
     session = Session()
 
     #obtain data
-    for task, mwtext in scraper.pages.items():
-        print "Processing task:  ",task
+    nitems = len(scraper.pages)
+    for (ix,(task, mwtext)) in enumerate(scraper.pages.items()):
+        print "Processing task %d of %d: %s" % (ix, nitems, task)
         task, langs, codes = page2ORM(task, mwtext)
         session.add(task)
         session.add_all(codes)
