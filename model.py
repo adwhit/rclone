@@ -3,7 +3,7 @@ import os.path
 import re
 import argparse
 from lxml import etree
-from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
+from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, Index
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 from subprocess import Popen, PIPE, STDOUT
@@ -16,6 +16,7 @@ class Code(Base):
     text = Column(String())
     language = Column(String(), ForeignKey("language.name"))
     task = Column(String(), ForeignKey("task.name"))
+    __table_args__ = (Index("tasklangind", "task", "language"),)
 
     relationship("Lang", backref = "codes")
     relationship("Task", backref = "codes")
@@ -177,6 +178,3 @@ def create_db(datapath, dbpath):
 def connect_to_db(dbpath):
     engine = create_engine("sqlite:///"+ dbpath, echo=False)
     return engine, scoped_session(sessionmaker(bind=engine))
-
-
-

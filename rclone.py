@@ -219,19 +219,26 @@ def task2link(task):
     link = "/".join([t.capitalize() for t in task.replace(" ","_").split("/")])
     return "http://rosettacode.org/wiki/"+link
 
-def main(dbpath, debug):
+def main(dbpath, debug, profile):
     init_globals(dbpath)
+    host = "0.0.0.0"
+    port = 80
     if debug:
-        app.run(debug=True, port = 3000)
-    else:
-        app.run(host="0.0.0.0", port = 80)
+        host = "127.0.0.1"
+        port = 3000
+    if profile:
+        from werkzeug.contrib.profiler import ProfilerMiddleware
+        app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions = [30])
+        app.config['PROFILE'] = True
+    app.run(host=host, debug=debug, port=port)
 
 def argparser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--database", default="data/data.sqlite")
     parser.add_argument("-d", "--debug", action="store_true")
+    parser.add_argument("-p", "--profile", action="store_true")
     args = parser.parse_args()
-    return(args.database, args.debug)
+    return(args.database, args.debug, args.profile)
 
 if __name__ == "__main__":
     main(*argparser())
