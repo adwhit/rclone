@@ -92,8 +92,9 @@ class Scraper():
 def splitcode(task, text):
     r = Scraper.rarestring
     """Split code from description"""
-    langarr = re.findall(r+"(.*?)"+r, text)
-    sections = re.split(r+".*?"+r, text)
+    langheaderarr = re.findall("<h2.*?>(.*?)</h2>", text)
+    langarr = [re.findall(r+"header\|(.*?)"+r, lang) for lang in langheaderarr]
+    sections = re.split("<h2.*?>.*?</h2>", text)
     if (len(langarr) == 0):
         print "WARNING: splitting failed for page:", task
     if (len(sections) != len(langarr) + 1):
@@ -101,8 +102,11 @@ def splitcode(task, text):
         print "N sections:", len(sections)
         print "N langarr:", len(langarr)
     description = sections[0]
+
     codedict = {}
-    codedict = dict(zip(langarr,sections[1:]))
+    for langs, code in zip(langarr, sections[1:]):
+        for lang in langs:
+            codedict[lang] = code
     return description, codedict
 
 def mw2html(task, mwstring):
@@ -117,7 +121,7 @@ def sub_tag_to_token(txt):
     # XXX how to capture "=={{header|C}} / {{header|C++}}==" ?
     # ideally want to create two separate entries
     # the below match will completely miss it
-    tmp1 = re.sub("=={{header\|([^}]*)}}==",r+"\g<1>"+r,txt)
+    tmp1 = re.sub("{{(header.*?)}}",r + "\g<1>" + r,txt)
     tmp2 =  re.sub("<lang\s*([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
     return re.sub("</lang>", "</syntaxhighlight>", tmp2)
 
@@ -154,7 +158,7 @@ def create_db(datapath, dbpath):
     #obtain data
     nitems = len(scraper.pages)
     for (ix,(task, mwtext)) in enumerate(scraper.pages.items()):
-        print "Processing task %d of %d: %s" % (ix, nitems, task)
+        print "Processing task %d of %d: %s" % (ix+1, nitems, task)
         task, langs, codes = page2ORM(task, mwtext)
         session.add(task)
         session.add_all(codes)
