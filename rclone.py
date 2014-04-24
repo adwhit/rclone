@@ -214,7 +214,6 @@ def task2link(task):
     return "http://rosettacode.org/wiki/"+link
 
 def main(dbpath, debug, profile):
-    init_globals(dbpath)
     host = "0.0.0.0"
     port = 80
     if debug:
@@ -233,6 +232,8 @@ def argparser():
     parser.add_argument("-p", "--profile", action="store_true")
     args = parser.parse_args()
     return(args.database, args.debug, args.profile)
+
+init_globals("data/data.sqlite")
 
 if __name__ == "__main__":
     main(*argparser())

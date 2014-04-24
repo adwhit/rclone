@@ -1,11 +1,10 @@
-{% macro langselector(position, langnum, lang, langlist) -%}
+{% macro langselector(position, langnum, lang, langlist, topfilt) -%}
 <div style="float:{{position}};"><span>Language {{langnum}}:</span>
     <select class="lang" data-placeholder="Select a Language" name="lang{{langnum}}" onchange="this.form.submit()">
                             {% for curlang in langlist %}<option value="{{curlang}}"{% if curlang == lang %} selected="selected"{% endif %}>{{curlang}}</option>{% endfor %}
                         </select>
-                        <span>filter:</span>
-                        <span>top</span>
-                        <input type="checkbox" onchange="this.form.submit()" name="l1top" value="true" {% if l1top %}checked{% endif %}>
+                        <span>filter:</span><span>top</span>
+                        <input type="checkbox" onchange="this.form.submit()" name="l{{langnum}}top" value="true" {% if topfilt %}checked{% endif %}>
                     </div>
 {%- endmacro %}
 
@@ -19,8 +18,8 @@
         <form action="#">
             <div id=descrwrapper class=whitebg>
                 <div id=langwrapper class=blackbg>
-                    {{ langselector("left", 1, lang1, lang1list) }}
-                    {{ langselector("right", 2, lang2, lang2list) }}
+                    {{ langselector("left", 1, lang1, lang1list, l1top) }}
+                    {{ langselector("right", 2, lang2, lang2list, l2top) }}
                 </div>
                 <div id=descr class="blackbg">
                     <div style="text-align:center">
