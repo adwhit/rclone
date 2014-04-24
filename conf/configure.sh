@@ -1,4 +1,4 @@
-ROOT="/home/alex/proj/rclone"
+ROOT="/home/$USER/proj/rclone"
 sudo ln -s $ROOT/conf/nginx.conf /etc/nginx/sites-enabled/
 mkdir logs
 touch $ROOT/logs/access.log
