@@ -8,8 +8,6 @@ now = datetime.now()
 
 uri = "http://rosettacode.org/mw/index.php?title=Special:Export&action=submit"
 
-
-
 gettasks = {"catname":"Programming_Tasks", "addcat":"Add", "pages":"", "curonly":"1", "wpDownload":"1"}
 getpages = {"catname":"", "pages":"", "curonly":"1"}
 
@@ -25,12 +23,6 @@ r2 = post(uri, getpages)
 
 fname = "data/rip%s.xml.gz" % now.strftime("%Y-%m-%dT%H%M")
 
-
 print "Saving to file %s " % fname
 with gzip.open(fname, "wb") as f:
     f.write(r2.text.encode("utf8"))
-
-
-
-
-

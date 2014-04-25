@@ -55,8 +55,9 @@ a { color:inherit }
 }
 
 
-.tasks { width:250px; color:#ff0000 }
-.lang { width:150px; color:#ff0000 }
+.tasks { width:250px; }
+.lang { width:150px; }
+.filter { width:300px; }
 
 
 #descr {

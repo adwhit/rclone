@@ -50,20 +50,26 @@ def init_globals(dbpath):
 
     gb.task_filters["top"] = set([r[0] for r in top_tasks])
 
-    #gb.lang_filters["top"] = set([r[0] for r in 
-    #    session.query(Code.language, func.count(Code.language)).group_by(Code.language).limit(20).all()])
+    gb.lang_filters["popular"] = set([r[0] for r in 
+        session.query(Code.language, func.count(Code.language)).\
+                group_by(Code.language).order_by(func.count(Code.language).desc()).limit(20).all()])
 
     gb.lang_filters["top"] = set("C,C++,JavaScript,Java,Python,D,Objective-C,PHP,Ruby,\
                  Go,Rust,Julia,Haskell,Clojure,C#,UNIX shell,Perl".split(","))
-    gb.lang_filters["python"] = set(["Python"])
-
+    gb.lang_filters["python"] = set(["Python", "Ruby"])
 
 @app.route("/app/")
 def handler():
     pagedata = get_form_data()
-    filters = get_filters()
+    get_filters(pagedata)
     get_content(pagedata)
-    filter_content(pagedata, filters)
+    filter_content(pagedata)
+    pagedata["langfiltlist"] = gb.lang_filters.keys()
+    pagedata["taskfiltlist"] = gb.task_filters.keys()
+    print pagedata["langfiltlist"]
+    print pagedata["taskfiltlist"]
+    print pagedata["l1filters"]
+    print pagedata["l2filters"]
     return render_template("app.html", **pagedata)
 
 @app.route("/app/<path:link>")
@@ -85,22 +91,10 @@ def get_form_data():
         formdata[item] = notnull(request.args.get(item))
     return formdata
 
-def get_filters():
-    taskfilters = []
-    lang1filters = []
-    lang2filters = []
-
-    for filter in gb.task_filters:
-        if request.args.get(filter):
-            taskfilters.append(filter)
-
-    for filter in gb.lang_filters:
-        if request.args.get("l1" + filter):
-            lang1filters.append(filter)
-        if request.args.get("l2" + filter):
-            lang2filters.append(filter)
-
-    return {"task": taskfilters, "lang1": lang1filters, "lang2" :lang2filters}
+def get_filters(content):
+    content["taskfilters"] = request.args.getlist("taskfilt")
+    content["l1filters"] = request.args.getlist("l1filt")
+    content["l2filters"] = request.args.getlist("l2filt")
 
 @app.route("/")
 def toindex():
@@ -113,11 +107,9 @@ def notnull(s):
         return s
 
 def get_content(content):
-
     task = content["task"]
     lang1 = content["lang1"]
     lang2 = content["lang2"]
-    
 
     tasklist = gb.task_filters["all"].copy()
     langlist = gb.lang_filters["all"].copy()
@@ -126,33 +118,32 @@ def get_content(content):
         content["rclink"] = task2link(task)
         langlist &= get_langlist(task)
         content["taskdesc"] = get_task_desc(task)
-
     if lang1:
         tasklist &= get_tasklist(lang1)
         if task:
             content["lang1code"] = get_snippet(task, lang1)
-
     if lang2:
         tasklist &= get_tasklist(lang2)
         if task:
             content["lang2code"] = get_snippet(task, lang2)
 
-    content["tasklist"] = [gb.nullstr] + sorted(tasklist)
+    content["tasklist"] = tasklist
     content["lang1list"] = langlist
     content["lang2list"] = langlist.copy()
     return content
 
-def filter_content(content, filters):
-    for tf in filters["task"]:
-        content["tasklist"] &= gb.task_filters[tf]
-        content[tf] = True
-    for l1f in filters["lang1"]:
-        content["lang1list"] &= gb.lang_filters[l1f]
-        content["l1" + l1f] = True
-    for l2f in filters["lang2"]:
-        content["lang2list"] &= gb.lang_filters[l2f]
-        content["l2" + l2f] = True
+def filter_content(content):
+    for tf in content["taskfilters"]:
+        if tf in gb.task_filters:
+            content["tasklist"] &= gb.task_filters[tf]
+    for l1f in content["l1filters"]:
+        if l1f in gb.lang_filters:
+            content["lang1list"] &= gb.lang_filters[l1f]
+    for l2f in content["l2filters"]:
+        if l2f in gb.lang_filters:
+            content["lang2list"] &= gb.lang_filters[l2f]
 
+    content["tasklist"] = [gb.nullstr] + sorted(content["tasklist"])
     content["lang1list"] = [gb.nullstr] + sorted(content["lang1list"])
     content["lang2list"] = [gb.nullstr] + sorted(content["lang2list"])
 

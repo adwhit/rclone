@@ -1,10 +1,12 @@
-{% macro langselector(position, langnum, lang, langlist, topfilt) -%}
-<div style="float:{{position}};"><span>Language {{langnum}}:</span>
-    <select class="lang" data-placeholder="Select a Language" name="lang{{langnum}}" onchange="this.form.submit()">
+{% macro langselector(position, langnum, lang, langlist, filters) -%}
+                    <div style="float:{{position}};"><span>Language {{langnum}}:</span>
+                        <select class="lang" data-placeholder="Select a Language" name="lang{{langnum}}" onchange="this.form.submit()">
                             {% for curlang in langlist %}<option value="{{curlang}}"{% if curlang == lang %} selected="selected"{% endif %}>{{curlang}}</option>{% endfor %}
                         </select>
-                        <span>filter:</span><span>top</span>
-                        <input type="checkbox" onchange="this.form.submit()" name="l{{langnum}}top" value="true" {% if topfilt %}checked{% endif %}>
+                        <span>filter:</span>
+                        <select class="filter" data-placeholder="Select filters" name="l{{langnum}}filt" onchange="this.form.submit()" multiple>
+                            {% for filter in langfiltlist %}<option value="{{filter}}"{% if filter in filters %} selected="selected"{% endif %}>{{filter}}</option>{% endfor %}
+                        </select>
                     </div>
 {%- endmacro %}
 
@@ -18,14 +20,17 @@
         <form action="#">
             <div id=descrwrapper class=whitebg>
                 <div id=langwrapper class=blackbg>
-                    {{ langselector("left", 1, lang1, lang1list, l1top) }}
-                    {{ langselector("right", 2, lang2, lang2list, l2top) }}
+                    {{ langselector("left", 1, lang1, lang1list, l1filters) }}
+                    {{ langselector("right", 2, lang2, lang2list, l2filters) }}
                 </div>
                 <div id=descr class="blackbg">
                     <div style="text-align:center">
                             <span>Task:</span>
                             <select class="tasks"  data-placeholder="Select a Task" name="task" onchange="this.form.submit()">
                             {% for t in tasklist %}<option value="{{t}}" {% if t == task %}selected="selected"{% endif %}>{{t}}</option>{% endfor %}
+                            </select>
+                            <select class="filter" data-placeholder="Select filters" name="taskfilt" onchange="this.form.submit()" multiple>
+                                {% for filter in taskfiltlist %}<option value="{{filter}}"{% if filter in taskfilters %} selected="selected"{% endif %}>{{filter}}</option>{% endfor %}
                             </select>
                         {% if rclink %} <p><a href="{{rclink}}">RosettaCode entry</a></p> {% endif %}
                     </div>
