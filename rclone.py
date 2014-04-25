@@ -66,10 +66,6 @@ def handler():
     filter_content(pagedata)
     pagedata["langfiltlist"] = gb.lang_filters.keys()
     pagedata["taskfiltlist"] = gb.task_filters.keys()
-    print pagedata["langfiltlist"]
-    print pagedata["taskfiltlist"]
-    print pagedata["l1filters"]
-    print pagedata["l2filters"]
     return render_template("app.html", **pagedata)
 
 @app.route("/app/<path:link>")
