@@ -1,0 +1,1316 @@
+== Array language ==
+{{see also|:Category:Array programming languages|l1=Category:Array programming languages}}
+
+[[Array programming]] (also known as ''vector'' or ''multidimensional'' languages) generalize operations on scalars to apply transparently to vectors, matrices, and higher-dimensional arrays.
+
+* [[A+ (programming language)|A+]]
+* [[APL (programming language)|APL]]
+* [[Chapel (programming language)|Chapel]]
+* [[Fortran]]
+* [[J (programming language)|J]]
+* [[Julia (programming language)|Julia]]
+* [[K (programming language)|K]]
+* [[Matlab]]
+* [[Octave (language)|Octave]]
+* [[S (programming language)|S]]
+* [[X10 (programming language)|X10]]
+* [[ZPL (programming language)|ZPL]]
+* [[Interactive Data Language|IDL]]
+
+== Aspect-oriented languages ==
+
+{{main|Aspect-oriented programming}}
+
+* [[AspectC++]]
+* [[AspectJ]]
+* [[e (verification language)]]
+
+== Assembly languages ==
+{{main|List of assemblers}}
+
+[[Assembly language]]s directly correspond to a machine language (see below) so machine code instructions appear in a form understandable by humans. Assembly languages lets programmers use symbolic addresses, which the [[Assembly language assembler|assembler]] converts to absolute addresses. Most assemblers also support [[Macro (computer science)|macros]] and [[symbolic constant]]s.
+
+* [[Autocoder]] (for IBM 1401 and 1440 mainframe systems)
+* [[IBM Basic assembly language|BAL]] (Basic AssembLer) - for [[IBM System/360]] and later mainframe systems
+* [[COMPASS]] (COMPrehensive ASSembler)
+* [[IBM 700/7000 series|FAP]] ([[Fortran]] Assembly Program, for [[IBM 700/7000 series#Scientific Architecture (704/709/7090/7094)|IBM 709, 7090, 7094]] mainframes)
+* [[FASM]] (Flat Assembler; [[IA-32]], [[Itanium|IA-64]])
+* [[GNU Assembler|GAS]] (GNU Assembler)
+* [[High Level Assembly|HLA]] (High Level Assembly)
+* [[High-level assembler|HLASM]] (High Level Assembler, for [[mainframe computer|mainframes]])
+* [[LC-3]]
+* [[Linoleum (programming language)|Linoleum]] (for cross-platform use)
+* [[MACRO-11]] (for [[Digital Equipment Corporation|DEC]] [[PDP-11]])
+* [[Microsoft Macro Assembler|MASM]] ([[Microsoft]] Macro Assembler)
+* MI (Machine Interface, compile-time [[intermediate language]])
+* MIPS (for [[MIPS architecture]]) Microprocessor without Interlocked Pipeline Stages
+* Motorola 68k Assembly (for [[Motorola 68000 family]]) of CPUs
+* [[Netwide Assembler|NASM]] (Netwide Assembler)
+* NEAT (National's Electronic Autocoder Technique), for [[NCR Corporation|NCR]] computers, evolved into NEAT/3
+* [[PDP-8|PAL-III]] (for DEC [[PDP-8]])
+* [[Parrot assembly language|PASM]] (for [[Parrot virtual machine]])
+* [[RosAsm]] (32-bit Assembler; The Bottom Up Assembler) <!-- article deleted via AFD, see [[Wikipedia:Articles for deletion/RosAsm]] -->
+* Sphinx [[C--]] (mixes Assembly commands with C-like structures)
+* [[IBM 1401 Symbolic Programming System|SPS]] (also IBM 1620)
+* [[Turbo Assembler|TASM]] (Turbo Assembler, [[Borland]])
+* [[X Sharp (programming language)|X#]]
+* [[Yasm]] (Rewrite of [[Netwide Assembler|NASM]])
+* [[Z80A]] Mnemonic language used to represent instructions for the Z80A microprocessor
+
+== Authoring languages ==
+{{Main|Authoring language}}
+* [[Bigwig (programming language)|Bigwig]] (web design language)
+* [[PILOT]]
+* [[TUTOR (programming language)|TUTOR]]
+
+== Command line interface languages ==
+
+[[Command-line interface]] (CLI) languages are also called batch languages, or job control languages. Examples:
+
+* [[4DOS]] (extended command-line shell for [[IBM Personal Computer|IBM PC]]s)
+* [[Bash (Unix shell)|bash]] (the Bourne-Again shell from [[GNU]]/[[Free Software Foundation|FSF]])
+* [[C shell|csh]] and [[tcsh]] (C-like shell from [[Bill Joy]] at UC Berkeley)
+* [[CHAIN (programming language)|CHAIN]] ([[Datapoint]])
+* [[CLIST]] ([[MVS]] Command List)
+* [[CMS EXEC]]
+* [[DIGITAL Command Language|DCL]] DIGITAL Command Language - standard CLI language for [[OpenVMS|VMS]] ([[Digital Equipment Corporation|DEC]], [[Compaq]], [[Hewlett-Packard|HP]])
+* [[Batch file|DOS batch language]] (standard CLI/batch language for the [[IBM Personal Computer|IBM PC]] running [[DR-DOS]], [[MS-DOS]], or [[IBM PC DOS|PC&nbsp;DOS]] before [[Microsoft Windows|Windows]])
+* [[EXEC 2]]
+* [[Expect]] (a [[Unix|UNIX]] automation and test tool)
+* [[Hamilton C shell]] (a C shell for Windows)
+* [[Job Control Language|JCL]] ([[punched card|punch card]]-oriented batch control language for [[IBM System/360]] family mainframes)
+* [[Korn shell|ksh]] (a standard [[Unix|UNIX]] shell, written by [[David Korn (computer scientist)|David Korn]])
+* [[Rc]] (command-line shell for [[Plan 9 from Bell Labs|Plan 9]])
+* [[REXX]]
+* [[Bourne shell|sh]] (the standard [[Unix|UNIX]] shell, written by [[Stephen R. Bourne]])
+* [[TACL]] (Tandem Advanced Command Language)
+* [[Batch file|Windows batch language]] (Windows batch file language as understood by [[COMMAND.COM]] and [[Command Prompt]])
+* [[Windows PowerShell]] ([[Microsoft]] [[.NET Framework|.NET]]-based CLI)
+* [[z shell|zsh]] (a [[Unix|UNIX]] shell)
+
+== Compiled languages ==
+
+These are languages typically processed by [[compiler]]s, though theoretically any language can be compiled or interpreted. See also [[compiled language]].
+* [[ActionScript]]
+* [[Ada (programming language)|Ada]] (multi-purpose language)
+* [[ALGOL]] (extremely influential language design. The second high level language compiler.)
+** [[SMALL|SMALL Machine Algol Like Language]]
+* [[Ateji PX]], an extension of the Java language for parallelism
+* [[BASIC]] (some dialects, including the first version of Dartmouth BASIC)
+* [[BAIL (programming language)|BAIL]] (compiled into C)
+* [[BCPL]]
+* [[Blue (programming language)|Blue]]
+* [[C (programming language)|C]] (one of the most widely used procedural programming languages)
+* [[C++]] (One of the most widely used Object Oriented Languages specialy used in large scale, highly complex, high performance software systems)
+* [[Clipper (programming language)|CLIPPER 5.3]] (Programming Language for dos base software)
+* [[C Sharp (programming language)|C#]] (compiled into [[Intermediate language|Intermediate Language]], which generates a native image at runtime)
+* [[LEO (computer)|CLEO]] (Clear Language for Expressing Orders) used the compiler for the British [[LEO (computer)|Leo computers]]
+* [[COBOL]]
+* [[Cobra (programming language)|Cobra]]
+* [[Common Lisp]]
+* [[Curl (programming language)|Curl]]
+* [[D (programming language)|D]] (Attempts a "C++ done right" philosophy)
+* [[DASL - Distributed Application Specification Language|DASL]] compiles into Java, JavaScript, JSP, Flex, etc., which are further compiled into a .war file
+* [[Object Pascal|Delphi]] ([[Borland]]'s Object Pascal development system)
+* [[DIBOL]] (Digital Interactive Business Oriented Language)
+* [[Dylan (programming language)|Dylan]]
+* [[Eiffel (programming language)|Eiffel]] (object-oriented language developed by [[Bertrand Meyer]])
+** [[Sather]]
+** [[Ubercode]]
+* [[eLisp]] Emacs Lisp
+* [[Erlang (programming language)|Erlang]]
+* [[Factor (programming language)|Factor]]
+* [[Fancy (programming language)|Fancy]]
+* [[Forth (programming language)|Forth]] (professional systems, like VFX and SwiftForth)
+* [[Fortran]] (the first high-level, compiled language, from [[IBM]], [[John Backus]], et al.)
+* [[Go (programming language)|Go]]
+* [[Gosu (programming language)|Gosu]]
+* [[Groovy (programming language)|Groovy]] (compiled into [[Java Virtual Machine|JVM]] [[bytecode]])
+* [[Haskell (programming language)|Haskell]]
+* [[Harbour (software)|Harbour]]
+* [[Java (programming language)|Java]]  (usually compiled into [[Java Virtual Machine|JVM]] [[bytecode]] although true native-code compiled versions exist)
+* [[JOVIAL]]
+* [[LabVIEW]]
+* [[Nemerle]] (compiled into Intermediate Language bytecode)
+* [[Obix programming language|Obix]]
+* [[Objective-C]]
+* [[Pascal (programming language)|Pascal]] (most implementations)
+* [[Plus (programming language)|Plus]]
+* [[IBM RPG|RPG]] (Report Program Generator)
+* [[Rust (programming language)|Rust]]
+* [[Scheme (programming language)|Scheme]] (some implementations, e.g. Gambit)
+* [[Smalltalk]] generally compiled to platform independent [[bytecode]] that runs on a Virtual Machine.
+* [[ML (programming language)|ML]]
+** [[Standard ML]]
+*** [[Alice (programming language)|Alice]]
+** [[OCaml]]
+* [[Turing (programming language)|Turing]]
+* [[Vala (programming language)|Vala]] (Compiler for the GObject type system)
+* [[Visual Basic]] (earlier versions compiled directly to a native runtime.  Recent .NET versions compile into Intermediate Language that is generated into a native image at runtime)
+* [[Visual FoxPro]]
+* [[Visual Prolog]]
+* [[WinDev]]
+* [[Microsoft Dynamics AX|X++]]
+* [[X Sharp (programming language)|X#]]
+* [[XL (programming language)|XL]]
+* [[Z++]]
+
+== Concurrent languages ==
+{{see also|:Category:Concurrent programming languages|l1=Category:Concurrent programming languages}}
+
+[[Message passing]] languages provide language constructs for [[concurrency (computer science)|concurrency]]. The predominant paradigm for concurrency in mainstream languages such as [[Java (programming language)|Java]] is [[shared memory]] concurrency based on [[Monitor (synchronization)|monitors]]. Concurrent languages that make use of message passing have generally been inspired by [[Communicating sequential processes|CSP]] or the [[Pi-calculus|π-calculus]], but have had little commercial success, except for Ada and Erlang. Ada is a multipurpose language and concurrent programming is only one option available.
+
+* [[Ada (programming language)|Ada]] (multi-purpose language)
+* [[Alef (programming language)|Alef]] &ndash; concurrent language with threads and message passing, used for systems programming in early versions of [[Plan 9 from Bell Labs]]
+* [[Ateji PX]] an extension of the Java language for parallelism
+* [[ChucK]] &ndash; domain specific programming language for audio, precise control over concurrency and timing
+* [[Cilk]] &ndash; a concurrent [[C (programming language)|C]]
+* [[Cω]] &ndash; C Omega, a research language extending C#, uses asynchronous communication
+* [[Clojure]] &ndash; a dialect of [[Lisp (programming language)|Lisp]] for the [[Java Virtual Machine]]
+* [[Chapel (programming language)|Chapel]]
+* [[Co-array Fortran]]
+* [[Concurrent Pascal]] (by Brinch-Hansen)
+* [[Curry (programming language)|Curry]]
+* [[E (programming language)|E]] &ndash; uses promises, ensures deadlocks cannot occur
+* [[Eiffel (programming language)|Eiffel]] (through the [[SCOOP (software)|SCOOP]] mechanism, Simple Concurrent Object-Oriented Computation)
+* [[Erlang (programming language)|Erlang]] &ndash; uses asynchronous message passing with nothing shared
+* [[Go (programming language)|Go]]
+* [[Java (programming language)|Java]]
+** [[Join Java]] &ndash; concurrent language based on Java
+** [[X10 (programming language)|X10]]
+* [[Join-calculus]]
+* [[Joule (programming language)|Joule]] &ndash; dataflow language, communicates by message passing
+* [[Limbo (programming language)|Limbo]] &ndash; relative of [[Alef (programming language)|Alef]], used for systems programming in [[Inferno (operating system)]]
+* [[MultiLisp]] &ndash; [[Scheme (programming language)|Scheme]] variant extended to support parallelism
+* [[occam (programming language)|occam]] &ndash; influenced heavily by [[Communicating sequential processes|Communicating Sequential Processes]] (CSP).
+** [[occam-π]] &ndash; a modern variant of [[occam (programming language)|occam]], which incorporates ideas from Milner's [[Pi-calculus|π-calculus]]
+* [[Orc (programming language)|Orc]]
+* [[Oz (programming language)|Oz]] &ndash; multiparadigm language, supports shared-state and message-passing concurrency, and futures
+** [[Mozart Programming System]] &ndash; [[Cross-platform|multiplatform]] Oz
+* [[Pict (programming language)|Pict]] &ndash; essentially an executable implementation of Milner's [[Pi-calculus|π-calculus]]
+* [[Rust (programming language)|Rust]] &ndash; actor-based
+* [[SALSA (programming language)|SALSA]] &ndash; actor language with token-passing, join, and first-class continuations for distributed computing over the Internet
+* [[Scala (programming language)|Scala]] &ndash; implements Erlang-style [[Actor model|actors]] on the JVM
+* [[SR (programming language)|SR]] &ndash; research language
+* [[Unified Parallel C]]
+* [[XProc]] &ndash; XML Processing language, enabling concurrency.
+
+== Curly-bracket languages ==
+
+The '''curly-bracket or curly-brace programming languages''' have a syntax that defines statement blocks using the [[braces (punctuation)|curly bracket or brace characters <code>{</code> and <code>}</code>]]. This syntax originated with [[BCPL]] (1966), and was popularized by [[C (programming language)|C]] (1972). Many curly-bracket languages descend from or are strongly influenced by C. Examples of curly-bracket languages include:
+* [[Actor-Based Concurrent Language|ABCL/c+]]
+* [[ActionScript]]
+* [[Alef (programming language)|Alef]]
+** [[Limbo (programming language)|Limbo]]
+*** [[Go (programming language)|Go]]
+* [[AutoHotkey]]
+* [[AWK]]
+* [[bc (programming language)|bc]]
+* [[BCPL]]
+* [[C (programming language)|C]] - developed circa 1970 at [[Bell Labs]]
+* [[C++]]
+* [[C Sharp (programming language)|C#]]
+* [[Candle (programming language)|Candle]]
+* [[ChucK]] - audio programming language
+* [[Cilk]] - concurrent C for multithreaded parallel programming
+* [[Cyclone (programming language)|Cyclone]] - safer C variant
+* [[D (programming language)|D]]
+* [[DASL - Distributed Application Specification Language|DASL]] - based on Java
+* [[E (programming language)|E]]
+* [[ECMAScript]]
+** [[ActionScript]]
+** [[ECMAScript for XML]]
+** [[JavaScript]]
+** [[JScript]]
+** [[TypeScript]]
+* [[Frink]]
+* GML ([[GameMaker: Studio|Game Maker Language]])
+* [[GLSL]]
+* [[Haskell (programming language)|Haskell]]
+* [[ICI (programming language)|ICI]]
+* [[Java (programming language)|Java]]
+** [[Processing (programming language)|Processing]]
+** [[Groovy (programming language)|Groovy]]
+** [[Join Java]]
+** [[Tea (programming language)|Tea]]
+** [[X10 (programming language)|X10]]
+* [[LPC (programming language)|LPC]]
+* [[mIRC scripting language|MSL]]
+* [[Maya Embedded Language|MEL]]
+* [[Nemerle]] - combines C# and ML features, provides syntax extension capabilities
+* [[PCASTL]]
+* [[Perl]]
+* [[PHP]]
+* [[Pico (programming language)|Pico]]
+* [[Pike (programming language)|Pike]]
+* [[R (programming language)|R]]
+* [[Rust (programming language)|Rust]]
+* [[S-Lang (programming language)|S-Lang]]
+* [[Scala (programming language)|Scala]]
+* [[sed]]
+* [[SuperCollider]]
+* [[UnrealScript]]
+* [[Windows PowerShell]] ([[Microsoft]] [[.NET Framework|.NET]]-based CLI)
+* [[Yorick (programming language)|Yorick]]
+
+There is dispute among programmers who use these languages about the placement of opening braces. Some put them on the lines of code which determine whether the contents of the braces are executed (e.g. the "if" or "while" condition) in order to reduce the number of lines and make more code visible at once. Others put every brace on a new line of code, in order to make brace nesting clearer. See [[Indent style]].
+
+== Dataflow languages ==
+
+[[Dataflow programming]] languages rely on a (usually visual) representation of the flow of data to specify the program.  Frequently used for reacting to discrete events or for processing streams of data.  Examples of dataflow languages include:
+
+* [[Hartmann pipeline]]s
+* G (used in [[LabVIEW]])
+* [[Lucid (programming language)|Lucid]]
+* [[Max (software)|Max]]
+* [[Oz (programming language)|Oz]]
+* [[Prograph]]
+* [[Pure Data]]
+* [[Reaktor]]
+* [[StreamBase Systems#StreamSQL EventFlow Language|StreamBase StreamSQL EventFlow]]
+* [[Agilent VEE|VEE]]
+* [[VHDL]]
+* [[VisSim]]
+* [[WebMethods Flow]]
+
+== Data-oriented languages ==
+
+[[Data-oriented language]]s provide powerful ways of searching and manipulating the relations that have been described as entity relationship tables which map one set of things into other sets. Examples of data-oriented languages include:
+
+* [[Clarion (programming language)|Clarion]]
+* [[Clipper (programming language)|Clipper]]
+* [[dBase]] a relational database access language
+* [[MUMPS]] (an ANSI standard general purpose language with specializations for database work.)
+* [[Caché (software)|Caché]] (similar to MUMPS)
+* [[RDQL]]
+* [[SPARQL]]
+* [[SQL]]
+* [[D (data language specification)|Tutorial D]], see also [[The Third Manifesto]]
+* [[Visual FoxPro]], a native RDBMS engine, object oriented, RAD
+* [[WebDNA]]
+* [[WebQL]]
+
+== Data-structured languages ==
+{{see also|:Category:Data-structured programming languages|l1=Category:Data-structured programming languages}}
+
+[[Data-structured language]]s are those where logic is structured in ways similar to their data. Such languages are generally well suited to reflection and introspection. There are three main types:
+
+* [[#Array language|Array-based]]
+* [[#List-based languages – LISPs|List-based]]
+* [[#Stack-based languages|Stack-based]]
+
+[[Assembly language]]s that statically link data inline with instructions can also be considered data-structured, in the most primitive way.
+
+== Declarative languages ==
+{{see also|:Category:Declarative programming languages|l1=Category:Declarative programming languages}}
+
+[[Declarative programming|Declarative languages]] describe a problem rather than defining a solution. [[Declarative programming]] stands in contrast to [[imperative programming]] via imperative programming languages, where serial orders (imperatives) are given to a computer.  In addition to the examples given just below, all (pure) [[#Functional languages|functional]] and [[#Logic-based languages|logic-based]] programming languages are also declarative.  In fact, "functional" and "logical" constitute the usual subcategories of the declarative category.
+
+* [[Apache Ant|Ant]] <small>(partially [[Declarative programming|Declarative languages]], partially [[imperative programming]])</small>
+* [[Candle (programming language)|Candle]]
+* [[DASL - Distributed Application Specification Language|DASL]] <small>(partially [[Declarative programming|Declarative languages]], partially [[imperative programming]])</small>
+* [[Lustre (programming language)|Lustre]]
+* [[MetaPost]]
+* [[Modelica]]
+* [[Prolog]]
+* [[Oz (programming language)|Oz]]
+* [[RDQL]]
+* [[SPARQL]]
+* [[SQL]]
+* [[xBase]]
+* [[XSL Transformations]]
+
+== Embeddable languages ==
+
+===In source code===
+Source embeddable languages embed small pieces of executable code inside a piece of free-form text, often a web page.
+
+Client-side embedded languages are limited by the capabilities of the browser or intended client. They aim to provide dynamism to web pages without the need to recontact the server.
+
+Server-side embedded languages are much more flexible, since almost any language can be built into a server. The aim of having fragments of server-side code embedded in a web page is to generate additional markup dynamically; the code itself disappears when the page is served, to be replaced by its output.
+
+====Server side====
+* [[PHP]]
+* [[VBScript]]
+* [[SMX (computer language)|SMX]], dedicated to web pages
+* [[WebDNA]], dedicated to database-driven websites.
+* [[Python (programming language)|Python]]
+The above examples are particularly dedicated to this purpose. A large number of other languages, such as [[Candle (programming language)|Candle]], [[Erlang (programming language)|Erlang]], [[Scala (programming language)|Scala]], [[Perl]] and [[Ruby (programming language)|Ruby]] can be adapted (for instance, by being made into [[Apache HTTP Server|Apache]] modules).
+
+====Client side====
+* [[ActionScript]]
+* [[Java (programming language)|Java]]
+* [[JavaScript]]
+* [[ECMAScript]]
+* [[JScript]]
+* [[VBScript]] (Windows only)
+
+===In object code===
+A wide variety of dynamic or scripting languages can be embedded in compiled executable code. Basically, object code for the language's [[interpreter (computing)|interpreter]] needs to be linked into the executable. Source code fragments for the embedded language can then be passed to an evaluation function as strings. [[Application control language]]s can be implemented this way, if the source code is input by the user. Languages with small interpreters are preferred.
+* [[AngelScript]]
+* [[Ch (computer programming)|Ch]]
+* [[Extensible Embeddable Language|EEL]]
+* [[Io (programming language)|Io]]
+* [[Lua (programming language)|Lua]]
+* [[Tcl]]
+
+== Educational languages ==
+
+Languages developed primarily for the purpose of teaching and learning of programming.
+
+* [[Alice (programming language)|Alice]]
+* [[Blue (programming language)|Blue]]
+* [[Modula-2]]
+* [[Pascal (programming language)|Pascal]]
+* [[Scratch (programming language)|Scratch]]
+
+== Esoteric languages ==
+
+{{see also|:Category:Esoteric programming languages|l1=Category:Esoteric programming languages}}
+
+An [[esoteric programming language]] is a programming language designed as a test of the boundaries of computer programming language design, as a proof of concept, or as a joke.
+
+* [[Befunge]]
+* [[Brainfuck]]
+* [[Chef (programming language)|Chef]]
+* [[FALSE]]
+* [[INTERCAL]]
+* [[LOLCODE]]
+* [[Malbolge]]
+* [[Piet (programming language)|Piet]]
+* [[Shakespeare (programming language)|Shakespeare]]
+* [[Whitespace (programming language)|Whitespace]]
+
+== Extension languages ==
+
+[[Extension programming language]]s are languages embedded into another program and used to harness its features in extension scripts.
+
+* [[Ateji PX]] an extension of the Java language for parallelism
+* [[AutoLISP]] (specific to [[AutoCAD]])
+* [[Cakewalk (sequencer)#Features|CAL]]
+* [[C/AL|C/AL(C/SIDE)]]
+* [[GNU Guile|Guile]]
+* [[Lua (programming language)|Lua]]
+* [[OpenCL]] an extension of C and C++ to use the GPU and parallel extensions of the CPU.
+* [[OptimJ]] an extension of the Java programming language with language support for writing optimization models and powerful abstractions for bulk data processing.
+* [[Python (programming language)|Python]] (Maya, Blender and other 3-D animation packages)
+* [[REXX]]
+* [[Ruby (programming language)|Ruby]] (Google SketchUp)
+* [[S-Lang (programming language)|S-Lang]]
+* [[SQL]]
+* [[Squirrel (programming language)|Squirrel]]
+* [[Tcl]]
+* [[Vim script]]
+* [[Visual Basic for Applications|VBA]]
+* [[Windows PowerShell]]
+
+== Fourth-generation languages ==
+{{see also|:Category:4GL|l1=Category:4GL}}
+
+[[Fourth-generation programming language]]s are high-level languages built around database systems. They are generally used in commercial environments.
+
+* [[ABAP]]
+* [[BuildProfessional]]
+* [[CorVision]]
+* [[Computer Sciences Corporation|CSC]]'s GraphTalk
+* [[Easytrieve]] report generator (now CA-Easytrieve Plus)
+* [[FOCUS]]
+* [[IBM Informix-4GL]] / [[Aubit-4GL]]
+* [[LINC 4GL]]
+* [[MAPPER]] ([[Unisys|Unisys/Sperry]])  now part of BIS
+* [[MARK IV (software)|MARK-IV]] ([[Sterling Software|Sterling/Informatics]]) now VISION:BUILDER of CA
+* [[NATURAL]]
+* [[Progress 4GL]]
+* [[Revolution (programming language)|Revolution]] (not based on a database; still, the goal is to work at a higher level of abstraction than 3GLs)
+* [[SAS System|SAS]]
+* Sculptor
+* [[Ubercode]] (VHLL, or Very High Level Language)
+* [[Uniface (programming language)|Uniface]]
+* [[Visual DataFlex]]
+* [[Visual FoxPro]]
+* [[xBase]]
+
+== Functional languages ==
+{{see also|:Category:Functional languages|l1=Category:Functional languages}}
+
+[[Functional programming]] languages define programs and subroutines as mathematical functions. Many so-called functional languages are "impure", containing imperative features. Not surprisingly, many of these languages are tied to mathematical calculation tools. Functional languages include:
+
+=== Pure ===
+* [[Charity (programming language)|Charity]]
+* [[Clean (programming language)|Clean]]
+* [[Curry (programming language)|Curry]]
+* [[Haskell (programming language)|Haskell]]
+* [[Hope (programming language)|Hope]]
+* [[Miranda (programming language)|Miranda]]
+* [[Idris (programming language)|Idris]]
+
+=== Impure ===
+
+* [[APL (programming language)|APL]]
+* [[ATS (programming language)|ATS]]
+* [[C Sharp (programming language)|C#]]
+* [[Candle (programming language)|Candle]]
+* [[Curl (programming language)|Curl]]
+* [[Erlang (programming language)|Erlang]]
+* [[F Sharp (programming language)|F#]]
+* [[FPr (programming language)|FPr]]
+** [[CAL (Joss family)|CAL]]
+* [[Hop (software)|Hop]]
+* [[J (programming language)|J]]
+* [[Java (programming language)|Java (since version 8)]]
+* [[JavaScript (programming language)|JavaScript]]
+* [[Joy (programming language)|Joy]]
+* [[Julia (programming language)|Julia]]
+* [[Lisp (programming language)|Lisp]]
+** [[Clojure]]
+** [[Common Lisp]]
+** [[Dylan (programming language)|Dylan]]
+** [[eLisp]] Emacs Lisp
+** [[Little b (programming language)|Little b]]
+** [[Logo (programming language)|Logo]]
+** [[Scheme (programming language)|Scheme]]
+*** [[Racket (programming language)|Racket]] (formerly PLT Scheme)
+** [[Tea (programming language)|Tea]]
+* [[Mathematica]]
+* [[ML (programming language)|ML]]
+** [[Standard ML]]
+*** [[Alice (programming language)|Alice]]
+** [[OCaml]]
+* [[Nemerle]]
+* [[Opal (programming language)|Opal]]
+* [[OPS5]]
+* [[Poplog]]
+* [[Q (equational programming language)]]
+* [[Q (programming language from Kx Systems)]]
+* [[R (programming language)|R]]
+* [[REFAL]]
+* [[Rust (programming language)|Rust]]
+* [[Scala (programming language)|Scala]]
+* [[Spreadsheet]]s
+
+== Hardware description languages ==
+In electronics, a [[Hardware description language]] or HDL is a specialized computer language used to describe the structure, design and operation of electronic circuits, and most commonly, digital logic circuits. The two most widely used and well-supported HDL varieties used in industry are [[Verilog]] and [[VHDL]]. Hardware description languages include:
+
+===HDLs for analog circuit design===
+
+* [[Verilog-AMS]] (Verilog for Analog and Mixed-Signal)
+* [[VHDL-AMS]] (VHDL with Analog/Mixed-Signal extension)
+
+===HDLs for digital circuit design===
+
+* [[Advanced Boolean Expression Language]](ABEL)
+* [[Altera Hardware Description Language]](AHDL)
+* [[Bluespec]]
+* [[Chisel]] (Constructing Hardware in a Scala Embedded Language)
+* [[Confluence]]
+* [[ELLA (programming language)|ELLA]]
+* [[ESys.net]]
+* [[Handel-C]]
+* [[HHDL]]
+* [[Impulse C]]
+* [[JHDL]]
+* [[Lava]]
+* [[Lola (computing)|Lola]]
+* [[M]]
+* [[MyHDL]]
+* [[PALASM]]
+* [[Ruby (hardware description language)]]
+* [[SystemC]]
+* [[SystemVerilog]]
+* [[Verilog]]
+* [[VHDL]] (VHSIC HDL)
+
+== Imperative languages ==
+
+Imperative programming languages may be multi-paradigm and appear in other classifications. Here is a list of programming languages that follow the [[imperative paradigm]]:<ref>{{cite web
+ | url    = http://www.trueknowledge.com/q/list_of_imperative_programming_languages
+ | title  = Your Answer… You asked: list of imperative programming languages
+ | publisher  = True Knowledge
+ | accessdate = 2012-05-22
+}}</ref><ref>[[Imperative programming#History|Imperative programming history]], Wikipedia</ref>
+* [[Ada (programming language)|Ada]]
+* [[ALGOL]]
+* [[BASIC]]
+* [[Blue (programming language)|Blue]]
+* [[C (programming language)|C]]
+* [[C++ (programming language)|C++]]
+* [[COBOL]]
+* [[FORTRAN]]
+* [[Java (programming language)|Java]]
+* [[Lua (programming language)|Lua]]
+* [[MATLAB]]
+* [[Machine code|Machine language]]
+* [[Modula-2]], [[Modula-3]]
+* [[MUMPS]]
+* [[Oberon (programming language)|Oberon]]
+* [[Object Pascal]]
+* [[Objective Caml]]
+* [[Pascal (programming language)|Pascal]]
+* [[Perl]]
+* [[PHP]]
+* [[PROSE modeling language]]
+* [[Python (programming language)|Python]]
+* [[Ruby (programming language)|Ruby]]
+* [[Rust (programming language)|Rust]]
+
+== Interactive mode languages ==
+
+Interactive mode languages act as a kind of shell: expressions or statements can be entered one at a time, and the result of their evaluation is seen immediately.
+
+* [[APL (programming language)|APL]]
+* [[BASIC]] (some dialects)
+* [[Clojure]]
+* [[Common Lisp]]
+* [[Erlang (programming language)|Erlang]]
+* [[F Sharp (programming language)|F#]]
+* [[Fancy (programming language)|Fancy]]
+* [[Forth (programming language)|Forth]]
+* [[FPr (programming language)|FPr]]
+* [[Fril]]
+* [[Haskell (programming language)|Haskell]] (with the GHCi or Hugs interpreter)
+* [[IDL (programming language)|IDL]]
+* [[J (programming language)|J]]
+* [[Lua (programming language)|Lua]]
+* [[MUMPS]] (an ANSI standard general purpose language)
+* [[Maple (software)|Maple]]
+* [[Mathematica]]
+* [[MATLAB]]
+* [[ML (programming language)|ML]]
+* [[Obix programming language|Obix]]
+* [[Perl]] 
+* [[Pike (programming language)|Pike]]
+* [[PostScript]]
+* [[Python (programming language)|Python]]
+* [[PROSE modeling language]]
+* [[R (programming language)|R]]
+* [[REXX]]
+* [[Ruby (programming language)|Ruby]] (with [[Interactive Ruby Shell|IRB]])
+* [[Scala (programming language)|Scala]]
+* [[Scheme (programming language)|Scheme]]
+* [[Smalltalk]] (anywhere in a Smalltalk environment)
+* [[S-Lang (programming language)|S-Lang]] (with the S-Lang shell, slsh)
+* [[Tcl]] (with the Tcl shell, tclsh)
+* [[Windows PowerShell]] ([[Microsoft]] [[.NET Framework|.NET]]-based CLI)
+
+== Interpreted languages ==
+
+[[Interpreted language]]s are programming languages in which programs may be executed from source code form, by an interpreter. Theoretically, any language can be compiled or interpreted, so the term *interpreted language* generally refers to languages that are commonly interpreted rather than compiled.
+
+* [[Apache Ant|Ant]]
+* [[APL (programming language)|APL]]
+* [[AutoHotkey]] scripting language
+* [[AutoIt]] scripting language
+* [[BASIC]] (some dialects)
+* [[DATABUS (programming language)|DATABUS]] (later versions added optional compiling)
+* [[DM (computing)|DM]]
+* [[Eiffel (programming language)|Eiffel]] (via "Melting Ice Technology" in [[EiffelStudio]])
+* [[Forth (programming language)|Forth]] (interactive shell only; otherwise compiled to native or [[threaded code]])
+* [[FPr (programming language)|FPr]] ([[Virtual machine]]: Text is compiled to linked lists; linked lists are interpreted)
+* [[Frink]]
+* [[GameMaker: Studio|Game Maker Language]]
+* [[Groovy (programming language)|Groovy]]
+* [[Haskell (programming language)|Haskell]] (GHCi, Hugs, NHC, YHC etc.)
+* [[J (programming language)|J]]
+* [[JavaScript]]
+* [[Lisp (programming language)|Lisp]] (early versions, pre-1962, and some experimental ones; production Lisp systems are compilers, but many of them still provide an interpreter if needed)
+** [[Tea (programming language)|Tea]]
+* [[LPC (programming language)|LPC]]
+* [[Lua (programming language)|Lua]]
+* [[MUMPS]] (an ANSI standard general purpose language)
+* [[Maple (software)|Maple]]
+* [[Mathematica]]
+* [[Oriel (scripting language)|Oriel]]
+* [[Pascal (programming language)|Pascal]] <small>(early implementations)</small>
+* [[PCASTL]]
+* [[Perl]]
+* [[PHP]]
+* [[PIKT|Pikt]]
+* [[PostScript]]
+* [[PROSE modeling language]]
+* [[Python (programming language)|Python]]
+* [[REXX]]
+* [[R (programming language)|R]]
+* [[Ruby (programming language)|Ruby]]
+* [[S-Lang (programming language)|S-Lang]]
+* [[Standard ML|SML (Standard ML)]]
+* [[Parallax Propeller|Spin]]
+* [[Tcl]]
+* [[TI-BASIC]]
+* [[TorqueScript]]
+* [[thinBasic]] scripting language
+* [[VBScript]]
+* [[Windows PowerShell]] ([[Microsoft]] [[.NET Framework|.NET]]-based CLI)
+* Some scripting languages ([[#Scripting languages|below]])
+
+== Iterative languages ==
+
+Iterative languages are built around or offering [[generator (computer science)|generator]]s.
+
+* [[Aldor]]
+* [[Alphard (programming language)|Alphard]]
+* [[Generator (computer science)#C#|C#]]
+* [[CLU (programming language)|CLU]]
+* [[Cobra (programming language)|Cobra]]
+* [[Eiffel (programming language)|Eiffel]], through "agents"
+* [[Icon (programming language)|Icon]]
+* [[Information Processing Language|IPL-v]]
+* [[Lua (programming language)|Lua]]
+* [[Python (programming language)|Python]]
+* [[Sather]]
+* [[XL (programming language)|XL]] ("iterator" construct)
+
+== List-based languages – LISPs ==
+
+List-based languages are a type of [[data-structured language]] that are based upon the [[list (computing)|list]] data structure.
+
+* [[FPr (programming language)|FPr]]
+* [[Joy (programming language)|Joy]]
+* [[Lisp (programming language)|Lisp]]
+** [[Paul Graham (computer programmer)|Arc]]
+** [[Clojure]]
+** [[Common Lisp]]
+** [[Dylan (programming language)|Dylan]]
+** [[eLisp]] Emacs Lisp
+** [[Racket (programming language)|Racket]]
+** [[Scheme (programming language)|Scheme]]
+** [[Logo (programming language)|Logo]]
+* [[R (programming language)|R]]
+* [[Tcl]]
+** [[Tea (programming language)|Tea]]
+* [[TRAC (programming language)|TRAC]]
+
+== Little languages ==
+
+[[Domain-specific language|Little languages]] serve a specialized problem domain.
+
+* [[AWK|awk]] can serve as a prototyping language for [[C (programming language)|C]], because the syntax is similar
+* [[Comet (programming language)|Comet]] is used to solve complex combinatorial [[Program optimization|optimization]] problems in areas such as [[resource allocation]] and [[Scheduling (computing)|scheduling]].
+* [[SQL]] has only a few keywords, and not all the constructs needed for a full programming language.<ref>The objects of SQL are collections of records, called tables. A full programming language can specify algorithms, irrespective of runtime. Thus an algorithm can be considered to generate usable results. In contrast, SQL can only select  records which are limited to the current collection, the data at hand in the system, rather than produce a statement of the correctness of the result.</ref> Many database management systems extend SQL with additional constructs as a [[stored procedure]] language.
+
+== Logic-based languages ==
+{{see also|:Category:Logic programming languages|l1=Category:Logic programming languages}}
+
+[[Logic programming|Logic-based]] languages specify a set of attributes that a solution must have, rather than a set of steps to obtain a solution. Examples:
+
+* [[Algebraic Logic Functional (programming language)|ALF]]
+* [[Alma-0]]
+* [[CLACL (programming language)|CLACL (CLAC-Language)]]
+* [[Curry (programming language)|Curry]]
+* [[Fril]]
+* [[Janus (programming language)|Janus]]
+* [[λProlog]] (a logic programming language featuring polymorphic typing, modular programming, and higher-order programming)
+* [[Leda (programming language)|Leda]]
+* [[Oz (programming language)|Oz]]
+** [[Mozart Programming System]] a [[Cross-platform|multiplatform]] Oz
+* [[Poplog]]
+* [[Prolog]] (formulates data and the program evaluation mechanism as a special form of mathematical logic called [[Horn clause|Horn logic]] and a general proving mechanism called [[Resolution (logic)|logical resolution]])
+** [[Mercury (programming language)|Mercury]] (based on Prolog)
+** [[Strawberry Prolog]] (standard Prolog with some extensions)
+** [[Visual Prolog]] (object-oriented Prolog extension)
+* [[ROOP (programming language)|ROOP]]
+
+== Machine languages ==
+
+[[Machine code|Machine language]]s are directly executable by a computer's CPU. They are typically formulated as bit patterns, usually represented in [[octal]] or [[hexadecimal]]. Each group of npatterns (often 1 or more bytes) causes the circuits in the CPU to execute one of the fundamental operations of the hardware. The activation of specific electrical inputs (e.g., CPU package pins for microprocessors), and logical settings for CPU state values, control the processor's computation. Individual machine languages are processor specific and are not portable. They are (essentially) always defined by the CPU developer, not by 3rd parties. The symbolic version, the processor's [[assembly language]], is also defined by the developer, in most cases. Since processors come in families based on a shared architecture, the same basic assembly language style can often be used for more than one CPU. Each of the following CPUs served as the basis for a family of processors:
+
+* [[ARM architecture|ARM]]
+* [[PDP-6|DEC PDP-6]], which led to the [[PDP-10|KA10 family]] (used in [[PDP-10]], [[DECSYSTEM-20]])
+* [[PDP-11|DEC PDP-11]] (influenced [[VAX]] and [[Motorola 68000 family#Architecture|M68000]])
+* [[Intel Corporation|Intel]] [[Intel 8008|8008]], [[Intel 8080|8080]] and [[Intel 8085|8085]]
+** [[Zilog Z80]]
+** [[x86-16]] Instruction set first used in the [[Intel 8086]]
+*** [[Intel 8088]] (variant used in the first and early [[IBM PC]])
+*** [[Intel 80186]]
+*** [[Intel 80286]] (the first x86 processor with [[protected mode]], used in the [[IBM AT]])
+** [[x86-32]]
+*** [[Intel 80386]]
+*** [[Intel 80486]]
+*** [[Intel Pentium]] and [[Intel Xeon|Xeon]] CPUs
+** [[x86-64]] The original specification was created by [[Advanced Micro Devices|AMD]]. There are vendor variants, but they're essentially the same
+*** [[Advanced Micro Devices|AMD's]] [[x86-64#AMD64|AMD64]] - [[Opteron]], [[Athlon 64]]
+*** [[Intel Corporation|Intel's]]  [[Intel 64]] - [[Intel Core|Core]] CPUs ([[Intel Core#Core2|Core2]], [[Core i3|i3]], [[Core i5 430|i5]], [[Corei7|i7]]), some [[Intel Atom|Atom]], and newer [[Pentium 4]]s and [[Intel Xeon|Xeon]] processors
+
+* [[IBM System/360]]
+* MIPS [[R1000|R2000/R3000]]
+* [[Motorola 6800]]
+** [[Motorola 68000 family]] (CPUs used in early [[Apple Macintosh]] and early [[Sun Microsystems|Sun]] computers)
+** [[MOS Technology]] [[MOS Technology 65xx|65xx]]
+*** [[MOS Technology 6502|6502]] (CPU for [[Commodore VIC-20|VIC-20]], [[Apple II family|Apple II]], and [[Atari 8-bit family|Atari 800]])
+*** [[MOS Technology 6510|6510]] (CPU for [[Commodore 64]])
+*** [[Western Design Center]] [[WDC 65816/65802|65816/65802]] (CPU for [[Apple IIGS|Apple II<small>GS</small>]] and (variant) [[Super Nintendo Entertainment System]])
+* National [[NS320xx|32032]]
+* [[Power Architecture]]
+** [[IBM POWER microprocessors|POWER]]
+** [[PowerPC]] - used in [[Power Macintosh]] and the technology is used in many [[PowerPC#Gaming consoles|game consoles]])
+* [[StrongARM]]
+* Sun [[SPARC]], [[UltraSPARC]]
+
+== Macro languages ==
+
+===Textual substitution macro languages===
+{{see also|:Category:Macro programming languages|l1=Category:Macro programming languages}}
+
+[[Macro (computer science)|Macro]] languages transform one source code file into another. A "macro" is essentially a short piece of text that expands into a longer one, possibly with parameter substitution. They are often used to [[preprocess]] source code. Preprocessors can also supply facilities like [[file inclusion]].
+Macro languages may be restricted to acting on specially labeled code regions (pre-fixed with a <code>#</code> in the case of the C preprocessor. Alternatively, they may not, but in this case it is still often undesirable to (for instance) expand
+a macro embedded in a [[string literal]], so they still need a rudimentary awareness
+of syntax. That being the case, they are often still applicable to more than one language. Contrast with source-embeddable languages like [[PHP]], which are fully featured.
+
+* [[C preprocessor|cpp]] (the C preprocessor)
+* [[M4 (computer language)|m4]] (originally from AT&T, bundled with UNIX)
+
+===Application macro languages===
+[[Scripting language]]s such as [[Tcl]] and [[ECMAScript]] ([[ActionScript]], [[ECMAScript for XML]], [[JavaScript]], [[JScript]]) have been embedded into applications. These are sometimes called "macro languages", although in a somewhat different sense to textual-substitution macros like [[M4 (computer language)|m4]].
+
+== Metaprogramming languages ==
+[[Metaprogramming]] is writing of programs that write or manipulate other programs (or themselves) as their data or that do part of the work that is otherwise done at [[Run time (program lifecycle phase)|run time]] during [[compile time]]. In many cases, this allows programmers to get more done in the same amount of time as they would take to write all the code manually.
+* [[C++]]
+* [[Curl (programming language)|Curl]]
+* [[D (programming language)|D]]
+* [[Fancy (programming language)|Fancy]]
+* [[Forth (programming language)|Forth]]
+* [[Groovy (programming language)|Groovy]]
+* [[Haskell (programming language)|Haskell]]
+* [[Lisp (programming language)|Lisp]]
+* [[Lua (programming language)|Lua]]
+* [[Maude system]]
+* [[Mathematica]]
+* [[MetaL (programming language)|MetaL]]
+* [[MetaOCaml]]
+* [[Nemerle]]
+* [[Perl]]
+* [[Python (programming language)|Python]]
+* [[Ruby (programming language)|Ruby]]
+* [[Rust (programming language)|Rust]]
+* [[Scheme (programming language)|Scheme]]
+* [[Smalltalk]]
+* [[XL (programming language)|XL]] ([[concept programming]])
+
+== Multiparadigm languages ==
+
+[[Multi-paradigm programming language|Multiparadigm language]]s support more than one [[programming paradigm]]. They allow a [[Computer program|program]] to use more than one [[Computer program|programming]] style. The goal is to allow programmers to use the best tool for a job, admitting that no one paradigm solves all problems in the easiest or most efficient way.
+
+* [[Ada (programming language)|Ada]] ([[Parallel computing|concurrent]], [[distributed computing|distributed]], [[Generic programming|generic]] ([[template metaprogramming]]), [[Imperative programming|imperative]], [[Object-oriented programming|object-oriented]] ([[Class (computer science)|class-based]]))
+* [[Algebraic Logic Functional (programming language)|ALF]] ([[Functional programming|functional]], [[logic programming|logic]])
+* [[Alma-0]] (constraint, imperative, logic)
+* [[APL (programming language)|APL]] (functional, imperative)
+* [[BETA (programming language)|BETA]] (functional, imperative, object-oriented (class-based))
+* [[C++]] (generic, imperative, object-oriented (class-based), functional)
+* [[C Sharp (programming language)|C#]] (generic, imperative, object-oriented (class-based), functional, declarative)
+* [[ChucK]] (imperative, object-oriented, time-based, concurrent, on-the-fly)
+* [[Cobra (programming language)|Cobra]] (generic, imperative, object-oriented (class-based), functional, contractual)
+* [[Common Lisp]] (functional, imperative, object-oriented (class-based), [[Aspect-oriented programming|aspect-oriented]] (user may add further paradigms, e.g., logic))
+* [[Curl (programming language)|Curl]] (functional, imperative, object-oriented (class-based), metaprogramming)
+* [[Curry (programming language)|Curry]] (concurrent, functional, logic)
+* [[D (programming language)|D]] (generic, imperative, functional, object-oriented (class-based), metaprogramming)
+* [[Object Pascal|Delphi]] (generic, imperative, object-oriented (class-based), metaprogramming)
+* [[Dylan (programming language)|Dylan]] (functional, object-oriented (class-based))
+* [[ECMAScript]] (functional, imperative, object-oriented (prototype-based))
+** [[ActionScript]]
+** [[ECMAScript for XML]]
+** [[JavaScript]]
+** [[JScript]]
+* [[Eiffel (programming language)|Eiffel]] (imperative, object-oriented (class-based), generic, functional (agents), concurrent (SCOOP))
+* [[F Sharp (programming language)|F#]] (functional, generic, object-oriented (class-based), language-oriented)
+* [[Fantom (programming language)|Fantom]] (functional, object-oriented (class-based))
+* [[FPr (programming language)|FPr]] (function-level, object-oriented (class-based))
+* [[Harbour (software)|Harbour]]
+* [[Hop (software)|Hop]]
+* [[J (programming language)|J]] (functional, imperative, object-oriented (class-based))
+* [[LabVIEW]] ([[Dataflow programming|dataflow]], [[Visual programming language|visual]])
+* [[Lasso (programming language)|Lasso]] (macro, object-oriented (prototype-based), procedural, scripting)
+* [[Lava (programming language)|Lava]] (object-oriented (class-based), visual)
+* [[Leda (programming language)|Leda]] (functional, imperative, logic, object-oriented (class-based))
+* [[Lua (programming language)|Lua]] (functional, imperative, object-oriented ([[Prototype-based programming|prototype-based]]))
+* [[Metaobject|Metaobject protocols]] (object-oriented (class-based, prototype-based))
+* [[Nemerle]] (functional, object-oriented (class-based), imperative, metaprogramming)
+* [[OCaml]] (functional, imperative, object-oriented (class-based))
+* [[Oz (programming language)|Oz]] (functional (evaluation: [[eager evaluation|eager]], [[lazy evaluation|lazy]]), logic, [[Constraint programming|constraint]], imperative, object-oriented (class-based), concurrent, distributed)
+** [[Mozart Programming System]] ([[Cross-platform|multiplatform]] Oz)
+* [[Object Pascal]] (imperative, object-oriented (class-based))
+* [[Perl]] (imperative, functional (can't be purely functional), object-oriented, class-oriented, aspect-oriented (through modules))
+* [[PHP]] (imperative, object-oriented)
+* [[Pike (programming language)|Pike]]
+* [[Poplog]] (functional, imperative, logic)
+* [[Prograph]] (dataflow, object-oriented (class-based), visual)
+* [[Python (programming language)|Python]] (functional, object-oriented (class-based), imperative, metaprogramming)
+* [[R (programming language)|R]]
+* [[Racket (programming language)|Racket]] (functional, imperative, object-oriented (class-based)..., and can be extended by the user)
+* [[REBOL]] (functional, imperative, object-oriented (prototype-based), metaprogramming (dialected))
+* [[ROOP (programming language)|ROOP]] (imperative, logic, object-oriented (class-based), rule-based)
+* [[Ruby (programming language)|Ruby]] (functional, object-oriented (class-based))
+* [[Rust (programming language)|Rust]] (concurrent, functional, imperative, object-oriented)
+* [[Scala (programming language)|Scala]] (functional, object-oriented)
+* [[Seed7]] (imperative, object-oriented, generic)
+* [[SISAL]] (concurrent, dataflow, functional)
+* [[Spreadsheet]]s (functional, visual)
+* [[Tcl]] (functional, imperative, object-oriented (class-based))
+** [[Tea (programming language)|Tea]] (functional, imperative, object-oriented (class-based))
+* [[Windows PowerShell]] (functional, imperative, pipeline, object-oriented (class-based))
+* [[XL (programming language)|XL]] ([[concept programming]] approach)
+
+== Numerical analysis ==
+
+* [[AIMMS]]
+* [[AMPL (programming language)|AMPL]]
+* [[General Algebraic Modeling System|GAMS]]
+* [[Julia (programming language)|Julia]]
+* [[MATLAB]]
+* [[PROSE modeling language]]
+* [[Oberon (programming language)|Seneca]] an [[Oberon (programming language)|Oberon]] variant
+
+== Non-English-based languages ==
+{{main|non-English-based programming languages}}
+
+* [[ARLOGO]] - [[Arabic language|Arabic]]
+* [[Chinese BASIC]] - [[Chinese language|Chinese]]
+* [[Fjölnir (programming language)|Fjölnir]] - [[Icelandic language|Icelandic]]
+* [[LSE (programming language)|Language Symbolique d'Enseignement]] - [[French language|French]]
+* [[Lexico programming language|Lexico]] - [[Spanish language|Spanish]]
+* [[Rapira]] - [[Russian language|Russian]]
+
+== Object-oriented class-based languages ==
+
+Class-based [[Object-oriented programming language]]s support objects defined by their class. Class definitions include member data. [[Message passing]] is a key concept (if not ''the'' key concept)  in Object-oriented languages.
+
+Polymorphic functions parameterized by the class of some of their arguments are typically called methods. In languages with [[Dynamic dispatch|single dispatch]], classes typically also include method definitions. In languages with [[multiple dispatch]], methods are defined by [[generic function]]s. There are exceptions where [[Dynamic dispatch|single dispatch]] methods are [[generic function]]s (e.g. [[Bigloo]]'s object system).
+
+===[[Multiple dispatch]]===
+
+* [[Common Lisp]]
+* [[Cecil (programming language)|Cecil]]
+* [[Dylan (programming language)|Dylan]]
+* [[Goo (programming language)|Goo]]
+* [[Julia (programming language)|Julia]]
+
+=== Single dispatch ===
+
+* [[ActionScript|ActionScript 3.0]]
+* [[Actor (programming language)|Actor]]
+* [[Ada (programming language)|Ada 95]] and [[Ada (programming language)|Ada 2005]] (multi-purpose language)
+* [[BETA (programming language)|BETA]]
+* [[Blue (programming language)|Blue]]
+* [[C++]]
+* [[C Sharp (programming language)|C#]]
+* [[Oxygene (programming language)|Oxygene]] (formerly known as Chrome)
+* [[ChucK]]
+* [[Cobra (programming language)|Cobra]]
+* [[ColdFusion]]
+* [[Curl (programming language)|Curl]]
+* [[D (programming language)|D]]
+* [[DASL - Distributed Application Specification Language|DASL]]
+* [[Object Pascal|Delphi]]
+* [[E (programming language)|E]]
+* [[GNU E]]
+* [[Eiffel (programming language)|Eiffel]]
+** [[Sather]]
+** [[Ubercode]]
+* [[Fancy (programming language)|Fancy]]
+* [[F-Script (programming language)|F-Script]]
+* [[Fortran 2003]]
+* [[Fortress (programming language)|Fortress]]
+* [[FPr (programming language)|FPr]]
+* [[Gambas]]
+* [[GameMaker: Studio|Game Maker Language]]
+* [[Harbour (software)|Harbour]]
+* [[J (programming language)|J]]
+* [[Java (programming language)|Java]]
+** [[Processing (programming language)|Processing]]
+** [[Groovy (programming language)|Groovy]]
+** [[Join Java]]
+** [[Tea (programming language)|Tea]]
+** [[X10 (programming language)|X10]]
+* [[LabVIEW]]
+* [[Lava (programming language)|Lava]]
+* [[Lua (programming language)|Lua]]
+* [[Modula-2]] (data abstraction, information hiding, strong typing, full modularity)
+** [[Modula-3]] (added more object oriented features to Modula-2)
+* Moto
+* [[Nemerle]]
+* [[IBM NetRexx]]
+* [[Oberon-2 (programming language)|Oberon-2]] (full object orientation equivalence in an original, strongly typed, Wirthian manner)
+* [[Obix (programming language)|Obix]]
+* [[Object Pascal]]
+* [[Object REXX]]
+* [[Objective-C]] (a superset of C adding a [[Smalltalk]] derived object model and message passing syntax)
+* [[OCaml]]
+* [[Oz (programming language)|Oz]]
+** [[Mozart Programming System]]
+* [[Perl|Perl 5]]
+* [[PHP]]
+* [[Pike (programming language)|Pike]]
+* [[Prograph]]
+* [[Python (programming language)|Python]] (object oriented interpretive language)
+* [[Realbasic]]
+* [[Revolution (programming language)|Revolution]] (programmer does not get to pick the objects)
+* [[Ruby (programming language)|Ruby]]
+* [[Scala (programming language)|Scala]]
+* [[Simula]] (the first object oriented language, developed by [[Ole-Johan Dahl]] and [[Kristen Nygaard]])
+* [[Smalltalk]] (pure object-orientation, developed at [[PARC (company)|Xerox PARC]])
+** [[Bistro (programming language)|Bistro]]
+** [[F-Script (programming language)|F-Script]]
+** [[Little Smalltalk]]
+** [[Squeak]]
+*** [[Scratch (programming language)|Scratch]]
+** [[IBM VisualAge]]
+** [[VisualWorks]]
+* [[Parallax Propeller|SPIN]]
+* [[SuperCollider]]
+* [[VBScript]] (Microsoft Office 'macro scripting' language)
+* [[Visual DataFlex]]
+* [[Visual FoxPro]]
+* [[Visual Prolog]]
+* [[Microsoft Dynamics AX|X++]]
+* [[XOTcl]]
+
+== Object-oriented prototype-based languages ==
+
+[[Prototype-based programming|Prototype-based languages]] are object-oriented languages where the distinction between classes and instances has been removed:
+
+* [[Actor-Based Concurrent Language|ABCL/1]]
+* [[Actor-Based Concurrent Language|ABCL/R]]
+* [[Actor-Based Concurrent Language|ABCL/R2]]
+* [[Actor-Based Concurrent Language|ABCL/c plus]]
+* [[Agora (programming language)|Agora]]
+* [[Cecil (programming language)|Cecil]]
+* [[ECMAScript]]
+** [[ActionScript]]
+** [[ECMAScript for XML]]
+** [[JavaScript]] (first named '''Mocha''', then '''LiveScript''')
+** [[JScript]]
+* [[Etoys (programming language)|Etoys]] in [[Squeak]]
+* [[Io (programming language)|Io]]
+* [[Lisaac]]
+* [[Lua (programming language)|Lua]]
+* [[MOO (programming language)|MOO]]
+* [[NewtonScript]]
+* [[Obliq]]
+* [[R (programming language)|R]]
+* [[REBOL]]
+* [[Self (programming language)|Self]] (the first prototype-based language, derived from [[Smalltalk]])
+* [[TADS]]
+
+== Off-side rule languages ==
+
+[[Off-side rule]] languages are those where blocks are formed, indicated, by their [[indentation]].
+
+* [[ISWIM]], the abstract language that introduced the rule
+* [[ABC (programming language)|ABC]], Python's parent
+** [[Python (programming language)|Python]]
+*** [[Cobra (programming language)|Cobra]]
+*** [[Boo (programming language)|Boo]]
+*** [[Genie (programming language)|Genie]]
+* [[Miranda (programming language)|Miranda]], Haskell's parent
+** [[Orwell (programming language)|Orwell]]
+** [[Haskell (programming language)|Haskell]]
+*** [[Curry (programming language)|Curry]]
+* [[F Sharp (programming language)|F#]]
+* [[Occam (programming language)|Occam]]
+* [[Parallax Propeller|SPIN]]
+* [[XL (programming language)|XL]]
+
+== Procedural languages ==
+
+[[Procedural programming]] languages are based on the concept of the unit and scope (the data viewing range of an executable code statement). A procedural program is composed of one or more units or modules, either user coded or provided in a code library; each module is composed of one or more procedures, also called a function, routine, subroutine, or method, depending on the language. Examples of procedural languages include:
+
+* [[Ada (programming language)|Ada]] (multi-purpose language)
+* [[ALGOL]] (extremely influential language design. The second high level language compiler.)
+** [[SMALL|SMALL Machine Algol Like Language]]
+* [[Alma-0]]
+* [[BASIC]] (BASICs are innocent of most modularity in (especially) versions before about 1990)
+* [[BCPL]]
+* [[BLISS (programming language)|BLISS]]
+* [[Blue (programming language)|Blue]]
+* [[C (programming language)|C]]
+* [[C++]] (C with objects + much else)
+* [[C Sharp (programming language)|C#]] (similar to Java/C++)
+* [[ChucK]] (C/Java-like syntax, with new syntax elements for time and parallelism)
+* [[COBOL]]
+* [[Cobra (programming language)|Cobra]]
+* [[ColdFusion]]
+* [[Combined Programming Language]] (CPL)
+* [[Curl (programming language)|Curl]]
+* [[D (programming language)|D]]
+* [[DASL - Distributed Application Specification Language|DASL]] <small>(partly [[declarative programming|declarative]], partly [[imperative programming|imperative]])</small>
+* [[ECMAScript]]
+** [[ActionScript]]
+** [[ECMAScript for XML]]
+** [[JavaScript]] (first named '''Mocha''', then '''LiveScript''')
+** [[JScript]]
+* [[Eiffel (programming language)|Eiffel]]
+* [[Fortran]] (better modularity in later Standards)
+** [[F (programming language)|F]]
+* [[Go (programming language)|Go]]
+* [[Harbour (software)|Harbour]]
+* [[HyperTalk]]
+* [[Java (programming language)|Java]]
+** [[Groovy (programming language)|Groovy]]
+** [[Join Java]]
+** [[Tea (programming language)|Tea]]
+* [[JOVIAL]]
+* [[Lasso (programming language)|Lasso]]
+* [[Modula-2]] (fundamentally based on modules)
+* [[MATLAB]]
+* [[MUMPS]] (more modular in its first release than a language of the time should have been; the standard has become still more modular since then)
+* [[Nemerle]]
+* [[Oberon (programming language)|Oberon and Oberon-2]] (improved, smaller, faster, safer follow-ons for Modula-2)
+** [[Component Pascal]]
+** [[Lagoona (programming language)|Lagoona]]
+** [[Oberon-2 (programming language)|Seneca]]
+* [[Obix programming language|Obix]]
+* [[Occam (programming language)|Occam]]
+* [[Oriel (scripting language)|Oriel]]
+* [[Pascal (programming language)|Pascal]] (successor to ALGOL 60, predecessor of Modula-2)
+** [[Free Pascal]] (FPC)
+** [[Object Pascal]] (Delphi)
+* [[PCASTL]]
+* [[Perl]]
+* [[Pike (programming language)|Pike]]
+* [[PL/C]]
+* [[PL/I]] (large general purpose language, originally for IBM mainframes)
+* [[Plus (programming language)|Plus]]
+* [[PROSE modeling language]]
+* [[Python (programming language)|Python]]
+* [[R (programming language)|R]]
+* [[Rapira]]
+* [[IBM RPG|RPG]] (only available in [[IBM]]'s [[IBM System i|System i]] midrange computers)
+* [[Rust (programming language)|Rust]]
+* [[S-Lang (programming language)|S-Lang]]
+* [[VBScript]]
+* [[Visual Basic]]
+* [[Visual FoxPro]]
+* [[Microsoft Dynamics AX|X++]]
+* [[X Sharp (programming language)|X#]]
+* [[XL (programming language)|XL]]
+
+== Reflective languages ==
+
+[[Reflection (computer science)|Reflective languages]] let programs examine and possibly modify their high level structure at runtime. This is most common in high-level virtual machine programming languages like [[Smalltalk]], and less common in lower-level programming languages like [[C (programming language)|C]]. Languages and platforms supporting reflection:
+
+{{see also|Aspect-oriented programming}}
+
+* [[Befunge]]
+* [[C Sharp (programming language)|C#]]
+* [[Charm (language)|Charm]]
+* [[ChucK]]
+* [[Cobra (programming language)|Cobra]]
+* [[Component Pascal]] [[BlackBox Component Builder]]
+* [[Curl (programming language)|Curl]]
+* [[Object Pascal|Delphi]]
+* [[ECMAScript]]
+** [[ActionScript]]
+** [[ECMAScript for XML]]
+** [[JavaScript]]
+** [[JScript]]
+* [[Eiffel (programming language)|Eiffel]]
+* [[Forth (programming language)|Forth]]
+* [[Harbour (software)|Harbour]]
+* [[Java (programming language)|Java]]
+** [[Java Virtual Machine]]
+** [[Groovy (programming language)|Groovy]]
+** [[Join Java]]
+** [[X10 (programming language)|X10]]
+* [[Lisp (programming language)|Lisp]]
+** [[Clojure]]
+** [[Common Lisp]]
+** [[Dylan (programming language)|Dylan]]
+** [[Logo (programming language)|Logo]]
+** [[Scheme (programming language)|Scheme]]
+* [[Lua (programming language)|Lua]]
+* [[Maude system]]
+* [[.NET Framework]] [[Common Language Runtime]]
+* [[Oberon-2 (programming language)|Oberon-2]] ETH Oberon System
+* [[Obix (programming language)|Obix]]
+* [[Objective-C]]
+* [[PCASTL]]
+* [[Perl]]
+* [[PHP]]
+* [[Pico (programming language)|Pico]]
+* [[Poplog]]
+** [[POP-11]]
+* [[Prolog]]
+* [[Python (programming language)|Python]]
+* [[REBOL]]
+* [[Ruby (programming language)|Ruby]]
+* [[Smalltalk]] (pure object-orientation, originally from [[PARC (company)|Xerox PARC]])
+** [[Bistro (programming language)|Bistro]]
+** [[F-Script (programming language)|F-Script]]
+** [[Little Smalltalk]]
+** [[Self (programming language)|Self]]
+** [[Squeak]]
+** [[IBM VisualAge]]
+** [[VisualWorks]]
+* [[SNOBOL|Snobol]]
+* [[Tcl]]
+** [[XOTcl]]
+* [[Microsoft Dynamics AX|X++]]
+* [[XL (programming language)|XL]]
+
+== Rule-based languages ==
+
+Rule-based languages instantiate rules when activated by conditions in a set of data. Of all possible activations, some set is selected and the statements belonging to those rules execute. Rule-based languages include:
+
+* [[awk]]
+* [[CLIPS]]
+* [[Constraint Handling Rules]]
+* [[GOAL agent programming language]]
+* [[Jess (programming language)|Jess]]
+* [[OPS5]]
+* [[Prolog]]
+* [[ToonTalk]] robots are rules
+* [[Mathematica]]
+* [[XSLT]]
+
+== Scripting languages ==
+
+"[[Scripting language]]" has two apparently different, but in fact similar meanings. In a traditional sense, scripting languages are designed to automate frequently used tasks that usually involve calling or passing commands to external programs. Many complex application programs provide built-in languages that let users automate tasks. Those that are [[interpreter (computing)|interpretive]] are often called scripting languages.
+
+Recently, many applications have built-in traditional scripting languages, such as [[Perl]] or [[Visual Basic]], but there are quite a few "native" scripting languages still in use. Many scripting languages are compiled to bytecode and then this (usually) platform independent bytecode is run through a virtual machine (compare to [[Java Virtual Machine|Java]]).
+
+* [[AppleScript]]
+* [[AWK]]
+* [[BeanShell]]
+* [[Bash (Unix shell)|Bash]]
+* [[Candle (programming language)|Candle]]
+* Ch (Embeddable C/C++ interpreter)
+* [[CLIST]]
+* [[ColdFusion]]
+* [[ECMAScript]]
+** [[ActionScript]]
+** [[ECMAScript for XML]]
+** [[JavaScript]] (first named '''Mocha''', then '''LiveScript''')
+** [[JScript]]
+* [[CMS EXEC]]
+* [[EXEC 2]]
+* [[F-Script (programming language)|F-Script]]
+* [[Falcon (programming language)|Falcon]]
+* [[Fancy (programming language)|Fancy]]
+* [[Frink]]
+* [[GameMaker: Studio|Game Maker Language]] (GML)
+* [[ICI (programming language)|ICI]]
+* [[Io (programming language)|Io]]
+* [[JASS]]
+* [[Groovy (programming language)|Groovy]]
+* [[Join Java]]
+* [[Tea (programming language)|Tea]]
+* [[Lua (programming language)|Lua]]
+* [[MAXScript]]
+* [[Maya Embedded Language|MEL]]
+* [[Obix (programming language)|Obix]]
+* [[Oriel (scripting language)|Oriel]]
+* [[Perl]]
+* [[PHP]] (intended for Web servers)
+* [[PIKT|Pikt]]
+* [[Python (programming language)|Python]]
+* [[R (programming language)|R]]
+* [[REBOL]]
+* [[REXX]]
+* [[Revolution (programming language)|Revolution]]
+* [[Ruby (programming language)|Ruby]]
+* [[Smalltalk]]
+* [[S-Lang (programming language)|S-Lang]]
+* [[sed]]
+* [[Tcl]]
+* [[TorqueScript (programming language)|TorqueScript]]
+* [[VBScript]]
+* [[WebDNA]], dedicated to database-driven websites
+* [[Windows PowerShell]] ([[Microsoft]] [[.NET Framework|.NET]]-based CLI)
+* [[Winbatch]]
+* Many shell command languages such as the [[Bourne shell|UNIX shell]] or [[DIGITAL Command Language|DCL]] on VMS have powerful scripting capabilities.
+
+== Stack-based languages ==
+{{see also|:Category:Stack-oriented programming languages|l1=Category:Stack-oriented programming languages}}
+
+Stack-based languages are a type of [[data-structured language]] that are based upon the [[stack (data structure)|stack]] data structure.
+
+* [[colorForth]]
+* [[Factor (programming language)|Factor]]
+* [[Forth (programming language)|Forth]]
+* [[Joy (programming language)|Joy]] (all functions work on parameter stacks instead of named parameters)
+* [[Piet (programming language)|Piet]]
+* [[Poplog]] via its implementation language [[POP-11]]
+* [[PostScript]]
+* [[RPL (programming language)|RPL]]
+
+== Synchronous languages ==
+{{see also|:Category:Synchronous programming languages|l1=Category:Synchronous programming languages}}
+
+[[Synchronous programming language]]s are optimized for programming reactive systems, systems that are often interrupted and must respond quickly. Many such systems are also called [[Real-time computing|realtime systems]], and are found often in [[Embedded system|embedded uses]]. Examples:
+
+* [[Argus (programming language)|Argus]]
+* [[Averest]]
+* [[Esterel]]
+* [[Lustre (programming language)|Lustre]]
+* [[SyncCharts]]
+
+== Syntax handling languages ==
+These languages assist with generating [[Lexical analysis|lexical analyzers]] and [[parsing|parsers]] for [[Context-free grammar]]s.
+* [[ANTLR]]
+* [[Candle (programming language)|Candle]] (instead of generating lexical analyzers or parsers, Candle takes EBNF kind of grammar and generate the AST of the source)
+* [[Coco/R]] (EBNF with semantics)
+* [[GNU bison]] (FSF's version of Yacc)
+* GNU [[Flex lexical analyser|Flex]] (FSF's version of Lex)
+* glex/gyacc (GoboSoft compiler compiler to Eiffel)
+* [[lex (software)|lex]] (Lexical Analysis, from Bell Labs)
+* [[M4 (computer language)|M4]]
+* [[yacc]] (yet another compiler compiler, from Bell Labs)
+* [[JavaCC]]
+
+== Visual languages ==
+{{see also|:Category:Visual programming languages|l1=Category:Visual programming languages}}
+
+[[Visual programming language]]s let users specify programs in a two-(or more)-dimensional way, instead of as one-dimensional text strings, via graphic layouts of various types.
+
+* [[CODE (programming language)|CODE]]
+* [[DRAKON]]
+* [[Fabrik (software)|Fabrik]]
+* G (used in [[LabVIEW]])
+* [[Lava (programming language)|Lava]]
+* [[Limnor]]
+* [[Max (software)|Max]]
+* [[NXT-G]]
+* [[Pict (programming language)|Pict programming language]]
+* [[Prograph]]
+* [[Pure Data]]
+* [[Apple Developer Tools#Quartz Composer|Quartz Composer]]
+* [[Scratch (programming language)|Scratch]] (written in and based on [[Squeak]], a version of [[Smalltalk]])
+* [[Simulink]]
+* [[Spreadsheet]]s
+* [[Subtext (programming language)|Subtext]]
+* [[ToonTalk]]
+* [[Agilent VEE|VEE]]
+* [[VisSim]]
+* [[vvvv]]
+* [[EICASLAB]]
+Some [[dataflow programming]] languages are also visual languages.
+
+== Wirth languages ==
+
+Computer scientist [[Niklaus Wirth]] designed and implemented several influential languages.
+
+* [[ALGOL W]]
+* [[Euler (programming language)|Euler]]
+* [[Modula]]
+* [[Modula-2]] (and Modula 3, etc. variants)
+** [[Obliq]] Modula 3 variant
+* [[Oberon (programming language)|Oberon]] (Oberon, Oberon-07, and Oberon-2)
+** [[Component Pascal]]
+** [[Lagoona (programming language)|Lagoona]]
+** [[Oberon-2 (programming language)|Oberon-2]]
+* [[Pascal (programming language)|Pascal]]
+** [[Object Pascal]] ("umbrella" name for [[Embarcadero Delphi|Delphi]], [[Free Pascal]], [[Oxygene (programming language)|Oxygene]] and others)
+
+== XML-based languages ==
+
+These are languages based on or that operate on [[XML]]. Although the big-boy equivalents of Oracle/PostgreSQL/MSSQL don't yet exist for XML, there are languages to navigate through it and its more tree-oriented structure.
+
+* [[Apache Ant|Ant]]
+* [[Candle (programming language)|Candle]]
+* [[Cω]]
+* [[ECMAScript]] [[ECMAScript for XML]]
+* [[MXML]]
+* [[OpenLaszlo|LZX]]
+* [[XAML]]
+* [[XPath]]
+* [[XQuery]]
+* [[XProc]]
+* [[XSL Transformations|XSLT]]

@@ -3,7 +3,7 @@ import os.path
 import re
 import argparse
 from lxml import etree
-from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, Index
+from sqlalchemy import Column, Integer, String, PickleType, ForeignKey, create_engine, Index
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 from subprocess import Popen, PIPE, STDOUT
@@ -40,6 +40,11 @@ class Task(Base):
     def __repr__(self):
         return "<Task:{:s}>".format(self.name)
 
+class LangFilters(Base):
+    __tablename__ = "lang filters"
+    filter = Column(String(), primary_key=True)
+    languages = Column(PickleType())
+
 def cleanstr(s):
     """Clean string for use as filename etc"""
     arr = []
@@ -73,7 +78,7 @@ class Scraper():
             if title is not None:
                 text = page.find(Scraper.tagbase + "revision").find(
                         Scraper.tagbase + "text").text
-                pagedict[title.text.title()] = text
+                pagedict[title.text] = text
         return pagedict
 
     def getdata(self):
@@ -118,9 +123,6 @@ def mw2html(task, mwstring):
 
 def sub_tag_to_token(txt):
     r = Scraper.rarestring
-    # XXX how to capture "=={{header|C}} / {{header|C++}}==" ?
-    # ideally want to create two separate entries
-    # the below match will completely miss it
     tmp1 = re.sub("{{(header.*?)}}",r + "\g<1>" + r,txt)
     tmp2 =  re.sub("<lang\s*([^>]*)>", "<syntaxhighlight lang=\g<1>>", tmp1)
     return re.sub("</lang>", "</syntaxhighlight>", tmp2)
@@ -133,6 +135,34 @@ def postprocess(html):
 
 def preprocess(mwstring):
     return sub_tag_to_token(mwstring)
+
+def build_filtdict():
+    text = open("misc/wikilangs.mw").read()
+    filtdict = {}
+    items = re.split("=+\[*(.*?)\]*=+", text)[1:]
+    print "Items:", len(items)
+    for i in range(len(items)):
+        if i%2==0:
+            filtdict[items[i].strip()] = items[i+1]
+    return filtdict
+
+def capture_langs(filtdict):
+    resdict = {}
+    rx = re.compile("^\*+ \[\[(?:.*\|)?(.*?)\]\]")
+    for key in sorted(filtdict):
+        resdict[key] = set()
+        s = filtdict[key]
+        for line in s.split("\n"):
+            m = re.match(rx, line)
+            if m:
+                resdict[key].add(m.group(1))
+    return resdict
+
+def filt2ORM(filtdict):
+    ormfiltlang = []
+    for key, val in filtdict.items():
+        ormfiltlang.append(LangFilters(filter=key.decode("utf8"), languages=val))
+    return ormfiltlang
 
 def page2ORM(task, mwtext):
     htmltext = mw2html(task, mwtext).decode("utf8")
@@ -165,7 +195,8 @@ def create_db(datapath, dbpath):
         for lang in langs:
             lang = session.merge(lang)
             session.add(lang)
-        #session.add_all(langs)
+    langfiltdict = capture_langs(build_filtdict())
+    session.add_all(filt2ORM(langfiltdict))
     session.commit()
 
 def connect_to_db(dbpath):

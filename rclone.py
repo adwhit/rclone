@@ -1,6 +1,6 @@
 from collections import defaultdict
 from flask import Flask, render_template, request, redirect, url_for
-from model import Lang, Task, Code, connect_to_db
+from model import Lang, Task, Code, LangFilters, connect_to_db
 from sqlalchemy import or_, and_, func
 from sqlalchemy.orm.exc import NoResultFound
 from werkzeug.contrib.fixers import ProxyFix
@@ -13,11 +13,9 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 #globals
 class gb():
     nullstr = ""
-    notfounderr = "No page found. You may be able to find it on <a href=http://www.rosettacode.org" \
-            "/wiki>RosettaCode.org</a>.<br><a href='javascript:history.back()'> Go back</a> "\
+    notfounderr = "No page found. You may be able to find it on <a href="\
+            "%s>RosettaCode.org</a>.<br><a href='javascript:history.back()'> Go back</a> "\
             "<span id=why><small><a href='/faq#why'>Why did this happen?</a></small></span>"
-    pageitems = "task lang1 lang2 hide".split()
-
     task2lang = defaultdict(set)
     lang2task = defaultdict(set)
     task_filters = {}
@@ -41,22 +39,23 @@ def init_globals(dbpath):
         t2l[t].add(l)
         alltasks.add(t)
         alllangs.add(l)
-    gb.task_filters["all"] = alltasks
-    gb.lang_filters["all"] = alllangs
+    gb.tasks = alltasks
+    gb.langs = alllangs
 
     #populate filters
     top_tasks = session.query(Code.task, func.count(Code.task)).\
                 group_by(Code.task).order_by(func.count(Code.task).desc()).limit(30).all()
-
-    gb.task_filters["top"] = set([r[0] for r in top_tasks])
-
-    gb.lang_filters["popular"] = set([r[0] for r in 
+    gb.task_filters["Top"] = set([r[0] for r in top_tasks])
+    gb.lang_filters["Popular"] = set([r[0] for r in 
         session.query(Code.language, func.count(Code.language)).\
-                group_by(Code.language).order_by(func.count(Code.language).desc()).limit(20).all()])
-
-    gb.lang_filters["top"] = set("C,C++,JavaScript,Java,Python,D,Objective-C,PHP,Ruby,\
+        group_by(Code.language).order_by(func.count(Code.language).desc()).limit(20).all()])
+    gb.lang_filters["Top"] = set("C,C++,JavaScript,Java,Python,D,Objective-C,PHP,Ruby,\
                  Go,Rust,Julia,Haskell,Clojure,C#,UNIX shell,Perl".split(","))
-    gb.lang_filters["python"] = set(["Python", "Ruby"])
+    qry= session.query(LangFilters.filter, LangFilters.languages)
+    for (filt, langs) in qry:
+        print filt
+        gb.lang_filters[filt] = langs
+
 
 @app.route("/app/")
 def handler():
@@ -83,8 +82,9 @@ def faq():
 
 def get_form_data():
     formdata = {}
-    for item in gb.pageitems:
+    for item in ["task", "lang1","lang2","hide"]:
         formdata[item] = notnull(request.args.get(item))
+    formdata["tasktitle"] = formdata["task"].title() if formdata["task"] else None
     return formdata
 
 def get_filters(content):
@@ -94,7 +94,7 @@ def get_filters(content):
 
 @app.route("/")
 def toindex():
-    return redirect("/app/?l1top=true&l2top=true")
+    return redirect("/app/?l1filt=Top&l2filt=Top")
 
 def notnull(s):
     if s == gb.nullstr:
@@ -107,8 +107,8 @@ def get_content(content):
     lang1 = content["lang1"]
     lang2 = content["lang2"]
 
-    tasklist = gb.task_filters["all"].copy()
-    langlist = gb.lang_filters["all"].copy()
+    tasklist = gb.tasks.copy()
+    langlist = gb.langs.copy()
 
     if task:
         content["rclink"] = task2link(task)
@@ -143,37 +143,32 @@ def filter_content(content):
     content["lang1list"] = [gb.nullstr] + sorted(content["lang1list"])
     content["lang2list"] = [gb.nullstr] + sorted(content["lang2list"])
 
-
 def get_snippet(task, lang):
-    snippet = gb.notfounderr
-    if lang in gb.lang_filters["all"]:
+    if lang in gb.langs:
         session = gb.Session()
-        snippet = session.query(Code).filter(and_(Code.language==lang, Code.task==task.title())).one().text
-    return snippet
-
+        return session.query(Code).filter(and_(Code.language==lang, Code.task==task)).one().text
+    else:
+        return gb.notfounderr % task2link(task)
 
 def get_task_desc(task):
     #assume not found, then lookup
-    taskdesc = gb.notfounderr
-    if task in gb.task_filters["all"]:
+    if task in gb.tasks:
         session = gb.Session()
-        taskdesc = session.query(Task).filter_by(name=task.title()).one().description
-    return taskdesc
-
+        return session.query(Task).filter_by(name=task).one().description
+    else:
+        return gb.notfounderr % task2link(task)
 
 def get_tasklist(lang):
     return gb.lang2task[lang]
 
-
 def get_langlist(task):
     return gb.task2lang[task]
-
 
 def filter_list(list1, set1):
     return [l for l in list1 if l in set1]
 
 def guess_link(link):
-    if link in gb.task_filters["all"]:
+    if link in gb.tasks:
         return link
     elif link in gb.link_guesses:
         return gb.link_guesses[link]
@@ -182,7 +177,7 @@ def guess_link(link):
         guess = ""
         sl = set(link.lower())
         ll = len(link)
-        for task in gb.task_filters["all"]:
+        for task in gb.tasks:
             scr = len(set(task.lower()).symmetric_difference(sl)) + abs(len(task) - ll)
             if scr < score:
                 score = scr
