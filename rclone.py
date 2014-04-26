@@ -54,6 +54,7 @@ def init_globals(dbpath):
     qry= session.query(LangFilters.filter, LangFilters.languages)
     for (filt, langs) in qry:
         filtset = set(langs.split("::"))
+        print "Unknown languages in filt %s: %s" % (filt, str(filtset.difference(gb.langs)))
         filtset &= gb.langs
         if filtset:
             gb.lang_filters[filt] = set(langs.split("::"))

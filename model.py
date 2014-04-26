@@ -11,6 +11,17 @@ from subprocess import Popen, PIPE, STDOUT
 
 Base = declarative_base()
 
+aliases = {
+        "python"     : "Python",
+        "C sharp|C#" : "C#",
+        "F_Sharp|F#" : "F#",
+        "F Sharp|F#" : "F#",
+        "Lisp"       : "Common Lisp",
+        "FORTRAN"    : "Fortran",
+        "BBC BASIC"  : "BASIC"
+        }
+
+
 class Code(Base):
     __tablename__ = "code"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -112,7 +123,11 @@ def splitcode(task, text):
     codedict = {}
     for langs, code in zip(langarr, sections[1:]):
         for lang in langs:
-            codedict[lang] = code
+            # deal with aliases and add to codedict
+            if lang in aliases:
+                codedict[aliases[lang]] = code
+            else:
+                codedict[lang] = code
     return description, codedict
 
 def mw2html(task, mwstring):
