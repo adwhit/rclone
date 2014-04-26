@@ -53,7 +53,6 @@ def init_globals(dbpath):
                  Go,Rust,Julia,Haskell,Clojure,C#,UNIX shell,Perl".split(","))
     qry= session.query(LangFilters.filter, LangFilters.languages)
     for (filt, langs) in qry:
-        print filt
         gb.lang_filters[filt] = langs
 
 
