@@ -3,7 +3,8 @@ import os.path
 import re
 import argparse
 from lxml import etree
-from sqlalchemy import Column, Integer, String, PickleType, ForeignKey, create_engine, Index
+from collections import defaultdict
+from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, Index
 from sqlalchemy.orm import relationship, sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 from subprocess import Popen, PIPE, STDOUT
@@ -43,7 +44,7 @@ class Task(Base):
 class LangFilters(Base):
     __tablename__ = "lang filters"
     filter = Column(String(), primary_key=True)
-    languages = Column(PickleType())
+    languages = Column(String())
 
 def cleanstr(s):
     """Clean string for use as filename etc"""
@@ -143,25 +144,32 @@ def build_filtdict():
     print "Items:", len(items)
     for i in range(len(items)):
         if i%2==0:
-            filtdict[items[i].strip()] = items[i+1]
+            key = items[i].replace("languages", "").strip()
+            filtdict[key] = items[i+1]
     return filtdict
 
 def capture_langs(filtdict):
-    resdict = {}
-    rx = re.compile("^\*+ \[\[(?:.*\|)?(.*?)\]\]")
+    resdict = defaultdict(list)
+    rx = re.compile(r"""
+    ^\*+\s+         # starts with asterisk and whitespace
+    \[\[            # indicate link
+    (?:.*\|)?       # may have a "translation" secion
+    (.*?)           # capture actual link
+    \]\]            # end of link
+    """, re.VERBOSE|re.MULTILINE)
     for key in sorted(filtdict):
-        resdict[key] = set()
-        s = filtdict[key]
-        for line in s.split("\n"):
+        text = filtdict[key]
+        for line in text.split("\n"):
             m = re.match(rx, line)
             if m:
-                resdict[key].add(m.group(1))
+                resdict[key].append(m.group(1))
     return resdict
 
 def filt2ORM(filtdict):
     ormfiltlang = []
     for key, val in filtdict.items():
-        ormfiltlang.append(LangFilters(filter=key.decode("utf8"), languages=val))
+        filtstring = "::".join(val).decode("utf8")
+        ormfiltlang.append(LangFilters(filter=key.decode("utf8"), languages=filtstring))
     return ormfiltlang
 
 def page2ORM(task, mwtext):
@@ -179,13 +187,11 @@ def create_db(datapath, dbpath):
     #parse xml
     scraper = Scraper(datapath)
     scraper.parse()
-
     #make db
     engine, Session = connect_to_db(dbpath)
     newdb(engine)
     session = Session()
-
-    #obtain data
+    #obtain data from scraper object
     nitems = len(scraper.pages)
     for (ix,(task, mwtext)) in enumerate(scraper.pages.items()):
         print "Processing task %d of %d: %s" % (ix+1, nitems, task)
@@ -195,6 +201,7 @@ def create_db(datapath, dbpath):
         for lang in langs:
             lang = session.merge(lang)
             session.add(lang)
+    #language filters
     langfiltdict = capture_langs(build_filtdict())
     session.add_all(filt2ORM(langfiltdict))
     session.commit()

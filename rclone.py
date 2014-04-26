@@ -53,7 +53,10 @@ def init_globals(dbpath):
                  Go,Rust,Julia,Haskell,Clojure,C#,UNIX shell,Perl".split(","))
     qry= session.query(LangFilters.filter, LangFilters.languages)
     for (filt, langs) in qry:
-        gb.lang_filters[filt] = langs
+        filtset = set(langs.split("::"))
+        filtset &= gb.langs
+        if filtset:
+            gb.lang_filters[filt] = set(langs.split("::"))
 
 
 @app.route("/app/")
@@ -62,8 +65,8 @@ def handler():
     get_filters(pagedata)
     get_content(pagedata)
     filter_content(pagedata)
-    pagedata["langfiltlist"] = gb.lang_filters.keys()
-    pagedata["taskfiltlist"] = gb.task_filters.keys()
+    pagedata["langfiltlist"] = sorted(gb.lang_filters.keys())
+    pagedata["taskfiltlist"] = sorted(gb.task_filters.keys())
     return render_template("app.html", **pagedata)
 
 @app.route("/app/<path:link>")

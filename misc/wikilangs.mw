@@ -329,15 +329,14 @@ Client-side embedded languages are limited by the capabilities of the browser or
 
 Server-side embedded languages are much more flexible, since almost any language can be built into a server. The aim of having fragments of server-side code embedded in a web page is to generate additional markup dynamically; the code itself disappears when the page is served, to be replaced by its output.
 
-====Server side====
+====Embedded/In Source/Server side====
 * [[PHP]]
 * [[VBScript]]
 * [[SMX (computer language)|SMX]], dedicated to web pages
 * [[WebDNA]], dedicated to database-driven websites.
 * [[Python (programming language)|Python]]
-The above examples are particularly dedicated to this purpose. A large number of other languages, such as [[Candle (programming language)|Candle]], [[Erlang (programming language)|Erlang]], [[Scala (programming language)|Scala]], [[Perl]] and [[Ruby (programming language)|Ruby]] can be adapted (for instance, by being made into [[Apache HTTP Server|Apache]] modules).
 
-====Client side====
+====Embedded/In Source/Client side====
 * [[ActionScript]]
 * [[Java (programming language)|Java]]
 * [[JavaScript]]
@@ -345,7 +344,7 @@ The above examples are particularly dedicated to this purpose. A large number of
 * [[JScript]]
 * [[VBScript]] (Windows only)
 
-===In object code===
+===Embedded/In object code===
 A wide variety of dynamic or scripting languages can be embedded in compiled executable code. Basically, object code for the language's [[interpreter (computing)|interpreter]] needs to be linked into the executable. Source code fragments for the embedded language can then be passed to an evaluation function as strings. [[Application control language]]s can be implemented this way, if the source code is input by the user. Languages with small interpreters are preferred.
 * [[AngelScript]]
 * [[Ch (computer programming)|Ch]]
@@ -435,7 +434,7 @@ An [[esoteric programming language]] is a programming language designed as a tes
 
 [[Functional programming]] languages define programs and subroutines as mathematical functions. Many so-called functional languages are "impure", containing imperative features. Not surprisingly, many of these languages are tied to mathematical calculation tools. Functional languages include:
 
-=== Pure ===
+=== Functional/Pure ===
 * [[Charity (programming language)|Charity]]
 * [[Clean (programming language)|Clean]]
 * [[Curry (programming language)|Curry]]
@@ -444,7 +443,7 @@ An [[esoteric programming language]] is a programming language designed as a tes
 * [[Miranda (programming language)|Miranda]]
 * [[Idris (programming language)|Idris]]
 
-=== Impure ===
+=== Functional/Impure ===
 
 * [[APL (programming language)|APL]]
 * [[ATS (programming language)|ATS]]
@@ -747,7 +746,7 @@ List-based languages are a type of [[data-structured language]] that are based u
 
 == Macro languages ==
 
-===Textual substitution macro languages===
+===Macro/Textual substitution macro languages===
 {{see also|:Category:Macro programming languages|l1=Category:Macro programming languages}}
 
 [[Macro (computer science)|Macro]] languages transform one source code file into another. A "macro" is essentially a short piece of text that expands into a longer one, possibly with parameter substitution. They are often used to [[preprocess]] source code. Preprocessors can also supply facilities like [[file inclusion]].
@@ -758,7 +757,7 @@ of syntax. That being the case, they are often still applicable to more than one
 * [[C preprocessor|cpp]] (the C preprocessor)
 * [[M4 (computer language)|m4]] (originally from AT&T, bundled with UNIX)
 
-===Application macro languages===
+===Macro/Application macro languages===
 [[Scripting language]]s such as [[Tcl]] and [[ECMAScript]] ([[ActionScript]], [[ECMAScript for XML]], [[JavaScript]], [[JScript]]) have been embedded into applications. These are sometimes called "macro languages", although in a somewhat different sense to textual-substitution macros like [[M4 (computer language)|m4]].
 
 == Metaprogramming languages ==
@@ -874,7 +873,7 @@ Class-based [[Object-oriented programming language]]s support objects defined by
 
 Polymorphic functions parameterized by the class of some of their arguments are typically called methods. In languages with [[Dynamic dispatch|single dispatch]], classes typically also include method definitions. In languages with [[multiple dispatch]], methods are defined by [[generic function]]s. There are exceptions where [[Dynamic dispatch|single dispatch]] methods are [[generic function]]s (e.g. [[Bigloo]]'s object system).
 
-===[[Multiple dispatch]]===
+===[[OO/Multiple dispatch]]===
 
 * [[Common Lisp]]
 * [[Cecil (programming language)|Cecil]]
@@ -882,7 +881,7 @@ Polymorphic functions parameterized by the class of some of their arguments are 
 * [[Goo (programming language)|Goo]]
 * [[Julia (programming language)|Julia]]
 
-=== Single dispatch ===
+=== OO/Single dispatch ===
 
 * [[ActionScript|ActionScript 3.0]]
 * [[Actor (programming language)|Actor]]

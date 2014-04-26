@@ -42,15 +42,13 @@ a { color:inherit }
     padding-bottom:4.7em;
 }
 
-#langwrapper { height:1.5em; }
-
 /*Clearfix*/
-#main:before,
-#main:after {
+.group:before,
+.group:after {
     content: " "; /* 1 */
     display: table; /* 2 */
 }
-#main:after {
+.group:after {
     clear: both;
 }
 
