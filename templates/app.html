@@ -3,7 +3,7 @@
                         <select class="lang" data-placeholder="Select a Language" name="lang{{langnum}}" onchange="this.form.submit()">
                             {% for curlang in langlist %}<option value="{{curlang}}"{% if curlang == lang %} selected="selected"{% endif %}>{{curlang}}</option>{% endfor %}
                         </select>
-                        <span>filter:</span>
+                        <span>Filter:</span>
                         <select class="filter" data-placeholder="Select filters" name="l{{langnum}}filt" onchange="this.form.submit()" multiple>
                             {% for filter in langfiltlist %}<option value="{{filter}}"{% if filter in filters %} selected="selected"{% endif %}>{{filter}}</option>{% endfor %}
                         </select>
@@ -21,6 +21,7 @@
             <div id="descrwrapper" class="whitebg">
                 <div id="langwrapper" class="blackbg group">
                     {{ langselector("left", 1, lang1, lang1list, l1filters) }}
+                    <div style="float:right"><span>Hide<span><input type="checkbox" name="hide" value="true" onchange="this.form.submit()"{% if hide %} checked="checked"{% endif %}></div>
                     {{ langselector("right", 2, lang2, lang2list, l2filters) }}
                 </div>
                 <div id=descr class="blackbg">
@@ -34,18 +35,16 @@
                             </select>
                         {% if rclink %} <p><a href="{{rclink}}">RosettaCode entry</a></p> {% endif %}
                     </div>
-                    {% if taskdesc %}<p>{{taskdesc|safe}}</p>{% endif %}
+                    {% if taskdesc %}{{taskdesc|safe}}{% endif %}
                 </div>
             </div>
             <div id=col1 class=whitebg>
                 <h3>{% if lang1 %}{{lang1}}{% else %}Select language{% endif %}</h3>
-                <p>{{lang1code|safe}}</p>
+                {{lang1code|safe}}
             </div>
             <div id=col2 class=whitebg>
                 <h3>{% if lang2 %}{{lang2}}{% else %}Select language{% endif %}</h3>
-                <p>{{lang2code|safe}}</p>
+                {{lang2code|safe}}
             </div>
         </form>
 {% endblock %}
-
-

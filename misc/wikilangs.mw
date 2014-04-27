@@ -1,8 +1,4 @@
 == Array language ==
-{{see also|:Category:Array programming languages|l1=Category:Array programming languages}}
-
-[[Array programming]] (also known as ''vector'' or ''multidimensional'' languages) generalize operations on scalars to apply transparently to vectors, matrices, and higher-dimensional arrays.
-
 * [[A+ (programming language)|A+]]
 * [[APL (programming language)|APL]]
 * [[Chapel (programming language)|Chapel]]
@@ -18,18 +14,11 @@
 * [[Interactive Data Language|IDL]]
 
 == Aspect-oriented languages ==
-
-{{main|Aspect-oriented programming}}
-
 * [[AspectC++]]
 * [[AspectJ]]
 * [[e (verification language)]]
 
 == Assembly languages ==
-{{main|List of assemblers}}
-
-[[Assembly language]]s directly correspond to a machine language (see below) so machine code instructions appear in a form understandable by humans. Assembly languages lets programmers use symbolic addresses, which the [[Assembly language assembler|assembler]] converts to absolute addresses. Most assemblers also support [[Macro (computer science)|macros]] and [[symbolic constant]]s.
-
 * [[Autocoder]] (for IBM 1401 and 1440 mainframe systems)
 * [[IBM Basic assembly language|BAL]] (Basic AssembLer) - for [[IBM System/360]] and later mainframe systems
 * [[COMPASS]] (COMPrehensive ASSembler)
@@ -58,15 +47,11 @@
 * [[Z80A]] Mnemonic language used to represent instructions for the Z80A microprocessor
 
 == Authoring languages ==
-{{Main|Authoring language}}
 * [[Bigwig (programming language)|Bigwig]] (web design language)
 * [[PILOT]]
 * [[TUTOR (programming language)|TUTOR]]
 
 == Command line interface languages ==
-
-[[Command-line interface]] (CLI) languages are also called batch languages, or job control languages. Examples:
-
 * [[4DOS]] (extended command-line shell for [[IBM Personal Computer|IBM PC]]s)
 * [[Bash (Unix shell)|bash]] (the Bourne-Again shell from [[GNU]]/[[Free Software Foundation|FSF]])
 * [[C shell|csh]] and [[tcsh]] (C-like shell from [[Bill Joy]] at UC Berkeley)
@@ -89,8 +74,6 @@
 * [[z shell|zsh]] (a [[Unix|UNIX]] shell)
 
 == Compiled languages ==
-
-These are languages typically processed by [[compiler]]s, though theoretically any language can be compiled or interpreted. See also [[compiled language]].
 * [[ActionScript]]
 * [[Ada (programming language)|Ada]] (multi-purpose language)
 * [[ALGOL]] (extremely influential language design. The second high level language compiler.)
@@ -156,10 +139,6 @@ These are languages typically processed by [[compiler]]s, though theoretically a
 * [[Z++]]
 
 == Concurrent languages ==
-{{see also|:Category:Concurrent programming languages|l1=Category:Concurrent programming languages}}
-
-[[Message passing]] languages provide language constructs for [[concurrency (computer science)|concurrency]]. The predominant paradigm for concurrency in mainstream languages such as [[Java (programming language)|Java]] is [[shared memory]] concurrency based on [[Monitor (synchronization)|monitors]]. Concurrent languages that make use of message passing have generally been inspired by [[Communicating sequential processes|CSP]] or the [[Pi-calculus|π-calculus]], but have had little commercial success, except for Ada and Erlang. Ada is a multipurpose language and concurrent programming is only one option available.
-
 * [[Ada (programming language)|Ada]] (multi-purpose language)
 * [[Alef (programming language)|Alef]] &ndash; concurrent language with threads and message passing, used for systems programming in early versions of [[Plan 9 from Bell Labs]]
 * [[Ateji PX]] an extension of the Java language for parallelism
@@ -196,8 +175,6 @@ These are languages typically processed by [[compiler]]s, though theoretically a
 * [[XProc]] &ndash; XML Processing language, enabling concurrency.
 
 == Curly-bracket languages ==
-
-The '''curly-bracket or curly-brace programming languages''' have a syntax that defines statement blocks using the [[braces (punctuation)|curly bracket or brace characters <code>{</code> and <code>}</code>]]. This syntax originated with [[BCPL]] (1966), and was popularized by [[C (programming language)|C]] (1972). Many curly-bracket languages descend from or are strongly influenced by C. Examples of curly-bracket languages include:
 * [[Actor-Based Concurrent Language|ABCL/c+]]
 * [[ActionScript]]
 * [[Alef (programming language)|Alef]]
@@ -253,12 +230,7 @@ The '''curly-bracket or curly-brace programming languages''' have a syntax that 
 * [[Windows PowerShell]] ([[Microsoft]] [[.NET Framework|.NET]]-based CLI)
 * [[Yorick (programming language)|Yorick]]
 
-There is dispute among programmers who use these languages about the placement of opening braces. Some put them on the lines of code which determine whether the contents of the braces are executed (e.g. the "if" or "while" condition) in order to reduce the number of lines and make more code visible at once. Others put every brace on a new line of code, in order to make brace nesting clearer. See [[Indent style]].
-
 == Dataflow languages ==
-
-[[Dataflow programming]] languages rely on a (usually visual) representation of the flow of data to specify the program.  Frequently used for reacting to discrete events or for processing streams of data.  Examples of dataflow languages include:
-
 * [[Hartmann pipeline]]s
 * G (used in [[LabVIEW]])
 * [[Lucid (programming language)|Lucid]]
@@ -274,9 +246,6 @@ There is dispute among programmers who use these languages about the placement o
 * [[WebMethods Flow]]
 
 == Data-oriented languages ==
-
-[[Data-oriented language]]s provide powerful ways of searching and manipulating the relations that have been described as entity relationship tables which map one set of things into other sets. Examples of data-oriented languages include:
-
 * [[Clarion (programming language)|Clarion]]
 * [[Clipper (programming language)|Clipper]]
 * [[dBase]] a relational database access language
@@ -291,21 +260,11 @@ There is dispute among programmers who use these languages about the placement o
 * [[WebQL]]
 
 == Data-structured languages ==
-{{see also|:Category:Data-structured programming languages|l1=Category:Data-structured programming languages}}
-
-[[Data-structured language]]s are those where logic is structured in ways similar to their data. Such languages are generally well suited to reflection and introspection. There are three main types:
-
 * [[#Array language|Array-based]]
 * [[#List-based languages – LISPs|List-based]]
 * [[#Stack-based languages|Stack-based]]
 
-[[Assembly language]]s that statically link data inline with instructions can also be considered data-structured, in the most primitive way.
-
 == Declarative languages ==
-{{see also|:Category:Declarative programming languages|l1=Category:Declarative programming languages}}
-
-[[Declarative programming|Declarative languages]] describe a problem rather than defining a solution. [[Declarative programming]] stands in contrast to [[imperative programming]] via imperative programming languages, where serial orders (imperatives) are given to a computer.  In addition to the examples given just below, all (pure) [[#Functional languages|functional]] and [[#Logic-based languages|logic-based]] programming languages are also declarative.  In fact, "functional" and "logical" constitute the usual subcategories of the declarative category.
-
 * [[Apache Ant|Ant]] <small>(partially [[Declarative programming|Declarative languages]], partially [[imperative programming]])</small>
 * [[Candle (programming language)|Candle]]
 * [[DASL - Distributed Application Specification Language|DASL]] <small>(partially [[Declarative programming|Declarative languages]], partially [[imperative programming]])</small>
@@ -319,15 +278,6 @@ There is dispute among programmers who use these languages about the placement o
 * [[SQL]]
 * [[xBase]]
 * [[XSL Transformations]]
-
-== Embeddable languages ==
-
-===In source code===
-Source embeddable languages embed small pieces of executable code inside a piece of free-form text, often a web page.
-
-Client-side embedded languages are limited by the capabilities of the browser or intended client. They aim to provide dynamism to web pages without the need to recontact the server.
-
-Server-side embedded languages are much more flexible, since almost any language can be built into a server. The aim of having fragments of server-side code embedded in a web page is to generate additional markup dynamically; the code itself disappears when the page is served, to be replaced by its output.
 
 ====Embedded/In Source/Server side====
 * [[PHP]]
@@ -345,7 +295,6 @@ Server-side embedded languages are much more flexible, since almost any language
 * [[VBScript]] (Windows only)
 
 ===Embedded/In object code===
-A wide variety of dynamic or scripting languages can be embedded in compiled executable code. Basically, object code for the language's [[interpreter (computing)|interpreter]] needs to be linked into the executable. Source code fragments for the embedded language can then be passed to an evaluation function as strings. [[Application control language]]s can be implemented this way, if the source code is input by the user. Languages with small interpreters are preferred.
 * [[AngelScript]]
 * [[Ch (computer programming)|Ch]]
 * [[Extensible Embeddable Language|EEL]]
@@ -354,9 +303,6 @@ A wide variety of dynamic or scripting languages can be embedded in compiled exe
 * [[Tcl]]
 
 == Educational languages ==
-
-Languages developed primarily for the purpose of teaching and learning of programming.
-
 * [[Alice (programming language)|Alice]]
 * [[Blue (programming language)|Blue]]
 * [[Modula-2]]
@@ -364,11 +310,6 @@ Languages developed primarily for the purpose of teaching and learning of progra
 * [[Scratch (programming language)|Scratch]]
 
 == Esoteric languages ==
-
-{{see also|:Category:Esoteric programming languages|l1=Category:Esoteric programming languages}}
-
-An [[esoteric programming language]] is a programming language designed as a test of the boundaries of computer programming language design, as a proof of concept, or as a joke.
-
 * [[Befunge]]
 * [[Brainfuck]]
 * [[Chef (programming language)|Chef]]
@@ -381,9 +322,6 @@ An [[esoteric programming language]] is a programming language designed as a tes
 * [[Whitespace (programming language)|Whitespace]]
 
 == Extension languages ==
-
-[[Extension programming language]]s are languages embedded into another program and used to harness its features in extension scripts.
-
 * [[Ateji PX]] an extension of the Java language for parallelism
 * [[AutoLISP]] (specific to [[AutoCAD]])
 * [[Cakewalk (sequencer)#Features|CAL]]
@@ -404,10 +342,6 @@ An [[esoteric programming language]] is a programming language designed as a tes
 * [[Windows PowerShell]]
 
 == Fourth-generation languages ==
-{{see also|:Category:4GL|l1=Category:4GL}}
-
-[[Fourth-generation programming language]]s are high-level languages built around database systems. They are generally used in commercial environments.
-
 * [[ABAP]]
 * [[BuildProfessional]]
 * [[CorVision]]
@@ -429,11 +363,6 @@ An [[esoteric programming language]] is a programming language designed as a tes
 * [[Visual FoxPro]]
 * [[xBase]]
 
-== Functional languages ==
-{{see also|:Category:Functional languages|l1=Category:Functional languages}}
-
-[[Functional programming]] languages define programs and subroutines as mathematical functions. Many so-called functional languages are "impure", containing imperative features. Not surprisingly, many of these languages are tied to mathematical calculation tools. Functional languages include:
-
 === Functional/Pure ===
 * [[Charity (programming language)|Charity]]
 * [[Clean (programming language)|Clean]]
@@ -444,7 +373,6 @@ An [[esoteric programming language]] is a programming language designed as a tes
 * [[Idris (programming language)|Idris]]
 
 === Functional/Impure ===
-
 * [[APL (programming language)|APL]]
 * [[ATS (programming language)|ATS]]
 * [[C Sharp (programming language)|C#]]
@@ -487,15 +415,12 @@ An [[esoteric programming language]] is a programming language designed as a tes
 * [[Scala (programming language)|Scala]]
 * [[Spreadsheet]]s
 
-== Hardware description languages ==
-In electronics, a [[Hardware description language]] or HDL is a specialized computer language used to describe the structure, design and operation of electronic circuits, and most commonly, digital logic circuits. The two most widely used and well-supported HDL varieties used in industry are [[Verilog]] and [[VHDL]]. Hardware description languages include:
-
-===HDLs for analog circuit design===
+===Analog HDLs===
 
 * [[Verilog-AMS]] (Verilog for Analog and Mixed-Signal)
 * [[VHDL-AMS]] (VHDL with Analog/Mixed-Signal extension)
 
-===HDLs for digital circuit design===
+===Digital HDLs===
 
 * [[Advanced Boolean Expression Language]](ABEL)
 * [[Altera Hardware Description Language]](AHDL)
@@ -520,13 +445,6 @@ In electronics, a [[Hardware description language]] or HDL is a specialized comp
 * [[VHDL]] (VHSIC HDL)
 
 == Imperative languages ==
-
-Imperative programming languages may be multi-paradigm and appear in other classifications. Here is a list of programming languages that follow the [[imperative paradigm]]:<ref>{{cite web
- | url    = http://www.trueknowledge.com/q/list_of_imperative_programming_languages
- | title  = Your Answer… You asked: list of imperative programming languages
- | publisher  = True Knowledge
- | accessdate = 2012-05-22
-}}</ref><ref>[[Imperative programming#History|Imperative programming history]], Wikipedia</ref>
 * [[Ada (programming language)|Ada]]
 * [[ALGOL]]
 * [[BASIC]]
@@ -553,9 +471,6 @@ Imperative programming languages may be multi-paradigm and appear in other class
 * [[Rust (programming language)|Rust]]
 
 == Interactive mode languages ==
-
-Interactive mode languages act as a kind of shell: expressions or statements can be entered one at a time, and the result of their evaluation is seen immediately.
-
 * [[APL (programming language)|APL]]
 * [[BASIC]] (some dialects)
 * [[Clojure]]
@@ -592,9 +507,6 @@ Interactive mode languages act as a kind of shell: expressions or statements can
 * [[Windows PowerShell]] ([[Microsoft]] [[.NET Framework|.NET]]-based CLI)
 
 == Interpreted languages ==
-
-[[Interpreted language]]s are programming languages in which programs may be executed from source code form, by an interpreter. Theoretically, any language can be compiled or interpreted, so the term *interpreted language* generally refers to languages that are commonly interpreted rather than compiled.
-
 * [[Apache Ant|Ant]]
 * [[APL (programming language)|APL]]
 * [[AutoHotkey]] scripting language
@@ -642,9 +554,6 @@ Interactive mode languages act as a kind of shell: expressions or statements can
 * Some scripting languages ([[#Scripting languages|below]])
 
 == Iterative languages ==
-
-Iterative languages are built around or offering [[generator (computer science)|generator]]s.
-
 * [[Aldor]]
 * [[Alphard (programming language)|Alphard]]
 * [[Generator (computer science)#C#|C#]]
@@ -659,9 +568,6 @@ Iterative languages are built around or offering [[generator (computer science)|
 * [[XL (programming language)|XL]] ("iterator" construct)
 
 == List-based languages – LISPs ==
-
-List-based languages are a type of [[data-structured language]] that are based upon the [[list (computing)|list]] data structure.
-
 * [[FPr (programming language)|FPr]]
 * [[Joy (programming language)|Joy]]
 * [[Lisp (programming language)|Lisp]]
@@ -679,18 +585,11 @@ List-based languages are a type of [[data-structured language]] that are based u
 * [[TRAC (programming language)|TRAC]]
 
 == Little languages ==
-
-[[Domain-specific language|Little languages]] serve a specialized problem domain.
-
 * [[AWK|awk]] can serve as a prototyping language for [[C (programming language)|C]], because the syntax is similar
 * [[Comet (programming language)|Comet]] is used to solve complex combinatorial [[Program optimization|optimization]] problems in areas such as [[resource allocation]] and [[Scheduling (computing)|scheduling]].
 * [[SQL]] has only a few keywords, and not all the constructs needed for a full programming language.<ref>The objects of SQL are collections of records, called tables. A full programming language can specify algorithms, irrespective of runtime. Thus an algorithm can be considered to generate usable results. In contrast, SQL can only select  records which are limited to the current collection, the data at hand in the system, rather than produce a statement of the correctness of the result.</ref> Many database management systems extend SQL with additional constructs as a [[stored procedure]] language.
 
 == Logic-based languages ==
-{{see also|:Category:Logic programming languages|l1=Category:Logic programming languages}}
-
-[[Logic programming|Logic-based]] languages specify a set of attributes that a solution must have, rather than a set of steps to obtain a solution. Examples:
-
 * [[Algebraic Logic Functional (programming language)|ALF]]
 * [[Alma-0]]
 * [[CLACL (programming language)|CLACL (CLAC-Language)]]
@@ -709,8 +608,6 @@ List-based languages are a type of [[data-structured language]] that are based u
 * [[ROOP (programming language)|ROOP]]
 
 == Machine languages ==
-
-[[Machine code|Machine language]]s are directly executable by a computer's CPU. They are typically formulated as bit patterns, usually represented in [[octal]] or [[hexadecimal]]. Each group of npatterns (often 1 or more bytes) causes the circuits in the CPU to execute one of the fundamental operations of the hardware. The activation of specific electrical inputs (e.g., CPU package pins for microprocessors), and logical settings for CPU state values, control the processor's computation. Individual machine languages are processor specific and are not portable. They are (essentially) always defined by the CPU developer, not by 3rd parties. The symbolic version, the processor's [[assembly language]], is also defined by the developer, in most cases. Since processors come in families based on a shared architecture, the same basic assembly language style can often be used for more than one CPU. Each of the following CPUs served as the basis for a family of processors:
 
 * [[ARM architecture|ARM]]
 * [[PDP-6|DEC PDP-6]], which led to the [[PDP-10|KA10 family]] (used in [[PDP-10]], [[DECSYSTEM-20]])
@@ -744,24 +641,11 @@ List-based languages are a type of [[data-structured language]] that are based u
 * [[StrongARM]]
 * Sun [[SPARC]], [[UltraSPARC]]
 
-== Macro languages ==
-
 ===Macro/Textual substitution macro languages===
-{{see also|:Category:Macro programming languages|l1=Category:Macro programming languages}}
-
-[[Macro (computer science)|Macro]] languages transform one source code file into another. A "macro" is essentially a short piece of text that expands into a longer one, possibly with parameter substitution. They are often used to [[preprocess]] source code. Preprocessors can also supply facilities like [[file inclusion]].
-Macro languages may be restricted to acting on specially labeled code regions (pre-fixed with a <code>#</code> in the case of the C preprocessor. Alternatively, they may not, but in this case it is still often undesirable to (for instance) expand
-a macro embedded in a [[string literal]], so they still need a rudimentary awareness
-of syntax. That being the case, they are often still applicable to more than one language. Contrast with source-embeddable languages like [[PHP]], which are fully featured.
-
 * [[C preprocessor|cpp]] (the C preprocessor)
 * [[M4 (computer language)|m4]] (originally from AT&T, bundled with UNIX)
 
-===Macro/Application macro languages===
-[[Scripting language]]s such as [[Tcl]] and [[ECMAScript]] ([[ActionScript]], [[ECMAScript for XML]], [[JavaScript]], [[JScript]]) have been embedded into applications. These are sometimes called "macro languages", although in a somewhat different sense to textual-substitution macros like [[M4 (computer language)|m4]].
-
 == Metaprogramming languages ==
-[[Metaprogramming]] is writing of programs that write or manipulate other programs (or themselves) as their data or that do part of the work that is otherwise done at [[Run time (program lifecycle phase)|run time]] during [[compile time]]. In many cases, this allows programmers to get more done in the same amount of time as they would take to write all the code manually.
 * [[C++]]
 * [[Curl (programming language)|Curl]]
 * [[D (programming language)|D]]
@@ -785,9 +669,6 @@ of syntax. That being the case, they are often still applicable to more than one
 * [[XL (programming language)|XL]] ([[concept programming]])
 
 == Multiparadigm languages ==
-
-[[Multi-paradigm programming language|Multiparadigm language]]s support more than one [[programming paradigm]]. They allow a [[Computer program|program]] to use more than one [[Computer program|programming]] style. The goal is to allow programmers to use the best tool for a job, admitting that no one paradigm solves all problems in the easiest or most efficient way.
-
 * [[Ada (programming language)|Ada]] ([[Parallel computing|concurrent]], [[distributed computing|distributed]], [[Generic programming|generic]] ([[template metaprogramming]]), [[Imperative programming|imperative]], [[Object-oriented programming|object-oriented]] ([[Class (computer science)|class-based]]))
 * [[Algebraic Logic Functional (programming language)|ALF]] ([[Functional programming|functional]], [[logic programming|logic]])
 * [[Alma-0]] (constraint, imperative, logic)
@@ -848,7 +729,6 @@ of syntax. That being the case, they are often still applicable to more than one
 * [[XL (programming language)|XL]] ([[concept programming]] approach)
 
 == Numerical analysis ==
-
 * [[AIMMS]]
 * [[AMPL (programming language)|AMPL]]
 * [[General Algebraic Modeling System|GAMS]]
@@ -858,8 +738,6 @@ of syntax. That being the case, they are often still applicable to more than one
 * [[Oberon (programming language)|Seneca]] an [[Oberon (programming language)|Oberon]] variant
 
 == Non-English-based languages ==
-{{main|non-English-based programming languages}}
-
 * [[ARLOGO]] - [[Arabic language|Arabic]]
 * [[Chinese BASIC]] - [[Chinese language|Chinese]]
 * [[Fjölnir (programming language)|Fjölnir]] - [[Icelandic language|Icelandic]]
@@ -867,14 +745,7 @@ of syntax. That being the case, they are often still applicable to more than one
 * [[Lexico programming language|Lexico]] - [[Spanish language|Spanish]]
 * [[Rapira]] - [[Russian language|Russian]]
 
-== Object-oriented class-based languages ==
-
-Class-based [[Object-oriented programming language]]s support objects defined by their class. Class definitions include member data. [[Message passing]] is a key concept (if not ''the'' key concept)  in Object-oriented languages.
-
-Polymorphic functions parameterized by the class of some of their arguments are typically called methods. In languages with [[Dynamic dispatch|single dispatch]], classes typically also include method definitions. In languages with [[multiple dispatch]], methods are defined by [[generic function]]s. There are exceptions where [[Dynamic dispatch|single dispatch]] methods are [[generic function]]s (e.g. [[Bigloo]]'s object system).
-
 ===[[OO/Multiple dispatch]]===
-
 * [[Common Lisp]]
 * [[Cecil (programming language)|Cecil]]
 * [[Dylan (programming language)|Dylan]]
@@ -882,7 +753,6 @@ Polymorphic functions parameterized by the class of some of their arguments are 
 * [[Julia (programming language)|Julia]]
 
 === OO/Single dispatch ===
-
 * [[ActionScript|ActionScript 3.0]]
 * [[Actor (programming language)|Actor]]
 * [[Ada (programming language)|Ada 95]] and [[Ada (programming language)|Ada 2005]] (multi-purpose language)
@@ -961,10 +831,7 @@ Polymorphic functions parameterized by the class of some of their arguments are 
 * [[Microsoft Dynamics AX|X++]]
 * [[XOTcl]]
 
-== Object-oriented prototype-based languages ==
-
-[[Prototype-based programming|Prototype-based languages]] are object-oriented languages where the distinction between classes and instances has been removed:
-
+== OO/Prototype-based languages ==
 * [[Actor-Based Concurrent Language|ABCL/1]]
 * [[Actor-Based Concurrent Language|ABCL/R]]
 * [[Actor-Based Concurrent Language|ABCL/R2]]
@@ -989,9 +856,6 @@ Polymorphic functions parameterized by the class of some of their arguments are 
 * [[TADS]]
 
 == Off-side rule languages ==
-
-[[Off-side rule]] languages are those where blocks are formed, indicated, by their [[indentation]].
-
 * [[ISWIM]], the abstract language that introduced the rule
 * [[ABC (programming language)|ABC]], Python's parent
 ** [[Python (programming language)|Python]]
@@ -1008,9 +872,6 @@ Polymorphic functions parameterized by the class of some of their arguments are 
 * [[XL (programming language)|XL]]
 
 == Procedural languages ==
-
-[[Procedural programming]] languages are based on the concept of the unit and scope (the data viewing range of an executable code statement). A procedural program is composed of one or more units or modules, either user coded or provided in a code library; each module is composed of one or more procedures, also called a function, routine, subroutine, or method, depending on the language. Examples of procedural languages include:
-
 * [[Ada (programming language)|Ada]] (multi-purpose language)
 * [[ALGOL]] (extremely influential language design. The second high level language compiler.)
 ** [[SMALL|SMALL Machine Algol Like Language]]
@@ -1082,11 +943,6 @@ Polymorphic functions parameterized by the class of some of their arguments are 
 * [[XL (programming language)|XL]]
 
 == Reflective languages ==
-
-[[Reflection (computer science)|Reflective languages]] let programs examine and possibly modify their high level structure at runtime. This is most common in high-level virtual machine programming languages like [[Smalltalk]], and less common in lower-level programming languages like [[C (programming language)|C]]. Languages and platforms supporting reflection:
-
-{{see also|Aspect-oriented programming}}
-
 * [[Befunge]]
 * [[C Sharp (programming language)|C#]]
 * [[Charm (language)|Charm]]
@@ -1145,9 +1001,6 @@ Polymorphic functions parameterized by the class of some of their arguments are 
 * [[XL (programming language)|XL]]
 
 == Rule-based languages ==
-
-Rule-based languages instantiate rules when activated by conditions in a set of data. Of all possible activations, some set is selected and the statements belonging to those rules execute. Rule-based languages include:
-
 * [[awk]]
 * [[CLIPS]]
 * [[Constraint Handling Rules]]
@@ -1160,11 +1013,6 @@ Rule-based languages instantiate rules when activated by conditions in a set of 
 * [[XSLT]]
 
 == Scripting languages ==
-
-"[[Scripting language]]" has two apparently different, but in fact similar meanings. In a traditional sense, scripting languages are designed to automate frequently used tasks that usually involve calling or passing commands to external programs. Many complex application programs provide built-in languages that let users automate tasks. Those that are [[interpreter (computing)|interpretive]] are often called scripting languages.
-
-Recently, many applications have built-in traditional scripting languages, such as [[Perl]] or [[Visual Basic]], but there are quite a few "native" scripting languages still in use. Many scripting languages are compiled to bytecode and then this (usually) platform independent bytecode is run through a virtual machine (compare to [[Java Virtual Machine|Java]]).
-
 * [[AppleScript]]
 * [[AWK]]
 * [[BeanShell]]
@@ -1217,10 +1065,6 @@ Recently, many applications have built-in traditional scripting languages, such 
 * Many shell command languages such as the [[Bourne shell|UNIX shell]] or [[DIGITAL Command Language|DCL]] on VMS have powerful scripting capabilities.
 
 == Stack-based languages ==
-{{see also|:Category:Stack-oriented programming languages|l1=Category:Stack-oriented programming languages}}
-
-Stack-based languages are a type of [[data-structured language]] that are based upon the [[stack (data structure)|stack]] data structure.
-
 * [[colorForth]]
 * [[Factor (programming language)|Factor]]
 * [[Forth (programming language)|Forth]]
@@ -1231,10 +1075,6 @@ Stack-based languages are a type of [[data-structured language]] that are based 
 * [[RPL (programming language)|RPL]]
 
 == Synchronous languages ==
-{{see also|:Category:Synchronous programming languages|l1=Category:Synchronous programming languages}}
-
-[[Synchronous programming language]]s are optimized for programming reactive systems, systems that are often interrupted and must respond quickly. Many such systems are also called [[Real-time computing|realtime systems]], and are found often in [[Embedded system|embedded uses]]. Examples:
-
 * [[Argus (programming language)|Argus]]
 * [[Averest]]
 * [[Esterel]]
@@ -1242,7 +1082,6 @@ Stack-based languages are a type of [[data-structured language]] that are based 
 * [[SyncCharts]]
 
 == Syntax handling languages ==
-These languages assist with generating [[Lexical analysis|lexical analyzers]] and [[parsing|parsers]] for [[Context-free grammar]]s.
 * [[ANTLR]]
 * [[Candle (programming language)|Candle]] (instead of generating lexical analyzers or parsers, Candle takes EBNF kind of grammar and generate the AST of the source)
 * [[Coco/R]] (EBNF with semantics)
@@ -1255,10 +1094,6 @@ These languages assist with generating [[Lexical analysis|lexical analyzers]] an
 * [[JavaCC]]
 
 == Visual languages ==
-{{see also|:Category:Visual programming languages|l1=Category:Visual programming languages}}
-
-[[Visual programming language]]s let users specify programs in a two-(or more)-dimensional way, instead of as one-dimensional text strings, via graphic layouts of various types.
-
 * [[CODE (programming language)|CODE]]
 * [[DRAKON]]
 * [[Fabrik (software)|Fabrik]]
@@ -1283,9 +1118,6 @@ These languages assist with generating [[Lexical analysis|lexical analyzers]] an
 Some [[dataflow programming]] languages are also visual languages.
 
 == Wirth languages ==
-
-Computer scientist [[Niklaus Wirth]] designed and implemented several influential languages.
-
 * [[ALGOL W]]
 * [[Euler (programming language)|Euler]]
 * [[Modula]]
@@ -1299,9 +1131,6 @@ Computer scientist [[Niklaus Wirth]] designed and implemented several influentia
 ** [[Object Pascal]] ("umbrella" name for [[Embarcadero Delphi|Delphi]], [[Free Pascal]], [[Oxygene (programming language)|Oxygene]] and others)
 
 == XML-based languages ==
-
-These are languages based on or that operate on [[XML]]. Although the big-boy equivalents of Oracle/PostgreSQL/MSSQL don't yet exist for XML, there are languages to navigate through it and its more tree-oriented structure.
-
 * [[Apache Ant|Ant]]
 * [[Candle (programming language)|Candle]]
 * [[Cω]]

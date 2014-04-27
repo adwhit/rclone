@@ -18,7 +18,9 @@ aliases = {
         "F Sharp|F#" : "F#",
         "Lisp"       : "Common Lisp",
         "FORTRAN"    : "Fortran",
-        "BBC BASIC"  : "BASIC"
+        "BBC BASIC"  : "BASIC",
+        ".NET"       : "Visual Basic .NET",
+        "Brain****"  : "Brainfuck",
         }
 
 
@@ -156,7 +158,7 @@ def build_filtdict():
     text = open("misc/wikilangs.mw").read()
     filtdict = {}
     items = re.split("=+\[*(.*?)\]*=+", text)[1:]
-    print "Items:", len(items)
+    #print "Items:", len(items)
     for i in range(len(items)):
         if i%2==0:
             key = items[i].replace("languages", "").strip()

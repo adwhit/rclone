@@ -1,6 +1,6 @@
 from collections import defaultdict
 from flask import Flask, render_template, request, redirect, url_for
-from model import Lang, Task, Code, LangFilters, connect_to_db
+from model import Lang, Task, Code, LangFilters, connect_to_db, aliases
 from sqlalchemy import or_, and_, func
 from sqlalchemy.orm.exc import NoResultFound
 from werkzeug.contrib.fixers import ProxyFix
@@ -51,10 +51,14 @@ def init_globals(dbpath):
         group_by(Code.language).order_by(func.count(Code.language).desc()).limit(20).all()])
     gb.lang_filters["Top"] = set("C,C++,JavaScript,Java,Python,D,Objective-C,PHP,Ruby,\
                  Go,Rust,Julia,Haskell,Clojure,C#,UNIX shell,Perl".split(","))
-    qry= session.query(LangFilters.filter, LangFilters.languages)
+    qry= session.query(LangFilters.filter, LangFilters.languages).all()
     for (filt, langs) in qry:
-        filtset = set(langs.split("::"))
-        print "Unknown languages in filt %s: %s" % (filt, str(filtset.difference(gb.langs)))
+        filtset = set() 
+        for lang in langs.split("::"):
+            if lang in aliases:
+                filtset.add(aliases[lang])
+            else:
+                filtset.add(lang)
         filtset &= gb.langs
         if filtset:
             gb.lang_filters[filt] = set(langs.split("::"))
