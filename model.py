@@ -20,7 +20,7 @@ aliases = {
         "FORTRAN"    : "Fortran",
         "BBC BASIC"  : "BASIC",
         ".NET"       : "Visual Basic .NET",
-        "Brain****"  : "Brainfuck",
+        "Brainf***"  : "Brainfuck",
         }
 
 
