@@ -1,12 +1,17 @@
 {% macro langselector(position, langnum, lang, langlist, filters) -%}
-                    <div style="float:{{position}};"><span>Language {{langnum}}:</span>
-                        <select class="lang" data-placeholder="Select a Language" name="lang{{langnum}}" onchange="this.form.submit()">
-                            {% for curlang in langlist %}<option value="{{curlang}}"{% if curlang == lang %} selected="selected"{% endif %}>{{curlang}}</option>{% endfor %}
-                        </select>
-                        <span>Filter:</span>
-                        <select class="filter" data-placeholder="Select filters" name="l{{langnum}}filt" onchange="this.form.submit()" multiple>
-                            {% for filter in langfiltlist %}<option value="{{filter}}"{% if filter in filters %} selected="selected"{% endif %}>{{filter}}</option>{% endfor %}
-                        </select>
+                    <div style="float:{{position}};">
+                        <div>
+                        <span>Language {{langnum}}:</span>
+                            <select class="lang" data-placeholder="Select a Language" name="lang{{langnum}}" onchange="this.form.submit()">
+                                {% for curlang in langlist %}<option value="{{curlang}}"{% if curlang == lang %} selected="selected"{% endif %}>{{curlang}}</option>{% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <span>Filter:</span>
+                            <select class="filter" data-placeholder="Select filters" name="l{{langnum}}filt" onchange="this.form.submit()" multiple>
+                                {% for filter in langfiltlist %}<option value="{{filter}}"{% if filter in filters %} selected="selected"{% endif %}>{{filter}}</option>{% endfor %}
+                            </select>
+                        </div>
                     </div>
 {%- endmacro %}
 
